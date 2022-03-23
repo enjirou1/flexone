@@ -1,0 +1,30 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "name": "MI 9T Pro",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "6d3376a7"
+        },
+        {
+            "name": "iPhone 7",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "a12541bc89a8afc2f3a39c87d0b4f9cff1422e7e"
+        }
+    ],
+    "compounds": [
+        {
+            "name": "All Devices",
+            "configurations": [
+                "MI 9T Pro",
+                "iPhone 7"
+            ]
+        }
+    ]
+}
