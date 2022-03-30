@@ -1,0 +1,52 @@
+{
+    "about_me:": "Tentang saya:",
+    "account": "Akun",
+    "activity_logs": "Log aktivitas",
+    "address:": "Alamat:",
+    "already_have_an_account": "Sudah memiliki akun?",
+    "choose_language": "Pilih bahasa",
+    "city:": "Kota:",
+    "class": "Kelas",
+    "create_an_account": "Buat akun",
+    "consultation": "Konsultasi",
+    "dark_mode": "Mode dark",
+    "discussion": "Diskusi",
+    "edit_profile": "Ubah profil",
+    "email-already-in-use": "Email telah digunakan",
+    "english": "Bahasa Inggris",
+    "error": {
+        "email": {
+            "empty": "Email tidak boleh kosong"
+        },
+        "password": {
+            "empty": "Password tidak boleh kosong"
+        },
+        "name": {
+            "empty": "Nama tidak boleh kosong"
+        }
+    },
+    "forgot_password": "Lupa password",
+    "fullname:": "Nama lengkap: ",
+    "indonesia": "Bahasa Indonesia",
+    "invalid-email": "Format email salah",
+    "logout": "Keluar",
+    "messages": "Pesan",
+    "my_classes": "Kelas saya",
+    "my_consultations": "Konsultasi saya",
+    "my_rooms": "Ruangan saya",
+    "new_here": "Baru disini?",
+    "phone_number:": "Nomor telepon:",
+    "profile": "Profil",
+    "province:": "Provinsi:",
+    "room": "Ruangan",
+    "settings": "Pengaturan",
+    "sign_in": "Masuk",
+    "sign_in_with_email": "Masuk dengan email",
+    "sign_in_with_google": "Masuk dengan google",
+    "sign_up": "Daftar",
+    "submit": "Submit",
+    "transactions": "Transaksi",
+    "user-not-found": "User tidak ditemukan",
+    "weak-password": "Password lemah",
+    "wrong-password": "Password salah"
+}

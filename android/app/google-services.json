@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "64930964421",
+    "project_id": "flexone-49cfa",
+    "storage_bucket": "flexone-49cfa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:64930964421:android:743331e7e57b733b11e1ac",
+        "android_client_info": {
+          "package_name": "com.example.flexone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "64930964421-e15r64g8850eb46dg8dq1d01hlqosvc4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbK8-qHlvBTg9P5_UvjPwRv0tvQgK_67I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "64930964421-e15r64g8850eb46dg8dq1d01hlqosvc4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

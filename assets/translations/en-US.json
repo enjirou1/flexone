@@ -1,0 +1,52 @@
+{
+    "about_me:": "About me:",
+    "account": "Account",
+    "activity_logs": "Activity logs",
+    "address:": "Alamat:",
+    "already_have_an_account": "Already have an account?",
+    "choose_language": "Choose language",
+    "city:": "Kota:",
+    "class": "Class",
+    "consultation": "Consultation",
+    "create_an_account": "Create an account",
+    "dark_mode": "Dark mode",
+    "discussion": "Discussion",
+    "edit_profile": "Edit profile",
+    "email-already-in-use": "Email already in use",
+    "english": "English",
+    "error": {
+        "email": {
+            "empty": "Email cannot be empty"
+        },
+        "password": {
+            "empty": "Password cannot be empty"
+        },
+        "name": {
+            "empty": "Name cannot be empty"
+        }
+    },
+    "forgot_password": "Forgot password",
+    "fullname:": "Fullname: ",
+    "indonesia": "Indonesia",
+    "invalid-email": "Invalid email",
+    "logout": "Logout",
+    "messages": "Messages",
+    "my_consultations": "My consultations",
+    "my_classes": "My classes",
+    "my_rooms": "My rooms",
+    "new_here": "New here?",
+    "phone_number:": "Phone number:",
+    "profile": "Profile",
+    "province:": "Provinsi:",
+    "room": "Room",
+    "settings": "Settings",
+    "sign_in": "Sign In",
+    "sign_in_with_email": "Sign in with email",
+    "sign_in_with_google": "Sign in with google",
+    "sign_up": "Sign Up",
+    "submit": "Submit",
+    "transactions": "Transactions",
+    "user-not-found": "User not found",
+    "weak-password": "Weak password",
+    "wrong-password": "Wrong Password"
+}
