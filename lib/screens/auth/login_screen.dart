@@ -1,12 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flexone/common/style.dart';
-import 'package:flexone/models/input_validation.dart';
-import 'package:flexone/models/user_result.dart';
-import 'package:flexone/providers/email_sign_in.dart';
-import 'package:flexone/providers/google_sign_in.dart';
-import 'package:flexone/providers/preferences.dart';
-import 'package:flexone/providers/user.dart';
+import 'package:flexone/data/models/user_result.dart';
+import 'package:flexone/data/providers/email_sign_in.dart';
+import 'package:flexone/data/providers/google_sign_in.dart';
+import 'package:flexone/data/providers/preferences.dart';
+import 'package:flexone/data/providers/user.dart';
+import 'package:flexone/utils/input_validation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -52,11 +52,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   TextField(
                     controller: _emailController,
                     decoration: InputDecoration(
-                        icon: Icon(Icons.email, color: secondaryColor),
-                        focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: secondaryColor)),
+                        icon: const Icon(Icons.email),
                         labelText: "Email: ",
-                        labelStyle: TextStyle(color: secondaryColor),
                         errorText: _emailValidation.isValid
                             ? null
                             : _emailValidation.message),
@@ -68,11 +65,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     controller: _passwordController,
                     obscureText: true,
                     decoration: InputDecoration(
-                        icon: Icon(Icons.vpn_key, color: secondaryColor),
-                        focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: secondaryColor)),
+                        icon: const Icon(Icons.vpn_key),
                         labelText: "Password: ",
-                        labelStyle: TextStyle(color: secondaryColor),
                         errorText: _passwordValidation.isValid
                             ? null
                             : _passwordValidation.message),
@@ -99,6 +93,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                             color: Colors.black),
                                         decoration: InputDecoration(
                                             labelText: "Email: ",
+                                            enabledBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    color: secondaryColor)),
+                                            focusedBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    color: secondaryColor)),
                                             labelStyle: TextStyle(
                                                 color: secondaryColor),
                                             errorText: _emailValidation2.isValid

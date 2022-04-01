@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flexone/providers/google_sign_in.dart';
-import 'package:flexone/providers/preferences.dart';
+import 'package:flexone/data/providers/google_sign_in.dart';
+import 'package:flexone/data/providers/preferences.dart';
 import 'package:flexone/widgets/profile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -68,7 +68,7 @@ class AccountScreen extends StatelessWidget {
         leading: const Icon(Icons.access_time_filled_rounded,
             color: Color(0XFFBDBDBD)),
         title: const Text('activity_logs').tr(),
-        onTap: null,
+        onTap: () => Get.toNamed('/activity_log'),
       ),
       ListTile(
         leading: const Icon(Icons.settings, color: Color(0XFFBDBDBD)),

@@ -1,14 +1,15 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flexone/common/style.dart';
-import 'package:flexone/providers/email_sign_in.dart';
-import 'package:flexone/providers/google_sign_in.dart';
-import 'package:flexone/providers/preferences.dart';
-import 'package:flexone/providers/user.dart';
+import 'package:flexone/data/providers/email_sign_in.dart';
+import 'package:flexone/data/providers/google_sign_in.dart';
+import 'package:flexone/data/providers/preferences.dart';
+import 'package:flexone/data/providers/user.dart';
 import 'package:flexone/screens/auth/register_screen.dart';
 import 'package:flexone/screens/auth/login_screen.dart';
 import 'package:flexone/screens/main_screen.dart';
 import 'package:flexone/screens/settings_screen.dart';
+import 'package:flexone/screens/user/activity_log_screen.dart';
 import 'package:flexone/screens/user/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -47,6 +48,7 @@ class MyApp extends StatelessWidget {
                 GetPage(name: '/register', page: () => const RegisterScreen()),
                 GetPage(name: '/settings', page: () => const SettingsScreen()),
                 GetPage(name: '/profile', page: () => const ProfileScreen()),
+                GetPage(name: '/activity_log', page: () => const ActivityLogScreen()),
               ],
               localizationsDelegates: context.localizationDelegates,
               supportedLocales: context.supportedLocales,

@@ -1,4 +1,4 @@
-import 'package:flexone/models/user_result.dart';
+import 'package:flexone/data/models/user_result.dart';
 import 'package:flutter/material.dart';
 
 class UserProvider extends ChangeNotifier {

@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flexone/models/user_result.dart';
-import 'package:flexone/providers/user.dart';
+import 'package:flexone/data/models/user_result.dart';
+import 'package:flexone/data/providers/user.dart';
 import 'package:flexone/screens/class_screen.dart';
 import 'package:flexone/screens/consultation_screen.dart';
 import 'package:flexone/screens/discussion_screen.dart';

@@ -1,10 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flexone/common/style.dart';
-import 'package:flexone/models/input_validation.dart';
-import 'package:flexone/models/user_result.dart';
-import 'package:flexone/providers/email_sign_in.dart';
-import 'package:flexone/providers/preferences.dart';
+import 'package:flexone/data/models/user_result.dart';
+import 'package:flexone/data/providers/email_sign_in.dart';
+import 'package:flexone/data/providers/preferences.dart';
+import 'package:flexone/utils/input_validation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -51,11 +51,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   TextField(
                     controller: _nameController,
                     decoration: InputDecoration(
-                        icon: Icon(Icons.person, color: secondaryColor),
-                        focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: secondaryColor)),
+                        icon: const Icon(Icons.person),
                         labelText: tr("fullname:"),
-                        labelStyle: TextStyle(color: secondaryColor),
                         errorText: _nameValidation.isValid
                             ? null
                             : _nameValidation.message),
@@ -66,11 +63,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   TextField(
                     controller: _emailController,
                     decoration: InputDecoration(
-                        icon: Icon(Icons.email, color: secondaryColor),
-                        focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: secondaryColor)),
+                        icon: const Icon(Icons.email),
                         labelText: "Email: ",
-                        labelStyle: TextStyle(color: secondaryColor),
                         errorText: _emailValidation.isValid
                             ? null
                             : _emailValidation.message),
@@ -82,11 +76,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     controller: _passwordController,
                     obscureText: true,
                     decoration: InputDecoration(
-                        icon: Icon(Icons.vpn_key, color: secondaryColor),
-                        focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: secondaryColor)),
+                        icon: const Icon(Icons.vpn_key),
                         labelText: "Password: ",
-                        labelStyle: TextStyle(color: secondaryColor),
                         errorText: _passwordValidation.isValid
                             ? null
                             : _passwordValidation.message),

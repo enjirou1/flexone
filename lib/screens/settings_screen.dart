@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flexone/common/style.dart';
-import 'package:flexone/providers/preferences.dart';
+import 'package:flexone/data/providers/preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';

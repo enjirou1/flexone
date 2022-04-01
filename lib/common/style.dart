@@ -85,6 +85,10 @@ ThemeData lightTheme = ThemeData(
             poppinsTheme.bodyText2?.copyWith(color: Colors.black)),
     inputDecorationTheme: InputDecorationTheme(
         border: const OutlineInputBorder(),
+        iconColor: secondaryColor,
+        prefixIconColor: secondaryColor,
+        enabledBorder:
+            OutlineInputBorder(borderSide: BorderSide(color: secondaryColor)),
         focusedBorder:
             OutlineInputBorder(borderSide: BorderSide(color: secondaryColor)),
         labelStyle: TextStyle(color: secondaryColor)),
@@ -108,18 +112,22 @@ ThemeData darkTheme = ThemeData(
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
         style:
-            OutlinedButton.styleFrom(side: BorderSide(color: secondaryColor))),
+            OutlinedButton.styleFrom(side: const BorderSide(color: Colors.white))),
     textButtonTheme:
         TextButtonThemeData(style: TextButton.styleFrom(primary: primaryColor)),
     dialogTheme: DialogTheme(
         titleTextStyle: poppinsTheme.bodyText1?.copyWith(color: Colors.black),
         contentTextStyle:
             poppinsTheme.bodyText2?.copyWith(color: Colors.black)),
-    inputDecorationTheme: InputDecorationTheme(
-        border: const OutlineInputBorder(),
+    inputDecorationTheme: const InputDecorationTheme(
+        border: OutlineInputBorder(),
+        iconColor: Colors.white,
+        prefixIconColor: Colors.white,
+        enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.white)),
         focusedBorder:
-            OutlineInputBorder(borderSide: BorderSide(color: secondaryColor)),
-        labelStyle: TextStyle(color: secondaryColor)),
+            OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+        labelStyle: TextStyle(color: Colors.white)),
     listTileTheme: const ListTileThemeData(tileColor: Color(0xFF212121)),
     iconTheme: const IconThemeData(color: Color(0xFF616161)),
     textTheme:

@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flexone/common/style.dart';
-import 'package:flexone/providers/user.dart';
+import 'package:flexone/data/providers/user.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -11,7 +11,7 @@ class ProfileCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _user = FirebaseAuth.instance.currentUser;
-    final _provider = Provider.of<UserProvider>(context, listen: false);
+    final _provider = Provider.of<UserProvider>(context, listen: true);
 
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
@@ -25,22 +25,30 @@ class ProfileCard extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ClipRRect(
-                    borderRadius: BorderRadius.circular(50),
-                    child: (_user!.photoURL != null ||
-                            _provider.user!.photo != null)
-                        ? Image.network(
-                            _user.photoURL != null
-                                ? _user.photoURL!
-                                : _provider.user!.photo!,
-                            height: 70,
-                            width: 70,
-                          )
-                        : Image.asset(
-                            'assets/images/profile-icon.png',
-                            height: 70,
-                            width: 70,
-                          )),
+                (_user!.photoURL != null || _provider.user!.photo != null)
+                    ? Container(
+                        width: 70,
+                        height: 70,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(color: Colors.black),
+                            image: DecorationImage(
+                                image: NetworkImage(
+                                    _provider.user!.photo == null
+                                        ? _user.photoURL!
+                                        : _provider.user!.photo!),
+                                fit: BoxFit.cover)),
+                      )
+                    : Container(
+                        width: 70,
+                        height: 70,
+                        decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                                image: AssetImage(
+                                    'assets/images/profile-icon.png'),
+                                fit: BoxFit.cover)),
+                      ),
                 Padding(
                   padding: const EdgeInsets.only(left: 15),
                   child: Column(

@@ -42,8 +42,8 @@ class UserModel {
         province: object['province'],
         city: object['city'],
         address: object['address'],
-        phone: object['phone'],
-        photo: object['photo_number'],
+        phone: object['phone_number'],
+        photo: object['photo'],
         about: object['about'],
         point: object['point'],
         lastLogin: object['last_login'],
@@ -60,7 +60,7 @@ class UserModel {
     } catch (e) {
       print(e);
     }
-    
+
     return null;
   }
 
@@ -79,5 +79,49 @@ class UserModel {
         throw Exception(json.decode(response.body)['message']);
       }
     }
+  }
+
+  static Future updateUser(
+      String id,
+      String email,
+      String fullname,
+      String? province,
+      String? city,
+      String? address,
+      String? phone,
+      String? photo,
+      String? about) async {
+    final String url = '$_baseUrl/$id';
+    final response = await http.put(Uri.parse(url), body: {
+      "email": email,
+      "fullname": fullname,
+      "province": province,
+      "city": city,
+      "address": address,
+      "phone_number": phone,
+      "photo": photo,
+      "about": about
+    });
+
+    if (response.statusCode != 200) {
+      throw Exception(json.decode(response.body)['message']);
+    }
+  }
+
+  // static Future<ActivityLog> getLogs(String id) async {
+  //   final url = '$_baseUrl/$id/log/all';
+  //   final response = await http.get(Uri.parse(url));
+
+  // }
+}
+
+class ActivityLog {
+  String? id;
+  String? en;
+
+  ActivityLog({this.id, this.en});
+
+  factory ActivityLog.createActivityLog(Map<String, String> object) {
+    return ActivityLog(id: object['id'], en: object['en']);
   }
 }
