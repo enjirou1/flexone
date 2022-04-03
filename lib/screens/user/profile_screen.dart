@@ -67,7 +67,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     if (_imageUrl == null) {
       _imagePath = _provider.user!.photo ?? _user!.photoURL;
     } else if (_imageUrl == "no photo") {
-      _imagePath = null;
+      _imagePath = "";
     } else {
       _imagePath = _imageUrl;
     }

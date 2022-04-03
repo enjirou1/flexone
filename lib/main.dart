@@ -10,6 +10,7 @@ import 'package:flexone/screens/auth/login_screen.dart';
 import 'package:flexone/screens/main_screen.dart';
 import 'package:flexone/screens/settings_screen.dart';
 import 'package:flexone/screens/user/activity_log_screen.dart';
+import 'package:flexone/screens/user/detail_screen.dart';
 import 'package:flexone/screens/user/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => PreferencesProvider()),
         ChangeNotifierProvider(create: (_) => GoogleSignInProvider()),
         ChangeNotifierProvider(create: (_) => EmailSignInProvider()),
-        ChangeNotifierProvider(create: (_) => UserProvider())
+        ChangeNotifierProvider(create: (_) => UserProvider()),
       ],
       child: Consumer<PreferencesProvider>(
         builder: (context, provider, _) {
@@ -49,6 +50,7 @@ class MyApp extends StatelessWidget {
                 GetPage(name: '/settings', page: () => const SettingsScreen()),
                 GetPage(name: '/profile', page: () => const ProfileScreen()),
                 GetPage(name: '/activity_log', page: () => const ActivityLogScreen()),
+                GetPage(name: '/user/detail', page: () => const UserDetailScreen())
               ],
               localizationsDelegates: context.localizationDelegates,
               supportedLocales: context.supportedLocales,

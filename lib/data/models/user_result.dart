@@ -16,6 +16,14 @@ class UserModel {
   int? point;
   String? lastLogin;
   bool? updatePoint;
+  String? createdAt;
+  int? followers = 0;
+  int? following = 0;
+  int? questions = 0;
+  int? answers = 0;
+  int? rooms = 0;
+  int? consultations = 0;
+  int? classes = 0;
   static const String _baseUrl = 'https://api.flexone.online/v1/user';
 
   UserModel(
@@ -31,7 +39,15 @@ class UserModel {
       this.about,
       this.point,
       this.lastLogin,
-      this.updatePoint});
+      this.updatePoint,
+      this.createdAt,
+      this.followers,
+      this.following,
+      this.questions,
+      this.answers,
+      this.rooms,
+      this.consultations,
+      this.classes});
 
   factory UserModel.createUser(Map<String, dynamic> object) {
     return UserModel(
@@ -47,12 +63,48 @@ class UserModel {
         about: object['about'],
         point: object['point'],
         lastLogin: object['last_login'],
-        updatePoint: object['update_point']);
+        updatePoint: object['update_point'],
+        createdAt: object['created_at'],
+        followers: object['followers'],
+        following: object['following'],
+        questions: object['questions'],
+        answers: object['answers'],
+        rooms: object['rooms'],
+        consultations: object['consultations'],
+        classes: object['classes']);
   }
 
   static Future<UserModel?> getUserByEmail(String? email) async {
     try {
       final String url = '$_baseUrl?email=$email';
+      final response = await http.get(Uri.parse(url));
+      final jsonObject = json.decode(response.body);
+      final data = (jsonObject as Map<String, dynamic>)['data'];
+      return UserModel.createUser(data);
+    } catch (e) {
+      print(e);
+    }
+
+    return null;
+  }
+
+  static Future<UserModel?> getUserByID(String? id) async {
+    try {
+      final String url = '$_baseUrl/$id';
+      final response = await http.get(Uri.parse(url));
+      final jsonObject = json.decode(response.body);
+      final data = (jsonObject as Map<String, dynamic>)['data'];
+      return UserModel.createUser(data);
+    } catch (e) {
+      print(e);
+    }
+
+    return null;
+  }
+
+  static Future<UserModel?> getDetail(String id) async {
+    try {
+      final String url = '$_baseUrl/detail?id=$id';
       final response = await http.get(Uri.parse(url));
       final jsonObject = json.decode(response.body);
       final data = (jsonObject as Map<String, dynamic>)['data'];
@@ -108,11 +160,22 @@ class UserModel {
     }
   }
 
-  // static Future<ActivityLog> getLogs(String id) async {
-  //   final url = '$_baseUrl/$id/log/all';
-  //   final response = await http.get(Uri.parse(url));
+  static Future<List<ActivityLog>> getLogs(String id) async {
+    final url = '$_baseUrl/$id/log/all';
+    final response = await http.get(Uri.parse(url));
 
-  // }
+    if (response.statusCode == 200) {
+      final jsonObject = json.decode(response.body);
+      List<dynamic> data = (jsonObject as Map<String, dynamic>)['data'];
+      List<ActivityLog> logs = [];
+      for (var log in data) {
+        logs.add(ActivityLog.createActivityLog(log));
+      }
+      return logs;
+    } else {
+      throw Exception(response.statusCode);
+    }
+  }
 }
 
 class ActivityLog {
@@ -121,7 +184,7 @@ class ActivityLog {
 
   ActivityLog({this.id, this.en});
 
-  factory ActivityLog.createActivityLog(Map<String, String> object) {
+  factory ActivityLog.createActivityLog(Map<String, dynamic> object) {
     return ActivityLog(id: object['id'], en: object['en']);
   }
 }

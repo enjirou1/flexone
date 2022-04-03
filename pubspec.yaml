@@ -41,6 +41,7 @@ dependencies:
   google_sign_in: ^5.2.4
   http: ^0.13.4
   image_picker: ^0.8.4+11
+  intl: ^0.17.0
   material_design_icons_flutter: ^5.0.6595
   provider: ^6.0.2
   shared_preferences: ^2.0.13

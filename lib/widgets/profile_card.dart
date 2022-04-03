@@ -12,10 +12,11 @@ class ProfileCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final _user = FirebaseAuth.instance.currentUser;
     final _provider = Provider.of<UserProvider>(context, listen: true);
+    String? _imagePath = _provider.user!.photo ?? _user!.photoURL;
 
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
-      onTap: null,
+      onTap: () => Get.toNamed('/user/detail?id=${_provider.user!.userId}'),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
         child: Row(
@@ -25,7 +26,7 @@ class ProfileCard extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                (_user!.photoURL != null || _provider.user!.photo != null)
+                (_imagePath != null && _imagePath != "")
                     ? Container(
                         width: 70,
                         height: 70,
@@ -33,10 +34,7 @@ class ProfileCard extends StatelessWidget {
                             shape: BoxShape.circle,
                             border: Border.all(color: Colors.black),
                             image: DecorationImage(
-                                image: NetworkImage(
-                                    _provider.user!.photo == null
-                                        ? _user.photoURL!
-                                        : _provider.user!.photo!),
+                                image: NetworkImage(_imagePath),
                                 fit: BoxFit.cover)),
                       )
                     : Container(
