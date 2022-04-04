@@ -44,6 +44,11 @@ class AccountScreen extends StatelessWidget {
         onTap: null,
       ),
       ListTile(
+        leading: const Icon(Icons.search_rounded, color: Color(0XFFBDBDBD)),
+        title: const Text('search_user').tr(),
+        onTap: () => Get.toNamed('/user'),
+      ),
+      ListTile(
         leading: const Icon(Icons.message_rounded, color: Color(0XFFBDBDBD)),
         title: const Text('messages').tr(),
         onTap: null,

@@ -44,20 +44,24 @@ class Expert {
         balance: object['balance'],
         isBanned: object['is_banned'],
         createdAt: object['created_at'],
-        certificates: List<Map<String, dynamic>>.from(object['certificates'] as List)
-            .map((certificate) => Certificate.createCertificate(object))
-            .toList());
+        certificates:
+            List<Map<String, dynamic>>.from(object['certificates'] as List)
+                .map((certificate) => Certificate.createCertificate(object))
+                .toList());
   }
 
   static Future<Expert?> getExpertByID(String id) async {
-    final url = '$_baseUrl/$id';
-    final response = await http.get(Uri.parse(url));
-    final jsonObject = json.decode(response.body);
-    final data = (jsonObject as Map<String, dynamic>)['data'];
+    try {
+      final url = '$_baseUrl/$id';
+      final response = await http.get(Uri.parse(url));
+      final jsonObject = json.decode(response.body);
+      final data = (jsonObject as Map<String, dynamic>)['data'];
+      return Expert.createExpert(data);
+    } catch (e) {
+      print(e);
+    }
 
-    if (response.statusCode != 200) return null;
-
-    return Expert.createExpert(data);
+    return null;
   }
 }
 

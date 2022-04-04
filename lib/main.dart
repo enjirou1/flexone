@@ -12,6 +12,7 @@ import 'package:flexone/screens/settings_screen.dart';
 import 'package:flexone/screens/user/activity_log_screen.dart';
 import 'package:flexone/screens/user/detail_screen.dart';
 import 'package:flexone/screens/user/profile_screen.dart';
+import 'package:flexone/screens/user/user_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -49,8 +50,12 @@ class MyApp extends StatelessWidget {
                 GetPage(name: '/register', page: () => const RegisterScreen()),
                 GetPage(name: '/settings', page: () => const SettingsScreen()),
                 GetPage(name: '/profile', page: () => const ProfileScreen()),
-                GetPage(name: '/activity_log', page: () => const ActivityLogScreen()),
-                GetPage(name: '/user/detail', page: () => const UserDetailScreen())
+                GetPage(
+                    name: '/activity_log',
+                    page: () => const ActivityLogScreen()),
+                GetPage(name: '/user', page: () => const UserScreen()),
+                GetPage(
+                    name: '/user/detail', page: () => const UserDetailScreen())
               ],
               localizationsDelegates: context.localizationDelegates,
               supportedLocales: context.supportedLocales,

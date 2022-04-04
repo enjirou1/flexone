@@ -105,7 +105,7 @@ class UserDetailScreen extends StatelessWidget {
                         ).tr(),
                         const SizedBox(height: 5),
                         Text(
-                          snapshot.data![0].about!,
+                          snapshot.data![0].about ?? "-",
                           style: poppinsTheme.bodyText2,
                         ),
                         const SizedBox(height: 10),
@@ -127,22 +127,26 @@ class UserDetailScreen extends StatelessWidget {
                         ).tr(),
                         const SizedBox(height: 10),
                         InfoRow(
-                            value: snapshot.data![1].education,
+                            value: snapshot.data![1] == null
+                                ? "-"
+                                : snapshot.data![1].education,
                             label: "education",
                             icon: Icons.school_rounded),
                         const SizedBox(height: 10),
                         InfoRow(
-                            value: snapshot.data![1].job,
+                            value: snapshot.data![1] == null
+                                ? "-"
+                                : snapshot.data![1].job,
                             label: "job",
                             icon: Icons.work_rounded),
                         const SizedBox(height: 5),
                         InfoRow(
-                            value: snapshot.data![0].phone!,
+                            value: snapshot.data![0].phone ?? "-",
                             label: "phone_number",
                             icon: Icons.phone),
                         const SizedBox(height: 10),
                         InfoRow(
-                            value: snapshot.data![0].city!,
+                            value: snapshot.data![0].city ?? "-",
                             label: "city",
                             icon: Icons.location_city_rounded),
                       ],

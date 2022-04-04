@@ -79,6 +79,9 @@ ThemeData lightTheme = ThemeData(
             OutlinedButton.styleFrom(side: BorderSide(color: secondaryColor))),
     textButtonTheme:
         TextButtonThemeData(style: TextButton.styleFrom(primary: primaryColor)),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+            primary: primaryColor, textStyle: poppinsTheme.bodyText2)),
     dialogTheme: DialogTheme(
         titleTextStyle: poppinsTheme.bodyText1?.copyWith(color: Colors.black),
         contentTextStyle:
@@ -111,10 +114,13 @@ ThemeData darkTheme = ThemeData(
       unselectedItemColor: const Color(0XFFBDBDBD),
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
-        style:
-            OutlinedButton.styleFrom(side: const BorderSide(color: Colors.white))),
+        style: OutlinedButton.styleFrom(
+            side: const BorderSide(color: Colors.white))),
     textButtonTheme:
         TextButtonThemeData(style: TextButton.styleFrom(primary: primaryColor)),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+            primary: primaryColor, textStyle: poppinsTheme.bodyText2)),
     dialogTheme: DialogTheme(
         titleTextStyle: poppinsTheme.bodyText1?.copyWith(color: Colors.black),
         contentTextStyle:
@@ -123,8 +129,8 @@ ThemeData darkTheme = ThemeData(
         border: OutlineInputBorder(),
         iconColor: Colors.white,
         prefixIconColor: Colors.white,
-        enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.white)),
+        enabledBorder:
+            OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
         focusedBorder:
             OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
         labelStyle: TextStyle(color: Colors.white)),
@@ -136,7 +142,4 @@ ThemeData darkTheme = ThemeData(
       backgroundColor: Color(0xFF212121),
     ),
     canvasColor: Colors.grey,
-    dividerColor: const Color(0xFF616161),
-    elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-            primary: primaryColor, textStyle: poppinsTheme.bodyText2)));
+    dividerColor: const Color(0xFF616161));

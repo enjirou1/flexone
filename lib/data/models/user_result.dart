@@ -116,6 +116,16 @@ class UserModel {
     return null;
   }
 
+  static Future<List<UserModel>> getUsers(
+      String userId, String keywords, int start, int limit) async {
+    final url =
+        '$_baseUrl/$userId/search?keywords=$keywords&start=$start&limit=$limit';
+    final response = await http.get(Uri.parse(url));
+    final jsonObject = json.decode(response.body);
+    final data = (jsonObject as Map<String, dynamic>)['data'] as List;
+    return data.map<UserModel>((user) => UserModel.createUser(user)).toList();
+  }
+
   static Future register(
       String email, String? password, String name, String google) async {
     const String url = '$_baseUrl/register';
@@ -175,6 +185,11 @@ class UserModel {
     } else {
       throw Exception(response.statusCode);
     }
+  }
+
+  @override
+  String toString() {
+    return "$email";
   }
 }
 
