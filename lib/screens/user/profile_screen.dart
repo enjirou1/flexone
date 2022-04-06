@@ -106,7 +106,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   _provider.setUser(value!);
                 });
 
-                Get.snackbar(tr('success'), 'tes',
+                Get.snackbar(tr('success'), tr('success_detail.update_profile'),
                     snackPosition: SnackPosition.BOTTOM,
                     animationDuration: const Duration(milliseconds: 300),
                     backgroundColor: Colors.green,
@@ -167,7 +167,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         _file = await UploadService.getImage(0);
                                         _imageUrl =
                                             await UploadService.uploadImage(
-                                                _file!, _user!.uid);
+                                                _file!, "user", _user!.uid);
                                       } on FirebaseException catch (e) {
                                         Get.snackbar('Error', e.message!,
                                             snackPosition: SnackPosition.BOTTOM,
@@ -197,7 +197,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         _file = await UploadService.getImage(1);
                                         _imageUrl =
                                             await UploadService.uploadImage(
-                                                _file!, _user!.uid);
+                                                _file!, "user", _user!.uid);
                                       } on FirebaseException catch (e) {
                                         Get.snackbar('Error', e.message!,
                                             snackPosition: SnackPosition.BOTTOM,

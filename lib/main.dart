@@ -12,6 +12,7 @@ import 'package:flexone/screens/settings_screen.dart';
 import 'package:flexone/screens/user/activity_log_screen.dart';
 import 'package:flexone/screens/user/detail_screen.dart';
 import 'package:flexone/screens/user/profile_screen.dart';
+import 'package:flexone/screens/user/report_screen.dart';
 import 'package:flexone/screens/user/user_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -55,7 +56,8 @@ class MyApp extends StatelessWidget {
                     page: () => const ActivityLogScreen()),
                 GetPage(name: '/user', page: () => const UserScreen()),
                 GetPage(
-                    name: '/user/detail', page: () => const UserDetailScreen())
+                    name: '/user/detail', page: () => const UserDetailScreen()),
+                GetPage(name: '/report', page: () => const ReportScreen())
               ],
               localizationsDelegates: context.localizationDelegates,
               supportedLocales: context.supportedLocales,

@@ -15,6 +15,7 @@ class UserModel {
   String? about;
   int? point;
   String? lastLogin;
+  bool? followed;
   bool? updatePoint;
   String? createdAt;
   int? followers = 0;
@@ -39,6 +40,7 @@ class UserModel {
       this.about,
       this.point,
       this.lastLogin,
+      this.followed,
       this.updatePoint,
       this.createdAt,
       this.followers,
@@ -63,6 +65,7 @@ class UserModel {
         about: object['about'],
         point: object['point'],
         lastLogin: object['last_login'],
+        followed: object['followed'],
         updatePoint: object['update_point'],
         createdAt: object['created_at'],
         followers: object['followers'],
@@ -183,6 +186,40 @@ class UserModel {
       }
       return logs;
     } else {
+      throw Exception(response.statusCode);
+    }
+  }
+
+  static Future report(
+      String userId, String targetUserId, String reason, String? photo) async {
+    final String url = '$_baseUrl/$userId/report';
+    final response = await http.post(Uri.parse(url), body: {
+      "target_user_id": targetUserId,
+      "reason": reason,
+      "photo": photo
+    });
+
+    if (response.statusCode != 201) {
+      throw Exception(json.decode(response.body)['message']);
+    }
+  }
+
+  static Future follow(String userId, String targetUserId) async {
+    String url = '$_baseUrl/$userId/follow';
+    final response = await http
+        .post(Uri.parse(url), body: {"followed_user_id": targetUserId});
+
+    if (response.statusCode != 201 && response.statusCode != 400) {
+      throw Exception(response.statusCode);
+    }
+  }
+
+  static Future unfollow(String userId, String targetUserId) async {
+    String url = '$_baseUrl/$userId/unfollow';
+    final response = await http
+        .post(Uri.parse(url), body: {"followed_user_id": targetUserId});
+
+    if (response.statusCode != 201 && response.statusCode != 400) {
       throw Exception(response.statusCode);
     }
   }

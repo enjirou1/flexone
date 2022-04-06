@@ -27,11 +27,14 @@
         "email": {
             "empty": "Email tidak boleh kosong"
         },
+        "name": {
+            "empty": "Nama tidak boleh kosong"
+        },
         "password": {
             "empty": "Password tidak boleh kosong"
         },
-        "name": {
-            "empty": "Nama tidak boleh kosong"
+        "reason": {
+            "empty": "Alasan tidak boleh kosong"
         }
     },
     "followers": "Pengikut",
@@ -54,6 +57,8 @@
     "profile": "Profil",
     "province:": "Provinsi:",
     "questions_asked": "Pertanyaan yang ditanyakan",
+    "reason:": "Alasan:",
+    "report": "Lapor",
     "room": "Ruangan",
     "rooms_joined": "Ruangan yang diikuti",
     "search": "Cari",
@@ -66,6 +71,10 @@
     "sign_up": "Daftar",
     "submit": "Submit",
     "success": "Berhasil",
+    "success_detail": {
+        "update_profile": "Berhasil ubah profil",
+        "report": "Berhasil melaporkan user"
+    },
     "transactions": "Transaksi",
     "user-not-found": "User tidak ditemukan",
     "weak-password": "Password lemah",

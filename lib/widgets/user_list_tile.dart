@@ -7,8 +7,10 @@ class UserListTile extends StatelessWidget {
   String? id;
   String? name;
   String? email;
+  bool? followed;
 
-  UserListTile({Key? key, this.image, this.id, this.name, this.email})
+  UserListTile(
+      {Key? key, this.image, this.id, this.name, this.email, this.followed})
       : super(key: key);
 
   @override
@@ -43,7 +45,7 @@ class UserListTile extends StatelessWidget {
           style: poppinsTheme.caption,
         )
       ]),
-      onTap: () => Get.toNamed('/user/detail?id=$id'),
+      onTap: () => Get.toNamed('/user/detail?id=$id&followed=$followed'),
     );
   }
 }

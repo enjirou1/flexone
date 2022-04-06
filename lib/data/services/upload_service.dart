@@ -3,12 +3,12 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 
 class UploadService {
-  static Future<String> uploadImage(XFile file, String uid) async {
+  static Future<String> uploadImage(XFile file, String folder, String id) async {
     String? filename = file.path;
     Reference ref = FirebaseStorage.instance
         .ref()
-        .child('user')
-        .child('${DateTime.now().millisecondsSinceEpoch}-$uid');
+        .child(folder)
+        .child('${DateTime.now().millisecondsSinceEpoch}-$id');
     UploadTask task = ref.putFile(File(filename));
     TaskSnapshot snapshot = await task;
     return await snapshot.ref.getDownloadURL();

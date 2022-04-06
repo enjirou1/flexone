@@ -27,11 +27,14 @@
         "email": {
             "empty": "Email cannot be empty"
         },
+        "name": {
+            "empty": "Name cannot be empty"
+        },
         "password": {
             "empty": "Password cannot be empty"
         },
-        "name": {
-            "empty": "Name cannot be empty"
+        "reason": {
+            "empty": "Reason cannot be empty"
         }
     },
     "followers": "Followers",
@@ -54,6 +57,8 @@
     "profile": "Profile",
     "province:": "Province:",
     "questions_asked": "Questions asked",
+    "reason:": "Reason:",
+    "report": "Report",
     "room": "Room",
     "rooms_joined": "Rooms joined",
     "search": "Search",
@@ -66,6 +71,10 @@
     "sign_up": "Sign Up",
     "submit": "Submit",
     "success": "Success",
+    "success_detail": {
+        "update_profile": "Successully update profile",
+        "report": "Successfully report user"
+    },
     "transactions": "Transactions",
     "user-not-found": "User not found",
     "weak-password": "Weak password",

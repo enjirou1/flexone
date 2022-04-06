@@ -99,7 +99,8 @@ class _UserScreenState extends State<UserScreen> {
                             image: _users[index].photo,
                             name: _users[index].fullname,
                             id: _users[index].userId,
-                            email: _users[index].email)
+                            email: _users[index].email,
+                            followed: _users[index].followed)
                         : const Center(
                             child: SizedBox(
                               width: 40,
