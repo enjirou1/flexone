@@ -17,16 +17,21 @@ class UserDetailScreen extends StatefulWidget {
 }
 
 class _UserDetailScreenState extends State<UserDetailScreen> {
-  bool _isFollowed = Get.parameters['followed'] == 'true' ? true : false;
+  bool _followed = false;
 
   @override
   Widget build(BuildContext context) {
     final _provider = Provider.of<UserProvider>(context, listen: false);
+    UserModel.checkFollow(_provider.user!.userId!, Get.parameters['id']!)
+        .then((value) {
+      _followed = value;
+      setState(() {});
+    });
 
     return FutureBuilder(
         future: Future.wait([
           UserModel.getDetail(Get.parameters['id']!),
-          Expert.getExpertByID("E${Get.parameters['id']}")
+          Expert.getExpertByID("E${Get.parameters['id']}"),
         ]),
         builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
           if (snapshot.hasData) {
@@ -113,47 +118,45 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                               const SizedBox(height: 5),
                               Center(child: Text(snapshot.data![0].email!)),
                               const SizedBox(height: 15),
-                              Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      width: 150,
-                                      child: ElevatedButton(
-                                          onPressed: () async {
-                                            if (_isFollowed) {
-                                              try {
-                                                await UserModel.unfollow(
-                                                    _provider.user!.userId!,
-                                                    Get.parameters['id']!);
-                                                _isFollowed = false;
-                                                setState(() {});
-                                              } catch (e) {
-                                                print(e);
+                              if (_provider.user!.userId! !=
+                                  Get.parameters['id'])
+                                Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SizedBox(
+                                        width: 150,
+                                        child: ElevatedButton(
+                                            onPressed: () async {
+                                              if (_followed) {
+                                                try {
+                                                  await UserModel.unfollow(
+                                                      _provider.user!.userId!,
+                                                      Get.parameters['id']!);
+                                                } catch (e) {
+                                                  print(e);
+                                                }
+                                              } else {
+                                                try {
+                                                  await UserModel.follow(
+                                                      _provider.user!.userId!,
+                                                      Get.parameters['id']!);
+                                                } catch (e) {
+                                                  print(e);
+                                                }
                                               }
-                                            } else {
-                                              try {
-                                                await UserModel.follow(
-                                                    _provider.user!.userId!,
-                                                    Get.parameters['id']!);
-                                                _isFollowed = true;
-                                                setState(() {});
-                                              } catch (e) {
-                                                print(e);
-                                              }
-                                            }
-                                          },
-                                          child: Text(_isFollowed
-                                              ? "Unfollow"
-                                              : "Follow")),
-                                    ),
-                                    const SizedBox(width: 15),
-                                    Container(
-                                      width: 150,
-                                      child: ElevatedButton(
-                                          onPressed: () {},
-                                          child: const Text("Chat")),
-                                    ),
-                                  ]),
+                                            },
+                                            child: Text(_followed
+                                                ? "Unfollow"
+                                                : "Follow")),
+                                      ),
+                                      const SizedBox(width: 15),
+                                      SizedBox(
+                                        width: 150,
+                                        child: ElevatedButton(
+                                            onPressed: () {},
+                                            child: const Text("Chat")),
+                                      ),
+                                    ]),
                             ],
                           ),
                         ),

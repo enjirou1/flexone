@@ -217,9 +217,20 @@ class UserModel {
   static Future unfollow(String userId, String targetUserId) async {
     String url = '$_baseUrl/$userId/unfollow';
     final response = await http
-        .post(Uri.parse(url), body: {"followed_user_id": targetUserId});
+        .delete(Uri.parse(url), body: {"followed_user_id": targetUserId});
 
-    if (response.statusCode != 201 && response.statusCode != 400) {
+    if (response.statusCode != 200 && response.statusCode != 400) {
+      throw Exception(response.statusCode);
+    }
+  }
+
+  static Future<bool> checkFollow(String userId, String targetUserId) async {
+    String url = '$_baseUrl/$userId/follow/$targetUserId';
+    final response = await http.get(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      return json.decode(response.body)['data'];
+    } else {
       throw Exception(response.statusCode);
     }
   }
