@@ -2,58 +2,107 @@
     "about": "About",
     "about_me:": "About me:",
     "account": "Account",
+    "account_holder_name:": "Bank account holder name:",
+    "account_number:": "Bank account number:",
     "activity_logs": "Activity logs",
+    "add": "Add",
+    "add_certificate": "Add certificate",
+    "add_skill": "Add skill",
     "additional_info": "Additional info",
     "address": "Address",
     "address:": "Address:",
     "already_have_an_account": "Already have an account?",
     "answers_given": "Answers given",
+    "bank:": "Bank:",
+    "cancel": "Cancel",
+    "certificates": "Certificates",
     "choose_language": "Choose language",
-    "city": "Kota",
+    "city": "City",
     "city:": "City:",
     "class": "Class",
     "classes_joined": "Classes joined",
+    "confirmation": {
+        "withdraw": {
+            "title": "Are you sure to withdraw saldo?",
+            "content": "Saldo will be withdrawn to your bank account",
+            "button": "Submit"
+        }
+    },
     "consultation": "Consultation",
     "consultations_joined": "Consultations joined",
     "create_an_account": "Create an account",
+    "create_expert_account": "Create expert account",
     "dark_mode": "Dark mode",
+    "delete": "Delete",
     "delete_photo": "Delete photo",
+    "detail:": "Detail:",
     "discussion": "Discussion",
+    "edit": "Edit",
     "edit_profile": "Edit profile",
     "education": "Education",
+    "education:": "Education:",
     "email-already-in-use": "Email already in use",
     "english": "English",
+    "enter_nominal": "Enter nominal",
     "error": {
+        "account_name": {
+            "empty": "Bank account holder name cannot be empty"
+        },
+        "account_number": {
+            "empty": "Bank account number cannot be empty"
+        },
+        "education": {
+            "empty": "Education cannot be empty"
+        },
         "email": {
             "empty": "Email cannot be empty"
+        },
+        "image": {
+            "empty": "Image is required"
+        },
+        "job": {
+            "empty": "Job cannot be empty"
         },
         "name": {
             "empty": "Name cannot be empty"
         },
+        "nominal": {
+            "minimum": "Minimum withdrawal is Rp. 10000",
+            "not_enough_saldo": "Not enough saldo"
+        },
         "password": {
             "empty": "Password cannot be empty"
+        },
+        "personal_identity_card": {
+            "empty": "Personal identity card is required"
         },
         "reason": {
             "empty": "Reason cannot be empty"
         }
     },
+    "expert": "Expert",
+    "expert_account": "Expert account",
     "followers": "Followers",
     "following": "Following",
     "forgot_password": "Forgot password",
     "fullname:": "Fullname: ",
     "indonesia": "Indonesia",
     "invalid-email": "Invalid email",
-    "job": "Job",
     "joined": "Joined",
+    "job": "Job",
+    "job:": "Job:",
     "logout": "Logout",
     "messages": "Messages",
     "my_consultations": "My consultations",
     "my_classes": "My classes",
     "my_rooms": "My rooms",
     "new_here": "New here?",
+    "nominal:": "Nominal:",
     "open_camera": "Open camera",
+    "personal_identity_card:": "Personal identity card:",
     "phone_number": "Phone number",
     "phone_number:": "Phone number:",
+    "preview": "Preview",
     "profile": "Profile",
     "province:": "Province:",
     "questions_asked": "Questions asked",
@@ -61,6 +110,8 @@
     "report": "Report",
     "room": "Room",
     "rooms_joined": "Rooms joined",
+    "saldo": "Saldo",
+    "save": "Save",
     "search": "Search",
     "search_user": "Search user",
     "select_photo": "Select photo",
@@ -69,14 +120,20 @@
     "sign_in_with_email": "Sign in with email",
     "sign_in_with_google": "Sign in with google",
     "sign_up": "Sign Up",
+    "skills": "Skills",
     "submit": "Submit",
     "success": "Success",
     "success_detail": {
-        "update_profile": "Successully update profile",
-        "report": "Successfully report user"
+        "add_certificate": "Successfully added certificate",
+        "create_expert": "Successfully created expert account",
+        "update_profile": "Successully updated profile",
+        "report": "Successfully reported user",
+        "withdraw_saldo": "Successfully withdrew saldo to bank account"
     },
     "transactions": "Transactions",
     "user-not-found": "User not found",
+    "view_all": "View all",
     "weak-password": "Weak password",
+    "withdraw": "Withdraw",
     "wrong-password": "Wrong Password"
 }

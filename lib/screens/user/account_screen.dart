@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flexone/data/providers/google_sign_in.dart';
 import 'package:flexone/data/providers/preferences.dart';
+import 'package:flexone/data/providers/user.dart';
 import 'package:flexone/widgets/profile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,6 +14,7 @@ class AccountScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<PreferencesProvider>(context, listen: true);
+    final _provider = Provider.of<UserProvider>(context, listen: true);
     final _user = FirebaseAuth.instance.currentUser;
 
     final List<Widget> menus = [
@@ -37,6 +39,32 @@ class AccountScreen extends StatelessWidget {
 
     final List<Widget> loggedinMenus = [
       const ProfileCard(),
+      _provider.user?.expertId == null
+          ? ListTile(
+              leading: const Icon(Icons.account_box_rounded,
+                  color: Color(0XFFBDBDBD)),
+              title: const Text('create_expert_account').tr(),
+              onTap: () async {
+                final result = await Get.toNamed('/expert/new');
+
+                if (result) {
+                  Get.snackbar(
+                      tr('success'), tr('success_detail.create_expert'),
+                      snackPosition: SnackPosition.BOTTOM,
+                      animationDuration: const Duration(milliseconds: 300),
+                      backgroundColor: Colors.green,
+                      colorText: Colors.white,
+                      icon: const Icon(Icons.check, color: Colors.white),
+                      duration: const Duration(seconds: 1));
+                }
+              },
+            )
+          : ListTile(
+              leading: const Icon(Icons.account_box_rounded,
+                  color: Color(0XFFBDBDBD)),
+              title: const Text('expert').tr(),
+              onTap: () => Get.toNamed('/expert/profile'),
+            ),
       ListTile(
         leading:
             const Icon(Icons.receipt_long_rounded, color: Color(0XFFBDBDBD)),

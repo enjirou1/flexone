@@ -136,6 +136,7 @@ ThemeData darkTheme = ThemeData(
         labelStyle: TextStyle(color: Colors.white)),
     listTileTheme: const ListTileThemeData(tileColor: Color(0xFF212121)),
     iconTheme: const IconThemeData(color: Color(0xFF616161)),
+    cardColor: Colors.grey[850],
     textTheme:
         poppinsTheme.apply(bodyColor: Colors.white, displayColor: Colors.white),
     drawerTheme: const DrawerThemeData(

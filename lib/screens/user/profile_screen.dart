@@ -74,8 +74,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     _selectedProvince = _provider.user!.province ?? "";
     _selectedCity = _provider.user!.city ?? "";
-
-    _nameController.text = _provider.user!.fullname!;
+    _nameController.text =
+        (!_nameValidation.isValid) ? "" : _provider.user!.fullname!;
     _aboutController.text = _provider.user?.about ?? "";
     _phoneController.text = _provider.user?.phone ?? "";
     _addressController.text = _provider.user?.address ?? "";
@@ -89,30 +89,36 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 if (_nameController.text.isEmpty) {
                   _nameValidation = InputValidation(
                       isValid: false, message: tr('error.name.empty'));
+                } else {
+                  _nameValidation = InputValidation(
+                      isValid: true, message: tr('error.name.empty'));
+
+                  await UserModel.updateUser(
+                      _provider.user!.userId!,
+                      _user!.email!,
+                      _nameController.text,
+                      _selectedProvince,
+                      _selectedCity,
+                      _addressController.text,
+                      _phoneController.text,
+                      _imagePath,
+                      _aboutController.text);
+
+                  await UserModel.getUserByEmail(_user.email).then((value) {
+                    _provider.setUser(value!);
+                  });
+
+                  Get.snackbar(
+                      tr('success'), tr('success_detail.update_profile'),
+                      snackPosition: SnackPosition.BOTTOM,
+                      animationDuration: const Duration(milliseconds: 300),
+                      backgroundColor: Colors.green,
+                      colorText: Colors.white,
+                      icon: const Icon(Icons.check, color: Colors.white),
+                      duration: const Duration(seconds: 1));
                 }
 
-                await UserModel.updateUser(
-                    _provider.user!.userId!,
-                    _user!.email!,
-                    _nameController.text,
-                    _selectedProvince,
-                    _selectedCity,
-                    _addressController.text,
-                    _phoneController.text,
-                    _imagePath,
-                    _aboutController.text);
-
-                await UserModel.getUserByEmail(_user.email).then((value) {
-                  _provider.setUser(value!);
-                });
-
-                Get.snackbar(tr('success'), tr('success_detail.update_profile'),
-                    snackPosition: SnackPosition.BOTTOM,
-                    animationDuration: const Duration(milliseconds: 300),
-                    backgroundColor: Colors.green,
-                    colorText: Colors.white,
-                    icon: const Icon(Icons.check, color: Colors.white),
-                    duration: const Duration(seconds: 1));
+                setState(() {});
               },
               icon: const Icon(
                 Icons.save,

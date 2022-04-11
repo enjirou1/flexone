@@ -1,12 +1,18 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flexone/common/style.dart';
+import 'package:flexone/data/providers/certificates.dart';
 import 'package:flexone/data/providers/email_sign_in.dart';
 import 'package:flexone/data/providers/google_sign_in.dart';
 import 'package:flexone/data/providers/preferences.dart';
 import 'package:flexone/data/providers/user.dart';
 import 'package:flexone/screens/auth/register_screen.dart';
 import 'package:flexone/screens/auth/login_screen.dart';
+import 'package:flexone/screens/expert/add_certificate_screen.dart';
+import 'package:flexone/screens/expert/add_skill_screen.dart';
+import 'package:flexone/screens/expert/certificate_screen.dart';
+import 'package:flexone/screens/expert/expert_profile_screen.dart';
+import 'package:flexone/screens/expert/new_account_screen.dart';
 import 'package:flexone/screens/main_screen.dart';
 import 'package:flexone/screens/settings_screen.dart';
 import 'package:flexone/screens/user/activity_log_screen.dart';
@@ -40,6 +46,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => GoogleSignInProvider()),
         ChangeNotifierProvider(create: (_) => EmailSignInProvider()),
         ChangeNotifierProvider(create: (_) => UserProvider()),
+        ChangeNotifierProvider(create: (_) => CertificateProvider())
       ],
       child: Consumer<PreferencesProvider>(
         builder: (context, provider, _) {
@@ -51,13 +58,15 @@ class MyApp extends StatelessWidget {
                 GetPage(name: '/register', page: () => const RegisterScreen()),
                 GetPage(name: '/settings', page: () => const SettingsScreen()),
                 GetPage(name: '/profile', page: () => const ProfileScreen()),
-                GetPage(
-                    name: '/activity_log',
-                    page: () => const ActivityLogScreen()),
+                GetPage(name: '/activity_log', page: () => const ActivityLogScreen()),
                 GetPage(name: '/user', page: () => const UserScreen()),
-                GetPage(
-                    name: '/user/detail', page: () => const UserDetailScreen()),
-                GetPage(name: '/report', page: () => const ReportScreen())
+                GetPage(name: '/user/detail', page: () => const UserDetailScreen()),
+                GetPage(name: '/report', page: () => const ReportScreen()),
+                GetPage(name: '/expert/new', page: () => const NewAccountScreen()),
+                GetPage(name: '/expert/profile', page: () => const ExpertProfileScreen()),
+                GetPage(name: '/add_skill', page: () => const AddSkillScreen()),
+                GetPage(name: '/certificate', page: () => const CertificateScreen()),
+                GetPage(name: '/add_certificate', page: () => const AddCertificateScreen()),
               ],
               localizationsDelegates: context.localizationDelegates,
               supportedLocales: context.supportedLocales,

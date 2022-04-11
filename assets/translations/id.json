@@ -2,41 +2,86 @@
     "about": "Tentang",
     "about_me:": "Tentang saya:",
     "account": "Akun",
+    "account_holder_name:": "Nama pemilik rekening bank",
+    "account_number:": "Nomor rekening bank",
     "activity_logs": "Log aktivitas",
+    "add": "Tambah",
+    "add_certificate": "Tambah sertifikat",
+    "add_skill": "Tambah skill",
     "additional_info": "Info tambahan",
     "address": "Alamat",
     "address:": "Alamat:",
     "already_have_an_account": "Sudah memiliki akun?",
     "answers_given": "Jawaban yang diberikan",
+    "bank:": "Bank:",
+    "cancel": "Batal",
+    "certificates": "Sertifikat",
     "choose_language": "Pilih bahasa",
     "city": "Kota",
     "city:": "Kota:",
     "class": "Kelas",
     "classes_joined": "Kelas yang diikuti",
-    "create_an_account": "Buat akun",
+    "confirmation": {
+        "withdraw": {
+            "title": "Anda yakin untuk menarik saldo?",
+            "content": "Saldo akan ditarik ke rekening anda",
+            "button": "Submit"
+        }
+    },
     "consultation": "Konsultasi",
     "consultations_joined": "Konsultasi yang diikuti",
+    "create_an_account": "Buat akun",
+    "create_expert_account": "Buat akun expert",
     "dark_mode": "Mode dark",
+    "delete": "Hapus",
     "delete_photo": "Hapus foto",
+    "detail:": "Detail:",
     "discussion": "Diskusi",
+    "edit": "Ubah",
     "edit_profile": "Ubah profil",
     "education": "Edukasi",
+    "education:": "Edukasi:",
     "email-already-in-use": "Email telah digunakan",
     "english": "Bahasa Inggris",
+    "enter_nominal": "Masukkan nominal",
     "error": {
+        "account_name": {
+            "empty": "Nama pemilik rekening tidak boleh kosong"
+        },
+        "account_number": {
+            "empty": "Nomor rekening tidak boleh kosong"
+        },
+        "education": {
+            "empty": "Edukasi tidak boleh kosong"
+        },
         "email": {
             "empty": "Email tidak boleh kosong"
+        },
+        "image": {
+            "empty": "Gambar diperlukan"
+        },
+        "job": {
+            "empty": "Pekerjaan tidak boleh kosong"
         },
         "name": {
             "empty": "Nama tidak boleh kosong"
         },
+        "nominal": {
+            "minimum": "Minimal penarikan Rp. 10000",
+            "not_enough_saldo": "Saldo tidak cukup"
+        },
         "password": {
             "empty": "Password tidak boleh kosong"
+        },
+        "personal_identity_card": {
+            "empty": "Kartu identitas pribadi diperlukan"
         },
         "reason": {
             "empty": "Alasan tidak boleh kosong"
         }
     },
+    "expert": "Expert",
+    "expert_account": "Akun expert",
     "followers": "Pengikut",
     "following": "Mengikuti",
     "forgot_password": "Lupa password",
@@ -44,6 +89,7 @@
     "indonesia": "Bahasa Indonesia",
     "invalid-email": "Format email salah",
     "job": "Pekerjaan",
+    "job:": "Pekerjaan:",
     "joined": "Bergabung",
     "logout": "Keluar",
     "messages": "Pesan",
@@ -51,9 +97,12 @@
     "my_consultations": "Konsultasi saya",
     "my_rooms": "Ruangan saya",
     "new_here": "Baru disini?",
+    "nominal:": "Nominal:",
     "open_camera": "Buka kamera",
+    "personal_identity_card:": "Kartu identitas pribadi:",
     "phone_number": "Nomor telepon",
     "phone_number:": "Nomor telepon:",
+    "preview": "Preview",
     "profile": "Profil",
     "province:": "Provinsi:",
     "questions_asked": "Pertanyaan yang ditanyakan",
@@ -61,6 +110,8 @@
     "report": "Lapor",
     "room": "Ruangan",
     "rooms_joined": "Ruangan yang diikuti",
+    "saldo": "Saldo",
+    "save": "Simpan",
     "search": "Cari",
     "search_user": "Cari user",
     "select_photo": "Pilih foto",
@@ -69,14 +120,20 @@
     "sign_in_with_email": "Masuk dengan email",
     "sign_in_with_google": "Masuk dengan google",
     "sign_up": "Daftar",
+    "skills": "Kemampuan",
     "submit": "Submit",
     "success": "Berhasil",
     "success_detail": {
+        "add_certificate": "Berhasil menambahkan sertifikat",
+        "create_expert": "Berhasil membuat akun expert",
+        "report": "Berhasil melaporkan user",
         "update_profile": "Berhasil ubah profil",
-        "report": "Berhasil melaporkan user"
+        "withdraw_saldo": "Berhasil menarik saldo ke rekening"
     },
     "transactions": "Transaksi",
     "user-not-found": "User tidak ditemukan",
+    "view_all": "Lihat semua",
     "weak-password": "Password lemah",
+    "withdraw": "Tarik",
     "wrong-password": "Password salah"
 }
