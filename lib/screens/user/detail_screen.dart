@@ -3,6 +3,7 @@ import 'package:flexone/common/style.dart';
 import 'package:flexone/data/models/expert_result.dart';
 import 'package:flexone/data/models/user_result.dart';
 import 'package:flexone/data/providers/user.dart';
+import 'package:flexone/screens/user/chat_screen.dart';
 import 'package:flexone/widgets/counter_container.dart';
 import 'package:flexone/widgets/info_row.dart';
 import 'package:flutter/material.dart';
@@ -152,9 +153,16 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                                       const SizedBox(width: 15),
                                       SizedBox(
                                         width: 150,
-                                        child: ElevatedButton(
-                                            onPressed: () {},
-                                            child: const Text("Chat")),
+                                        child: IgnorePointer(
+                                          ignoring: _followed ? false : true,
+                                          child: ElevatedButton(
+                                            style: ElevatedButton.styleFrom(primary: _followed ? primaryColor : Colors.grey[400]),
+                                            onPressed: () {
+                                              Get.to(ChatScreen(receiver: snapshot.data![0]));
+                                            },
+                                            child: const Text("Chat")
+                                          ),
+                                        ),
                                       ),
                                     ]),
                             ],

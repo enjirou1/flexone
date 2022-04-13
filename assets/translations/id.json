@@ -131,6 +131,7 @@
         "withdraw_saldo": "Berhasil menarik saldo ke rekening"
     },
     "transactions": "Transaksi",
+    "type_something": "Type something",
     "user-not-found": "User tidak ditemukan",
     "view_all": "Lihat semua",
     "weak-password": "Password lemah",

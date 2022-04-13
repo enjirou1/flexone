@@ -131,6 +131,7 @@
         "withdraw_saldo": "Successfully withdrew saldo to bank account"
     },
     "transactions": "Transactions",
+    "type_something": "Ketik sesuatu",
     "user-not-found": "User not found",
     "view_all": "View all",
     "weak-password": "Weak password",
