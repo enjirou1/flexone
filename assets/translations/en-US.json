@@ -57,6 +57,9 @@
         "email": {
             "empty": "Email cannot be empty"
         },
+        "follow": {
+            "not_followed": "Follow to chat with this user"
+        },
         "image": {
             "empty": "Image is required"
         },

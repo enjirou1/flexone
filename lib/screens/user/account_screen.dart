@@ -79,7 +79,7 @@ class AccountScreen extends StatelessWidget {
       ListTile(
         leading: const Icon(Icons.message_rounded, color: Color(0XFFBDBDBD)),
         title: const Text('messages').tr(),
-        onTap: null,
+        onTap: () => Get.toNamed('list_chat'),
       ),
       ListTile(
         leading: const Icon(Icons.people_alt_rounded, color: Color(0XFFBDBDBD)),

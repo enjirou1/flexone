@@ -17,6 +17,7 @@ import 'package:flexone/screens/main_screen.dart';
 import 'package:flexone/screens/settings_screen.dart';
 import 'package:flexone/screens/user/activity_log_screen.dart';
 import 'package:flexone/screens/user/detail_screen.dart';
+import 'package:flexone/screens/user/list_chat_screen.dart';
 import 'package:flexone/screens/user/profile_screen.dart';
 import 'package:flexone/screens/user/report_screen.dart';
 import 'package:flexone/screens/user/user_screen.dart';
@@ -67,6 +68,7 @@ class MyApp extends StatelessWidget {
                 GetPage(name: '/add_skill', page: () => const AddSkillScreen()),
                 GetPage(name: '/certificate', page: () => const CertificateScreen()),
                 GetPage(name: '/add_certificate', page: () => const AddCertificateScreen()),
+                GetPage(name: '/list_chat', page: () => const ListChatScreen())
               ],
               localizationsDelegates: context.localizationDelegates,
               supportedLocales: context.supportedLocales,

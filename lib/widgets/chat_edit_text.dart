@@ -7,8 +7,9 @@ import 'package:provider/provider.dart';
 class ChatEditText extends StatelessWidget {
   TextEditingController controller = TextEditingController();
   Function() onSubmit;
+  bool followed;
 
-  ChatEditText({ Key? key, required this.controller, required this.onSubmit }) : super(key: key);
+  ChatEditText({ Key? key, required this.controller, required this.onSubmit, required this.followed }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +32,7 @@ class ChatEditText extends StatelessWidget {
               minLines: 1,
               maxLines: 3,
               decoration: InputDecoration(
+                enabled: followed,
                 contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                 isDense: true,
                 fillColor: _editTextColor,

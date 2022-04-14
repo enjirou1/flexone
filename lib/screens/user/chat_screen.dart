@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flexone/common/style.dart';
 import 'package:flexone/data/models/user_result.dart';
 import 'package:flexone/data/providers/user.dart';
@@ -8,9 +9,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ChatScreen extends StatefulWidget {
-  late UserModel receiver;
+  UserModel receiver;
+  bool followed;
 
-  ChatScreen({ Key? key, required this.receiver }) : super(key: key);
+  ChatScreen({ Key? key, required this.receiver, required this.followed }) : super(key: key);
 
   @override
   State<ChatScreen> createState() => _ChatScreenState();
@@ -78,7 +80,11 @@ class _ChatScreenState extends State<ChatScreen> {
                         final date2 = ((b.data() as Map<String, dynamic>)['sent_at'] as Timestamp).toDate();
                         return date1.compareTo(date2);
                       }));
-                      
+                      WidgetsBinding.instance!.addPostFrameCallback((_){
+                        if (_scrollController.hasClients) {
+                          _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+                        }
+                      });
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: ListView.builder(
@@ -86,11 +92,6 @@ class _ChatScreenState extends State<ChatScreen> {
                           itemCount: documents.length,
                           itemBuilder: (context, index) {
                             Map<String, dynamic> data = documents[index].data() as Map<String, dynamic>;
-                            WidgetsBinding.instance!.addPostFrameCallback((_){
-                              if (_scrollController.hasClients) {
-                                _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
-                              }
-                            });
                             return BubbleChat(text: data['text'], status: data['sender']['id'] == _provider.user!.userId, date: data['sent_at']);
                           },
                         ),
@@ -105,28 +106,47 @@ class _ChatScreenState extends State<ChatScreen> {
               },
             )
           ),
+          if (!widget.followed)
+          Container(
+            width: double.infinity,
+            color: Colors.indigo.withOpacity(0.5),
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: Center(child: const Text('error.follow.not_followed').tr()),
+            ),
+          ),
           ChatEditText(
             controller: _controller, 
+            followed: widget.followed,
             onSubmit: () {
-              _messages.add({
-                "sender": {
-                  "avatar": _provider.user!.photo,
-                  "id": _provider.user!.userId,
-                  "name": _provider.user!.fullname,
-                },
-                "receiver": {
-                  "avatar": widget.receiver.photo,
-                  "id": widget.receiver.userId,
-                  "name": widget.receiver.fullname,
-                },
-                "text": _controller.text,
-                "sent_at": Timestamp.now()
-              });
-              _controller.clear();
+              if (_controller.text.isNotEmpty) {
+                _messages.add({
+                  "sender": {
+                    "avatar": _provider.user!.photo,
+                    "id": _provider.user!.userId,
+                    "name": _provider.user!.fullname,
+                  },
+                  "receiver": {
+                    "avatar": widget.receiver.photo,
+                    "id": widget.receiver.userId,
+                    "name": widget.receiver.fullname,
+                  },
+                  "text": _controller.text,
+                  "sent_at": Timestamp.now()
+                });
+                _controller.clear();
+              }
             }
           ),
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    _scrollController.dispose();
+    super.dispose();
   }
 }

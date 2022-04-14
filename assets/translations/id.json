@@ -57,6 +57,9 @@
         "email": {
             "empty": "Email tidak boleh kosong"
         },
+        "follow": {
+            "not_followed": "Follow untuk chat dengan user ini"
+        },
         "image": {
             "empty": "Gambar diperlukan"
         },
