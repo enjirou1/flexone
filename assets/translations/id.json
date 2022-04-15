@@ -14,6 +14,8 @@
     "already_have_an_account": "Sudah memiliki akun?",
     "answers_given": "Jawaban yang diberikan",
     "bank:": "Bank:",
+    "bought_at": "Dibeli pada {}",
+    "buy": "Beli",
     "cancel": "Batal",
     "certificates": "Sertifikat",
     "choose_language": "Pilih bahasa",
@@ -26,6 +28,10 @@
             "title": "Anda yakin untuk menarik saldo?",
             "content": "Saldo akan ditarik ke rekening anda",
             "button": "Submit"
+        },
+        "buy_merchandise": {
+            "title": "Anda yakin untuk membeli {}?",
+            "content": "Barang akan dikirimkan setelah diproses oleh admin. Pastikan alamat sudah terisi dengan benar."
         }
     },
     "consultation": "Konsultasi",
@@ -35,7 +41,9 @@
     "dark_mode": "Mode dark",
     "delete": "Hapus",
     "delete_photo": "Hapus foto",
+    "detail": "Detail",
     "detail:": "Detail:",
+    "description": "Deskripsi",
     "discussion": "Diskusi",
     "edit": "Ubah",
     "edit_profile": "Ubah profil",
@@ -79,12 +87,16 @@
         "personal_identity_card": {
             "empty": "Kartu identitas pribadi diperlukan"
         },
+        "point": {
+            "not_enough": "Poin tidak cukup"
+        },
         "reason": {
             "empty": "Alasan tidak boleh kosong"
         }
     },
     "expert": "Expert",
     "expert_account": "Akun expert",
+    "failed": "Gagal",
     "followers": "Pengikut",
     "following": "Mengikuti",
     "forgot_password": "Lupa password",
@@ -98,6 +110,7 @@
     "messages": "Pesan",
     "my_classes": "Kelas saya",
     "my_consultations": "Konsultasi saya",
+    "my_points": "Poin saya: {}",
     "my_rooms": "Ruangan saya",
     "new_here": "Baru disini?",
     "nominal:": "Nominal:",
@@ -105,7 +118,9 @@
     "personal_identity_card:": "Kartu identitas pribadi:",
     "phone_number": "Nomor telepon",
     "phone_number:": "Nomor telepon:",
+    "points": "{} poin",
     "preview": "Preview",
+    "price": "Harga",
     "profile": "Profil",
     "province:": "Provinsi:",
     "questions_asked": "Pertanyaan yang ditanyakan",
@@ -119,15 +134,18 @@
     "search_user": "Cari user",
     "select_photo": "Pilih foto",
     "settings": "Pengaturan",
+    "shop": "Toko",
     "sign_in": "Masuk",
     "sign_in_with_email": "Masuk dengan email",
     "sign_in_with_google": "Masuk dengan google",
     "sign_up": "Daftar",
     "skills": "Kemampuan",
+    "stock": "Stok",
     "submit": "Submit",
     "success": "Berhasil",
     "success_detail": {
         "add_certificate": "Berhasil menambahkan sertifikat",
+        "buy_merchandise": "{} berhasil dibeli",
         "create_expert": "Berhasil membuat akun expert",
         "report": "Berhasil melaporkan user",
         "update_profile": "Berhasil ubah profil",

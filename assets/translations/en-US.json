@@ -14,6 +14,8 @@
     "already_have_an_account": "Already have an account?",
     "answers_given": "Answers given",
     "bank:": "Bank:",
+    "bought_at": "Bought at {}",
+    "buy": "Buy",
     "cancel": "Cancel",
     "certificates": "Certificates",
     "choose_language": "Choose language",
@@ -26,6 +28,10 @@
             "title": "Are you sure to withdraw saldo?",
             "content": "Saldo will be withdrawn to your bank account",
             "button": "Submit"
+        },
+        "buy_merchandise": {
+            "title": "Are you sure to buy {}?",
+            "content": "Item will be delivered after processing by admin. Make sure your address is filled in correctly."
         }
     },
     "consultation": "Consultation",
@@ -35,6 +41,8 @@
     "dark_mode": "Dark mode",
     "delete": "Delete",
     "delete_photo": "Delete photo",
+    "description": "Description",
+    "detail": "Detail",
     "detail:": "Detail:",
     "discussion": "Discussion",
     "edit": "Edit",
@@ -79,12 +87,16 @@
         "personal_identity_card": {
             "empty": "Personal identity card is required"
         },
+        "point": {
+            "not_enough": "Not enough point"
+        },
         "reason": {
             "empty": "Reason cannot be empty"
         }
     },
     "expert": "Expert",
     "expert_account": "Expert account",
+    "failed": "Failed",
     "followers": "Followers",
     "following": "Following",
     "forgot_password": "Forgot password",
@@ -96,8 +108,9 @@
     "job:": "Job:",
     "logout": "Logout",
     "messages": "Messages",
-    "my_consultations": "My consultations",
     "my_classes": "My classes",
+    "my_consultations": "My consultations",
+    "my_points": "My points: {}",
     "my_rooms": "My rooms",
     "new_here": "New here?",
     "nominal:": "Nominal:",
@@ -105,7 +118,9 @@
     "personal_identity_card:": "Personal identity card:",
     "phone_number": "Phone number",
     "phone_number:": "Phone number:",
+    "points": "{} points",
     "preview": "Preview",
+    "price": "Price",
     "profile": "Profile",
     "province:": "Province:",
     "questions_asked": "Questions asked",
@@ -119,15 +134,18 @@
     "search_user": "Search user",
     "select_photo": "Select photo",
     "settings": "Settings",
+    "shop": "Shop",
     "sign_in": "Sign In",
     "sign_in_with_email": "Sign in with email",
     "sign_in_with_google": "Sign in with google",
     "sign_up": "Sign Up",
     "skills": "Skills",
+    "stock": "Stock",
     "submit": "Submit",
     "success": "Success",
     "success_detail": {
         "add_certificate": "Successfully added certificate",
+        "buy_merchandise": "{} bought successfully",
         "create_expert": "Successfully created expert account",
         "update_profile": "Successully updated profile",
         "report": "Successfully reported user",

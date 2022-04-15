@@ -5,7 +5,9 @@ import 'package:flexone/data/models/user_result.dart';
 import 'package:flexone/data/providers/user.dart';
 import 'package:flexone/widgets/bubble_chat.dart';
 import 'package:flexone/widgets/chat_edit_text.dart';
+import 'package:flexone/widgets/preview_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -35,24 +37,35 @@ class _ChatScreenState extends State<ChatScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             (widget.receiver.photo != null && widget.receiver.photo != "")
-            ? Container(
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(color: Colors.black),
-                    image: DecorationImage(
-                        image: NetworkImage(widget.receiver.photo!), fit: BoxFit.cover)),
+            ? GestureDetector(
+                onTap: () => Get.toNamed('/user/detail?id=${widget.receiver.userId}'),
+                child: Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.black),
+                      image: DecorationImage(
+                        image: NetworkImage(widget.receiver.photo!), 
+                        fit: BoxFit.cover
+                      )
+                    ),
+                  ),
               )
-            : Container(
-                width: 40,
-                height: 40,
-                decoration: const BoxDecoration(
+            : GestureDetector(
+              onTap: () => Get.toNamed('/user/detail?id=${widget.receiver.userId}'),
+              child: Container(
+                  width: 40,
+                  height: 40,
+                  decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     image: DecorationImage(
-                        image: AssetImage('assets/images/profile-icon.png'),
-                        fit: BoxFit.cover)),
-              ),
+                      image: AssetImage('assets/images/profile-icon.png'),
+                      fit: BoxFit.cover
+                    )
+                  ),
+                ),
+            ),
             const SizedBox(width: 15),
             Text('${widget.receiver.fullname!}#${widget.receiver.userId}', style: poppinsTheme.bodyText1)
           ],

@@ -25,49 +25,46 @@ class AccountScreen extends StatelessWidget {
       ),
       ListTile(
         title: OutlinedButton(
-            onPressed: () {
-              Get.toNamed('/login');
-            },
-            child: Text(
-              'sign_in',
-              style: TextStyle(
-                  color: provider.isDarkTheme ? Colors.white : Colors.black),
-            ).tr()),
-        onTap: null,
+          onPressed: () {
+            Get.toNamed('/login');
+          },
+          child: Text(
+            'sign_in',
+            style: TextStyle(color: provider.isDarkTheme ? Colors.white : Colors.black),
+          ).tr()
+        ),
       ),
     ];
 
     final List<Widget> loggedinMenus = [
       const ProfileCard(),
       _provider.user?.expertId == null
-          ? ListTile(
-              leading: const Icon(Icons.account_box_rounded,
-                  color: Color(0XFFBDBDBD)),
-              title: const Text('create_expert_account').tr(),
-              onTap: () async {
-                final result = await Get.toNamed('/expert/new');
+      ? ListTile(
+          leading: const Icon(Icons.account_box_rounded, color: Color(0XFFBDBDBD)),
+          title: const Text('create_expert_account').tr(),
+          onTap: () async {
+            final result = await Get.toNamed('/expert/new');
 
-                if (result) {
-                  Get.snackbar(
-                      tr('success'), tr('success_detail.create_expert'),
-                      snackPosition: SnackPosition.BOTTOM,
-                      animationDuration: const Duration(milliseconds: 300),
-                      backgroundColor: Colors.green,
-                      colorText: Colors.white,
-                      icon: const Icon(Icons.check, color: Colors.white),
-                      duration: const Duration(seconds: 1));
-                }
-              },
-            )
-          : ListTile(
-              leading: const Icon(Icons.account_box_rounded,
-                  color: Color(0XFFBDBDBD)),
-              title: const Text('expert').tr(),
-              onTap: () => Get.toNamed('/expert/profile'),
-            ),
+            if (result) {
+              Get.snackbar(
+                tr('success'), tr('success_detail.create_expert'),
+                snackPosition: SnackPosition.BOTTOM,
+                animationDuration: const Duration(milliseconds: 300),
+                backgroundColor: Colors.green,
+                colorText: Colors.white,
+                icon: const Icon(Icons.check, color: Colors.white),
+                duration: const Duration(seconds: 1)
+              );
+            }
+          },
+        )
+      : ListTile(
+          leading: const Icon(Icons.account_box_rounded, color: Color(0XFFBDBDBD)),
+          title: const Text('expert').tr(),
+          onTap: () => Get.toNamed('/expert/profile'),
+        ),
       ListTile(
-        leading:
-            const Icon(Icons.receipt_long_rounded, color: Color(0XFFBDBDBD)),
+        leading: const Icon(Icons.receipt_long_rounded, color: Color(0XFFBDBDBD)),
         title: const Text('transactions').tr(),
         onTap: null,
       ),
@@ -92,14 +89,17 @@ class AccountScreen extends StatelessWidget {
         onTap: null,
       ),
       ListTile(
-        leading:
-            const Icon(Icons.meeting_room_rounded, color: Color(0XFFBDBDBD)),
+        leading: const Icon(Icons.meeting_room_rounded, color: Color(0XFFBDBDBD)),
         title: const Text('my_rooms').tr(),
         onTap: null,
       ),
       ListTile(
-        leading: const Icon(Icons.access_time_filled_rounded,
-            color: Color(0XFFBDBDBD)),
+        leading: const Icon(Icons.shopping_bag_rounded, color: Color(0XFFBDBDBD)),
+        title: const Text('shop').tr(),
+        onTap: () => Get.toNamed('/shop'),
+      ),
+      ListTile(
+        leading: const Icon(Icons.access_time_filled_rounded, color: Color(0XFFBDBDBD)),
         title: const Text('activity_logs').tr(),
         onTap: () => Get.toNamed('/activity_log'),
       ),
@@ -118,8 +118,7 @@ class AccountScreen extends StatelessWidget {
           style: TextStyle(color: Colors.red),
         ).tr(),
         onTap: () {
-          final provider =
-              Provider.of<GoogleSignInProvider>(context, listen: false);
+          final provider = Provider.of<GoogleSignInProvider>(context, listen: false);
           provider.logout();
           Get.offAllNamed('/');
         },

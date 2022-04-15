@@ -14,6 +14,9 @@ import 'package:flexone/screens/expert/certificate_screen.dart';
 import 'package:flexone/screens/expert/expert_profile_screen.dart';
 import 'package:flexone/screens/expert/new_account_screen.dart';
 import 'package:flexone/screens/main_screen.dart';
+import 'package:flexone/screens/merchandise/detail_screen.dart';
+import 'package:flexone/screens/merchandise/history_screen.dart';
+import 'package:flexone/screens/merchandise/shop_screen.dart';
 import 'package:flexone/screens/settings_screen.dart';
 import 'package:flexone/screens/user/activity_log_screen.dart';
 import 'package:flexone/screens/user/detail_screen.dart';
@@ -68,7 +71,9 @@ class MyApp extends StatelessWidget {
                 GetPage(name: '/add_skill', page: () => const AddSkillScreen()),
                 GetPage(name: '/certificate', page: () => const CertificateScreen()),
                 GetPage(name: '/add_certificate', page: () => const AddCertificateScreen()),
-                GetPage(name: '/list_chat', page: () => const ListChatScreen())
+                GetPage(name: '/list_chat', page: () => const ListChatScreen()),
+                GetPage(name: '/shop', page: () => const ShopScreen()),
+                GetPage(name: '/merchandise-history', page: () => const MerchandiseHistoryScreen()),
               ],
               localizationsDelegates: context.localizationDelegates,
               supportedLocales: context.supportedLocales,

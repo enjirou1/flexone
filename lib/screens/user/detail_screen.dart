@@ -6,6 +6,7 @@ import 'package:flexone/data/providers/user.dart';
 import 'package:flexone/screens/user/chat_screen.dart';
 import 'package:flexone/widgets/counter_container.dart';
 import 'package:flexone/widgets/info_row.dart';
+import 'package:flexone/widgets/preview_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -83,17 +84,20 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                       child: Column(
                         children: [
                           (snapshot.data![0].photo != null && snapshot.data![0].photo != "")
-                          ? Center(
-                              child: Container(
-                                width: 120,
-                                height: 120,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  border: Border.all(color: Colors.black),
-                                  image: DecorationImage(
-                                    image: NetworkImage(snapshot.data![0].photo!),
-                                    fit: BoxFit.cover
-                                  )
+                          ? GestureDetector(
+                              onTap: () => Get.to(PreviewImage(image: snapshot.data![0].photo!)),
+                              child: Center(
+                                child: Container(
+                                  width: 120,
+                                  height: 120,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(color: Colors.black),
+                                    image: DecorationImage(
+                                      image: NetworkImage(snapshot.data![0].photo!),
+                                      fit: BoxFit.cover
+                                    )
+                                  ),
                                 ),
                               ),
                             )
