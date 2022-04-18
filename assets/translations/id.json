@@ -12,7 +12,10 @@
     "address": "Alamat",
     "address:": "Alamat:",
     "already_have_an_account": "Sudah memiliki akun?",
+    "answer": "Jawaban",
+    "answers": "Jawaban",
     "answers_given": "Jawaban yang diberikan",
+    "ask_a_question": "Ajukan pertanyaan",
     "bank:": "Bank:",
     "bought_at": "Dibeli pada {}",
     "buy": "Beli",
@@ -23,15 +26,19 @@
     "city:": "Kota:",
     "class": "Kelas",
     "classes_joined": "Kelas yang diikuti",
+    "comments": "Komentar",
     "confirmation": {
+        "buy_merchandise": {
+            "title": "Anda yakin untuk membeli {}?",
+            "content": "Barang akan dikirimkan setelah diproses oleh admin. Pastikan alamat sudah terisi dengan benar."
+        },
+        "delete_question": {
+            "title": "Apakah anda yakin untuk menghapus pertanyaan ini?"
+        },
         "withdraw": {
             "title": "Anda yakin untuk menarik saldo?",
             "content": "Saldo akan ditarik ke rekening anda",
             "button": "Submit"
-        },
-        "buy_merchandise": {
-            "title": "Anda yakin untuk membeli {}?",
-            "content": "Barang akan dikirimkan setelah diproses oleh admin. Pastikan alamat sudah terisi dengan benar."
         }
     },
     "consultation": "Konsultasi",
@@ -68,6 +75,9 @@
         "follow": {
             "not_followed": "Follow untuk chat dengan user ini"
         },
+        "grade_subject": {
+            "empty": "Pilih tingkatan dan subjek"
+        },
         "image": {
             "empty": "Gambar diperlukan"
         },
@@ -88,10 +98,14 @@
             "empty": "Kartu identitas pribadi diperlukan"
         },
         "point": {
+            "empty": "Poin minimum adalah 1 poin",
             "not_enough": "Poin tidak cukup"
         },
         "reason": {
             "empty": "Alasan tidak boleh kosong"
+        },
+        "text": {
+            "empty": "Isi tidak boleh kosong"
         }
     },
     "expert": "Expert",
@@ -101,6 +115,9 @@
     "following": "Mengikuti",
     "forgot_password": "Lupa password",
     "fullname:": "Nama lengkap: ",
+    "give_answer": "Beri jawaban",
+    "grade": "Tingkatan",
+    "grade_and_subject": "Tingkatan & Subjek",
     "indonesia": "Bahasa Indonesia",
     "invalid-email": "Format email salah",
     "job": "Pekerjaan",
@@ -111,6 +128,7 @@
     "my_classes": "Kelas saya",
     "my_consultations": "Konsultasi saya",
     "my_points": "Poin saya: {}",
+    "my_questions": "Pertanyaan saya",
     "my_rooms": "Ruangan saya",
     "new_here": "Baru disini?",
     "nominal:": "Nominal:",
@@ -119,12 +137,14 @@
     "phone_number": "Nomor telepon",
     "phone_number:": "Nomor telepon:",
     "points": "{} poin",
+    "point:": "Point:",
     "preview": "Preview",
     "price": "Harga",
     "profile": "Profil",
     "province:": "Provinsi:",
     "questions_asked": "Pertanyaan yang ditanyakan",
     "reason:": "Alasan:",
+    "remove": "Hapus",
     "report": "Lapor",
     "room": "Ruangan",
     "rooms_joined": "Ruangan yang diikuti",
@@ -141,6 +161,7 @@
     "sign_up": "Daftar",
     "skills": "Kemampuan",
     "stock": "Stok",
+    "subject": "Subjek",
     "submit": "Submit",
     "success": "Berhasil",
     "success_detail": {
@@ -155,6 +176,7 @@
     "type_something": "Type something",
     "user-not-found": "User tidak ditemukan",
     "view_all": "Lihat semua",
+    "view_answer": "Lihat jawaban",
     "weak-password": "Password lemah",
     "withdraw": "Tarik",
     "wrong-password": "Password salah"

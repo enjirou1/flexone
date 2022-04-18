@@ -12,7 +12,10 @@
     "address": "Address",
     "address:": "Address:",
     "already_have_an_account": "Already have an account?",
+    "answer": "Answer",
+    "answers": "Answers",
     "answers_given": "Answers given",
+    "ask_a_question": "Ask a Question",
     "bank:": "Bank:",
     "bought_at": "Bought at {}",
     "buy": "Buy",
@@ -23,15 +26,19 @@
     "city:": "City:",
     "class": "Class",
     "classes_joined": "Classes joined",
+    "comments": "Comments",
     "confirmation": {
+        "buy_merchandise": {
+            "title": "Are you sure to buy {}?",
+            "content": "Item will be delivered after processing by admin. Make sure your address is filled in correctly."
+        },
+        "delete_question": {
+            "title": "Are you sure to delete this question?"
+        },
         "withdraw": {
             "title": "Are you sure to withdraw saldo?",
             "content": "Saldo will be withdrawn to your bank account",
             "button": "Submit"
-        },
-        "buy_merchandise": {
-            "title": "Are you sure to buy {}?",
-            "content": "Item will be delivered after processing by admin. Make sure your address is filled in correctly."
         }
     },
     "consultation": "Consultation",
@@ -68,6 +75,9 @@
         "follow": {
             "not_followed": "Follow to chat with this user"
         },
+        "grade_subject": {
+            "empty": "Choose grade and subject"
+        },
         "image": {
             "empty": "Image is required"
         },
@@ -88,10 +98,14 @@
             "empty": "Personal identity card is required"
         },
         "point": {
+            "empty": "Minimum point is 1 point",
             "not_enough": "Not enough point"
         },
         "reason": {
             "empty": "Reason cannot be empty"
+        },
+        "text": {
+            "empty": "Content cannot be empty"
         }
     },
     "expert": "Expert",
@@ -101,6 +115,9 @@
     "following": "Following",
     "forgot_password": "Forgot password",
     "fullname:": "Fullname: ",
+    "give_answer": "Give answer",
+    "grade": "Grade",
+    "grade_and_subject": "Grade & Subject",
     "indonesia": "Indonesia",
     "invalid-email": "Invalid email",
     "joined": "Joined",
@@ -111,6 +128,7 @@
     "my_classes": "My classes",
     "my_consultations": "My consultations",
     "my_points": "My points: {}",
+    "my_questions": "My questions",
     "my_rooms": "My rooms",
     "new_here": "New here?",
     "nominal:": "Nominal:",
@@ -119,12 +137,14 @@
     "phone_number": "Phone number",
     "phone_number:": "Phone number:",
     "points": "{} points",
+    "point:": "Point:",
     "preview": "Preview",
     "price": "Price",
     "profile": "Profile",
     "province:": "Province:",
     "questions_asked": "Questions asked",
     "reason:": "Reason:",
+    "remove": "Remove",
     "report": "Report",
     "room": "Room",
     "rooms_joined": "Rooms joined",
@@ -141,6 +161,7 @@
     "sign_up": "Sign Up",
     "skills": "Skills",
     "stock": "Stock",
+    "subject": "Subject",
     "submit": "Submit",
     "success": "Success",
     "success_detail": {
@@ -155,6 +176,7 @@
     "type_something": "Ketik sesuatu",
     "user-not-found": "User not found",
     "view_all": "View all",
+    "view_answer": "View answer",
     "weak-password": "Weak password",
     "withdraw": "Withdraw",
     "wrong-password": "Wrong Password"

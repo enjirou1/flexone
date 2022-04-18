@@ -10,4 +10,9 @@ class UserProvider extends ChangeNotifier {
     _user = user;
     notifyListeners();
   }
+
+  void updatePoint(int point) {
+    _user!.point = point;
+    notifyListeners();
+  }
 }

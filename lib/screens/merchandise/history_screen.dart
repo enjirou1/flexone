@@ -1,6 +1,6 @@
 import 'package:flexone/data/models/merchandise_result.dart';
 import 'package:flexone/data/providers/user.dart';
-import 'package:flexone/widgets/merchandise_list_tile.dart';
+import 'package:flexone/widgets/listtile/merchandise_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

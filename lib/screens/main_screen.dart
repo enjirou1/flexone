@@ -1,10 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flexone/data/models/user_result.dart';
+import 'package:flexone/data/providers/question.dart';
 import 'package:flexone/data/providers/user.dart';
 import 'package:flexone/screens/class_screen.dart';
 import 'package:flexone/screens/consultation_screen.dart';
-import 'package:flexone/screens/discussion_screen.dart';
+import 'package:flexone/screens/discussion/discussion_screen.dart';
 import 'package:flexone/screens/user/account_screen.dart';
 import 'package:flexone/screens/room_screen.dart';
 import 'package:flutter/material.dart';
@@ -37,6 +38,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     final User? _user = FirebaseAuth.instance.currentUser;
     final provider = Provider.of<UserProvider>(context, listen: false);
+    final _questionProvider = Provider.of<QuestionProvider>(context, listen: false);
     print(_user);
 
     if (_user != null) {

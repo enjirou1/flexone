@@ -5,18 +5,21 @@ import 'package:flexone/data/providers/certificates.dart';
 import 'package:flexone/data/providers/email_sign_in.dart';
 import 'package:flexone/data/providers/google_sign_in.dart';
 import 'package:flexone/data/providers/preferences.dart';
+import 'package:flexone/data/providers/question.dart';
 import 'package:flexone/data/providers/user.dart';
 import 'package:flexone/screens/auth/register_screen.dart';
 import 'package:flexone/screens/auth/login_screen.dart';
+import 'package:flexone/screens/discussion/add_answer_screen.dart';
+import 'package:flexone/screens/discussion/add_question_screen.dart';
 import 'package:flexone/screens/expert/add_certificate_screen.dart';
 import 'package:flexone/screens/expert/add_skill_screen.dart';
 import 'package:flexone/screens/expert/certificate_screen.dart';
 import 'package:flexone/screens/expert/expert_profile_screen.dart';
 import 'package:flexone/screens/expert/new_account_screen.dart';
 import 'package:flexone/screens/main_screen.dart';
-import 'package:flexone/screens/merchandise/detail_screen.dart';
 import 'package:flexone/screens/merchandise/history_screen.dart';
 import 'package:flexone/screens/merchandise/shop_screen.dart';
+import 'package:flexone/screens/discussion/question_screen.dart';
 import 'package:flexone/screens/settings_screen.dart';
 import 'package:flexone/screens/user/activity_log_screen.dart';
 import 'package:flexone/screens/user/detail_screen.dart';
@@ -50,7 +53,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => GoogleSignInProvider()),
         ChangeNotifierProvider(create: (_) => EmailSignInProvider()),
         ChangeNotifierProvider(create: (_) => UserProvider()),
-        ChangeNotifierProvider(create: (_) => CertificateProvider())
+        ChangeNotifierProvider(create: (_) => CertificateProvider()),
+        ChangeNotifierProvider(create: (_) => (QuestionProvider())),
       ],
       child: Consumer<PreferencesProvider>(
         builder: (context, provider, _) {
@@ -74,6 +78,8 @@ class MyApp extends StatelessWidget {
                 GetPage(name: '/list_chat', page: () => const ListChatScreen()),
                 GetPage(name: '/shop', page: () => const ShopScreen()),
                 GetPage(name: '/merchandise-history', page: () => const MerchandiseHistoryScreen()),
+                GetPage(name: '/question', page: () => const QuestionScreen()),
+                GetPage(name: '/add_question', page: () => const AddQuestionScreen()),
               ],
               localizationsDelegates: context.localizationDelegates,
               supportedLocales: context.supportedLocales,

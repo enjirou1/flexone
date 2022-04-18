@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flexone/data/providers/google_sign_in.dart';
 import 'package:flexone/data/providers/preferences.dart';
 import 'package:flexone/data/providers/user.dart';
-import 'package:flexone/widgets/profile_card.dart';
+import 'package:flexone/widgets/card/profile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -76,7 +76,12 @@ class AccountScreen extends StatelessWidget {
       ListTile(
         leading: const Icon(Icons.message_rounded, color: Color(0XFFBDBDBD)),
         title: const Text('messages').tr(),
-        onTap: () => Get.toNamed('list_chat'),
+        onTap: () => Get.toNamed('/list_chat'),
+      ),
+      ListTile(
+        leading: const Icon(Icons.question_answer_rounded, color: Color(0XFFBDBDBD)),
+        title: const Text('my_questions').tr(),
+        onTap: () => Get.toNamed('/question'),
       ),
       ListTile(
         leading: const Icon(Icons.people_alt_rounded, color: Color(0XFFBDBDBD)),

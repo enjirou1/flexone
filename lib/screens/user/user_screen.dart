@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flexone/data/models/user_result.dart';
 import 'package:flexone/data/providers/user.dart';
-import 'package:flexone/widgets/user_list_tile.dart';
+import 'package:flexone/widgets/listtile/user_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

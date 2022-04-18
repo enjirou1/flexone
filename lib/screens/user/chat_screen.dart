@@ -4,7 +4,7 @@ import 'package:flexone/common/style.dart';
 import 'package:flexone/data/models/user_result.dart';
 import 'package:flexone/data/providers/user.dart';
 import 'package:flexone/widgets/bubble_chat.dart';
-import 'package:flexone/widgets/chat_edit_text.dart';
+import 'package:flexone/widgets/edittext/chat_edit_text.dart';
 import 'package:flexone/widgets/preview_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

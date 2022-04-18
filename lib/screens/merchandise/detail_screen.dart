@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flexone/common/style.dart';
 import 'package:flexone/data/models/merchandise_result.dart';
-import 'package:flexone/widgets/card_with_header.dart';
+import 'package:flexone/widgets/card/card_with_header.dart';
 import 'package:flexone/widgets/preview_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
