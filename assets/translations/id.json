@@ -35,6 +35,9 @@
         "delete_question": {
             "title": "Apakah anda yakin untuk menghapus pertanyaan ini?"
         },
+        "delete_room": {
+            "title": "Apakah anda yakin untuk menghapus ruangan ini?"
+        },
         "withdraw": {
             "title": "Anda yakin untuk menarik saldo?",
             "content": "Saldo akan ditarik ke rekening anda",
@@ -45,15 +48,18 @@
     "consultations_joined": "Konsultasi yang diikuti",
     "create_an_account": "Buat akun",
     "create_expert_account": "Buat akun expert",
+    "create_room": "Buat ruangan",
     "dark_mode": "Mode dark",
     "delete": "Hapus",
     "delete_photo": "Hapus foto",
     "detail": "Detail",
     "detail:": "Detail:",
     "description": "Deskripsi",
+    "description:": "Deskripsi:",
     "discussion": "Diskusi",
     "edit": "Ubah",
     "edit_profile": "Ubah profil",
+    "edit_room": "Ubah ruangan",
     "education": "Edukasi",
     "education:": "Edukasi:",
     "email-already-in-use": "Email telah digunakan",
@@ -104,6 +110,10 @@
         "reason": {
             "empty": "Alasan tidak boleh kosong"
         },
+        "slot": {
+            "empty": "Slot tidak boleh kosong",
+            "minimum": "Slot minimal adalah 3"
+        },
         "text": {
             "empty": "Isi tidak boleh kosong"
         }
@@ -124,15 +134,18 @@
     "job:": "Pekerjaan:",
     "joined": "Bergabung",
     "logout": "Keluar",
+    "members": "Anggota",
     "messages": "Pesan",
     "my_classes": "Kelas saya",
     "my_consultations": "Konsultasi saya",
     "my_points": "Poin saya: {}",
     "my_questions": "Pertanyaan saya",
     "my_rooms": "Ruangan saya",
+    "name:": "Nama:",
     "new_here": "Baru disini?",
     "nominal:": "Nominal:",
     "open_camera": "Buka kamera",
+    "password:": "Password:",
     "personal_identity_card:": "Kartu identitas pribadi:",
     "phone_number": "Nomor telepon",
     "phone_number:": "Nomor telepon:",
@@ -140,8 +153,10 @@
     "point:": "Point:",
     "preview": "Preview",
     "price": "Harga",
+    "private": "Private",
     "profile": "Profil",
     "province:": "Provinsi:",
+    "public": "Public",
     "questions_asked": "Pertanyaan yang ditanyakan",
     "reason:": "Alasan:",
     "remove": "Hapus",
@@ -160,6 +175,7 @@
     "sign_in_with_google": "Masuk dengan google",
     "sign_up": "Daftar",
     "skills": "Kemampuan",
+    "slot:": "Slot:",
     "stock": "Stok",
     "subject": "Subjek",
     "submit": "Submit",
@@ -168,8 +184,10 @@
         "add_certificate": "Berhasil menambahkan sertifikat",
         "buy_merchandise": "{} berhasil dibeli",
         "create_expert": "Berhasil membuat akun expert",
+        "create_room": "Berhasil membuat ruangan",
         "report": "Berhasil melaporkan user",
         "update_profile": "Berhasil ubah profil",
+        "update_room": "Berhasil ubah ruangan",
         "withdraw_saldo": "Berhasil menarik saldo ke rekening"
     },
     "transactions": "Transaksi",

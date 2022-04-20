@@ -14,42 +14,46 @@ class CommentCard extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ListTile(
-          contentPadding: EdgeInsets.zero,
-          leading: (comment.user.photo != null && comment.user.photo != "")
-            ? Container(
-                width: 35,
-                height: 35,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(color: Colors.black),
-                  image: DecorationImage(
-                    image: NetworkImage(comment.user.photo), 
-                    fit: BoxFit.cover
-                  )
-                ),
-              )
-            : Container(
-                width: 35,
-                height: 35,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                    image: AssetImage('assets/images/profile-icon.png'),
-                    fit: BoxFit.cover
-                  )
-                ),
-              ),
-          title: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+        GestureDetector(
+          onTap: () => Get.toNamed('/user/detail?id=${comment.user.id}'),
+          child: Row(
             children: [
-              Text('${comment.user.name} #${comment.user.id}', style: poppinsTheme.caption!.copyWith(fontWeight: FontWeight.bold)),
-              Text(timeago.format(DateTime.parse(comment.createdAt), locale: 'en'), style: poppinsTheme.caption!.copyWith(fontSize: 10))
+              (comment.user.photo != null && comment.user.photo != "")
+              ? Container(
+                  width: 35,
+                  height: 35,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: Colors.black),
+                    image: DecorationImage(
+                      image: NetworkImage(comment.user.photo), 
+                      fit: BoxFit.cover
+                    )
+                  ),
+                )
+              : Container(
+                  width: 35,
+                  height: 35,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/profile-icon.png'),
+                      fit: BoxFit.cover
+                    )
+                  ),
+                ),
+              const SizedBox(width: 10),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('${comment.user.name} #${comment.user.id}', style: poppinsTheme.caption!.copyWith(fontWeight: FontWeight.bold)),
+                  Text(timeago.format(DateTime.parse(comment.createdAt), locale: 'en'), style: poppinsTheme.caption!.copyWith(fontSize: 10))
+                ],
+              ),
             ],
           ),
-          onTap: () => Get.toNamed('/user/detail?id=${comment.user.id}'),
         ),
-        const SizedBox(height: 5),
+        const SizedBox(height: 10),
         SelectableText(comment.text, style: poppinsTheme.bodyText2),
       ],
     );

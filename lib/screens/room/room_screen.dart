@@ -1,42 +1,33 @@
-import 'package:flexone/data/models/dicussion_result.dart';
-import 'package:flexone/data/providers/user.dart';
-import 'package:flexone/screens/discussion/filter_screen.dart';
-import 'package:flexone/widgets/card/question_card.dart';
+import 'package:flexone/data/models/room_result.dart';
+import 'package:flexone/widgets/card/room_card.dart';
 import 'package:flexone/widgets/edittext/search_edit_text.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 
-class DiscussionScreen extends StatefulWidget {
-  const DiscussionScreen({ Key? key }) : super(key: key);
+class RoomScreen extends StatefulWidget {
+  const RoomScreen({ Key? key }) : super(key: key);
 
   @override
-  State<DiscussionScreen> createState() => _DiscussionScreenState();
+  State<RoomScreen> createState() => _RoomScreenState();
 }
 
-class _DiscussionScreenState extends State<DiscussionScreen> {
-  final TextEditingController _controller = TextEditingController();
+class _RoomScreenState extends State<RoomScreen> {
+  final TextEditingController _controller2 = TextEditingController();
   final ScrollController _scrollController = ScrollController();
-  List<Question> _questions = [];
+  List<Room> _rooms = [];
   String _keywords = "";
-  int _grade = 0, _subject = 0;
   bool _hasReachedMax = false;
 
   @override
   Widget build(BuildContext context) {
-    final _provider = Provider.of<UserProvider>(context, listen: true);
-
     return Padding(
       padding: const EdgeInsets.all(10),
       child: Column(
         children: [
           SearchEditText(
-            controller: _controller,
+            controller: _controller2,
             onSubmitted: (String value) {
               _keywords = value;
-              _grade = 0;
-              _subject = 0;
-              _questions.clear();
+              _rooms.clear();
               setState(() {});
             },
             onChanged: (String value) {
@@ -45,36 +36,23 @@ class _DiscussionScreenState extends State<DiscussionScreen> {
             },
             onClear: () {
               if (_keywords != "") {
-                _controller.text = "";
+                _controller2.text = "";
                 _keywords = "";
               }
-
-              _grade = 0;
-              _subject = 0;
-              _questions.clear();
-
+              _rooms.clear();
               setState(() {});
             },
-            onPressed: () async {
-              final result = await Get.to(const FilterScreen());
-              if (result != null) {
-                _grade = result['grade'];
-                _subject = result['subject'];
-                _questions.clear();
-                setState(() {});
-              }
-            }
           ),
           Expanded(
-            child: FutureBuilder<List<Question>>(
-              future: Question.getQuestions(_questions.length, 20, _keywords, _grade, _subject, null),
+            child: FutureBuilder<List<Room>>(
+              future: Room.getRooms(_rooms.length, 20, _keywords),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
-                  List<Question> data = snapshot.data!;
+                  List<Room> data = snapshot.data!;
           
-                  if (_questions.isEmpty) {
+                  if (_rooms.isEmpty) {
                     Future.delayed(Duration.zero, () {
-                      _questions.addAll(data);
+                      _rooms.addAll(data);
                       data = [];
                       setState(() {});
                     });
@@ -94,10 +72,10 @@ class _DiscussionScreenState extends State<DiscussionScreen> {
           
                     if (currentScroll == maxScroll) {
                       if (!_hasReachedMax) {
-                        List<Question> temp = [];
-                        temp.addAll(_questions);
-                        _questions.clear();
-                        _questions.addAll([...temp, ...data]);
+                        List<Room> temp = [];
+                        temp.addAll(_rooms);
+                        _rooms.clear();
+                        _rooms.addAll([...temp, ...data]);
                         data.clear();
                         setState(() {});
                       }
@@ -111,8 +89,8 @@ class _DiscussionScreenState extends State<DiscussionScreen> {
                     child: ListView.separated(
                       controller: _scrollController,
                       itemBuilder: (context, index) {
-                        return (index < _questions.length)
-                          ? QuestionCard(question: _questions[index], userId: _provider.user!.userId!)
+                        return (index < _rooms.length)
+                          ? RoomCard(room: _rooms[index], isOwner: false)
                           : const Center(
                               child: SizedBox(
                                 width: 40,
@@ -121,7 +99,7 @@ class _DiscussionScreenState extends State<DiscussionScreen> {
                               ),
                             );
                       },
-                      itemCount: _hasReachedMax ? _questions.length : _questions.length + 1,
+                      itemCount: _hasReachedMax ? _rooms.length : _rooms.length + 1,
                       separatorBuilder: (context, index) {
                         return const Divider();
                       },

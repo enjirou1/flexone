@@ -35,6 +35,9 @@
         "delete_question": {
             "title": "Are you sure to delete this question?"
         },
+        "delete_room": {
+            "title": "Are you sure to delete this room?"
+        },
         "withdraw": {
             "title": "Are you sure to withdraw saldo?",
             "content": "Saldo will be withdrawn to your bank account",
@@ -45,15 +48,18 @@
     "consultations_joined": "Consultations joined",
     "create_an_account": "Create an account",
     "create_expert_account": "Create expert account",
+    "create_room": "Create room",
     "dark_mode": "Dark mode",
     "delete": "Delete",
     "delete_photo": "Delete photo",
     "description": "Description",
+    "description:": "Description:",
     "detail": "Detail",
     "detail:": "Detail:",
     "discussion": "Discussion",
     "edit": "Edit",
     "edit_profile": "Edit profile",
+    "edit_room": "Edit room",
     "education": "Education",
     "education:": "Education:",
     "email-already-in-use": "Email already in use",
@@ -104,6 +110,10 @@
         "reason": {
             "empty": "Reason cannot be empty"
         },
+        "slot": {
+            "empty": "Slot cannot be empty",
+            "minimum": "Minimum slot is 3"
+        },
         "text": {
             "empty": "Content cannot be empty"
         }
@@ -124,15 +134,18 @@
     "job": "Job",
     "job:": "Job:",
     "logout": "Logout",
+    "members": "Members",
     "messages": "Messages",
     "my_classes": "My classes",
     "my_consultations": "My consultations",
     "my_points": "My points: {}",
     "my_questions": "My questions",
     "my_rooms": "My rooms",
+    "name:": "Name:",
     "new_here": "New here?",
     "nominal:": "Nominal:",
     "open_camera": "Open camera",
+    "password:": "Password:",
     "personal_identity_card:": "Personal identity card:",
     "phone_number": "Phone number",
     "phone_number:": "Phone number:",
@@ -140,8 +153,10 @@
     "point:": "Point:",
     "preview": "Preview",
     "price": "Price",
+    "private": "Private",
     "profile": "Profile",
     "province:": "Province:",
+    "public": "Public",
     "questions_asked": "Questions asked",
     "reason:": "Reason:",
     "remove": "Remove",
@@ -160,6 +175,7 @@
     "sign_in_with_google": "Sign in with google",
     "sign_up": "Sign Up",
     "skills": "Skills",
+    "slot:": "Slot:",
     "stock": "Stock",
     "subject": "Subject",
     "submit": "Submit",
@@ -168,7 +184,9 @@
         "add_certificate": "Successfully added certificate",
         "buy_merchandise": "{} bought successfully",
         "create_expert": "Successfully created expert account",
+        "create_room": "Successfully created room",
         "update_profile": "Successully updated profile",
+        "update_room": "Successully updated room",
         "report": "Successfully reported user",
         "withdraw_saldo": "Successfully withdrew saldo to bank account"
     },

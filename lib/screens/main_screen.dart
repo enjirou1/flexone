@@ -6,8 +6,8 @@ import 'package:flexone/data/providers/user.dart';
 import 'package:flexone/screens/class_screen.dart';
 import 'package:flexone/screens/consultation_screen.dart';
 import 'package:flexone/screens/discussion/discussion_screen.dart';
+import 'package:flexone/screens/room/room_screen.dart';
 import 'package:flexone/screens/user/account_screen.dart';
-import 'package:flexone/screens/room_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

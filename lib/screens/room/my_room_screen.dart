@@ -1,88 +1,70 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flexone/data/models/dicussion_result.dart';
-import 'package:flexone/data/providers/preferences.dart';
+import 'package:flexone/data/models/room_result.dart';
 import 'package:flexone/data/providers/user.dart';
-import 'package:flexone/widgets/card/question_card.dart';
+import 'package:flexone/screens/room/edit_room_screen.dart';
+import 'package:flexone/widgets/card/room_card.dart';
 import 'package:flexone/widgets/dialog/confirmation_dialog.dart';
+import 'package:flexone/widgets/edittext/search_edit_text.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-class QuestionScreen extends StatefulWidget {
-  const QuestionScreen({ Key? key }) : super(key: key);
+class MyRoomScreen extends StatefulWidget {
+  const MyRoomScreen({ Key? key }) : super(key: key);
 
   @override
-  State<QuestionScreen> createState() => _QuestionScreenState();
+  State<MyRoomScreen> createState() => _MyRoomScreenState();
 }
 
-class _QuestionScreenState extends State<QuestionScreen> {
-  final TextEditingController _controller = TextEditingController();
+class _MyRoomScreenState extends State<MyRoomScreen> {
+  final TextEditingController _controller2 = TextEditingController();
   final ScrollController _scrollController = ScrollController();
-  List<Question> _questions = [];
+  List<Room> _rooms = [];
   String _keywords = "";
   bool _hasReachedMax = false;
 
   @override
   Widget build(BuildContext context) {
-    final _preferencesProvider = Provider.of<PreferencesProvider>(context, listen: false);
     final _provider = Provider.of<UserProvider>(context, listen: false);
-    final Color _textColor = _preferencesProvider.isDarkTheme ? Colors.white : Colors.black;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('my_questions').tr(),
+        title: const Text('my_rooms').tr(),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10),
         child: Column(
           children: [
-            TextField(
-              controller: _controller,
+            SearchEditText(
+              controller: _controller2,
               onSubmitted: (String value) {
                 _keywords = value;
-                _questions.clear();
+                _rooms.clear();
                 setState(() {});
               },
-              decoration: InputDecoration(
-                contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                isDense: true,
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5),
-                  borderSide: BorderSide(color: _textColor)
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5),
-                  borderSide: BorderSide(color: _textColor)
-                ),
-                hintText: tr("search"),
-                hintStyle: TextStyle(
-                  color: _textColor
-                ),
-                suffixIcon: IconButton(
-                  icon: const FaIcon(FontAwesomeIcons.xmark), 
-                  onPressed: () {
-                    if (_keywords != "") {
-                      _controller.text = "";
-                      _keywords = "";
-                      _questions.clear();
-                      setState(() {});
-                    }
-                  },
-                )
-              ),
-              style: TextStyle(color: _textColor),
+              onChanged: (String value) {
+                _keywords = value;
+                setState(() {});
+              },
+              onClear: () {
+                if (_keywords != "") {
+                  _controller2.text = "";
+                  _keywords = "";
+                }
+                _rooms.clear();
+                setState(() {});
+              },
             ),
             Expanded(
-              child: FutureBuilder<List<Question>>(
-                future: Question.getQuestions(_questions.length, 20, _keywords, 0, 0, _provider.user!.userId),
+              child: FutureBuilder<List<Room>>(
+                future: Room.getJoinedRooms(_provider.user!.userId!, _rooms.length, 20, _keywords),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
-                    List<Question> data = snapshot.data!;
+                    List<Room> data = snapshot.data!;
             
-                    if (_questions.isEmpty) {
+                    if (_rooms.isEmpty) {
                       Future.delayed(Duration.zero, () {
-                        _questions.addAll(data);
+                        _rooms.addAll(data);
                         data = [];
                         setState(() {});
                       });
@@ -102,10 +84,10 @@ class _QuestionScreenState extends State<QuestionScreen> {
             
                       if (currentScroll == maxScroll) {
                         if (!_hasReachedMax) {
-                          List<Question> temp = [];
-                          temp.addAll(_questions);
-                          _questions.clear();
-                          _questions.addAll([...temp, ...data]);
+                          List<Room> temp = [];
+                          temp.addAll(_rooms);
+                          _rooms.clear();
+                          _rooms.addAll([...temp, ...data]);
                           data.clear();
                           setState(() {});
                         }
@@ -119,27 +101,43 @@ class _QuestionScreenState extends State<QuestionScreen> {
                       child: ListView.separated(
                         controller: _scrollController,
                         itemBuilder: (context, index) {
-                          return (index < _questions.length)
-                            ? QuestionCard(
-                                question: _questions[index],
-                                userId: _provider.user!.userId!,
+                          return (index < _rooms.length)
+                            ? RoomCard(
+                                room: _rooms[index], 
+                                isOwner: _rooms[index].user.id == _provider.user!.userId!,
                                 onRemoved: () {
                                   showDialog(
                                     context: context, 
                                     builder: (context) => ConfirmationDialog(
-                                      title: 'confirmation.delete_question.title',
+                                      title: 'confirmation.delete_room.title',
                                       buttonText: 'delete', 
                                       onCancel: () {
                                         Navigator.pop(context);
                                       }, 
                                       onPressed: () async {
-                                        await Question.deleteQuestion(_questions[index].questionId);
-                                        _questions.removeAt(index);
+                                        await Room.deleteRoom(_rooms[index].id);
+                                        _rooms.removeAt(index);
                                         Navigator.pop(context);
                                         setState(() {});
                                       }
                                     )
                                   );
+                                },
+                                onPressed: () async {
+                                  final result = await Get.to(EditRoomScreen(room: _rooms[index]));
+                                  if (result) {
+                                    _rooms.clear();
+                                    setState(() {});
+                                    Get.snackbar(
+                                      tr('success'), tr('success_detail.update_room'),
+                                      snackPosition: SnackPosition.BOTTOM,
+                                      animationDuration: const Duration(milliseconds: 300),
+                                      backgroundColor: Colors.green,
+                                      colorText: Colors.white,
+                                      icon: const Icon(Icons.check, color: Colors.white),
+                                      duration: const Duration(seconds: 1)
+                                    );
+                                  }
                                 },
                               )
                             : const Center(
@@ -150,7 +148,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                                 ),
                               );
                         },
-                        itemCount: _hasReachedMax ? _questions.length : _questions.length + 1,
+                        itemCount: _hasReachedMax ? _rooms.length : _rooms.length + 1,
                         separatorBuilder: (context, index) {
                           return const Divider();
                         },
@@ -173,10 +171,19 @@ class _QuestionScreenState extends State<QuestionScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          final result = await Get.toNamed('add_question');
-          if (result != null) {
-            _questions.insert(0, result);
+          final result = await Get.toNamed('/add_room');
+          if (result) {
+            _rooms.clear();
             setState(() {});
+            Get.snackbar(
+              tr('success'), tr('success_detail.create_room'),
+              snackPosition: SnackPosition.BOTTOM,
+              animationDuration: const Duration(milliseconds: 300),
+              backgroundColor: Colors.green,
+              colorText: Colors.white,
+              icon: const Icon(Icons.check, color: Colors.white),
+              duration: const Duration(seconds: 1)
+            );
           }
         },
         child: const Icon(Icons.add),

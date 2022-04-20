@@ -20,6 +20,8 @@ import 'package:flexone/screens/main_screen.dart';
 import 'package:flexone/screens/merchandise/history_screen.dart';
 import 'package:flexone/screens/merchandise/shop_screen.dart';
 import 'package:flexone/screens/discussion/question_screen.dart';
+import 'package:flexone/screens/room/add_room_screen.dart';
+import 'package:flexone/screens/room/my_room_screen.dart';
 import 'package:flexone/screens/settings_screen.dart';
 import 'package:flexone/screens/user/activity_log_screen.dart';
 import 'package:flexone/screens/user/detail_screen.dart';
@@ -80,6 +82,8 @@ class MyApp extends StatelessWidget {
                 GetPage(name: '/merchandise-history', page: () => const MerchandiseHistoryScreen()),
                 GetPage(name: '/question', page: () => const QuestionScreen()),
                 GetPage(name: '/add_question', page: () => const AddQuestionScreen()),
+                GetPage(name: '/my_rooms', page: () => const MyRoomScreen()),
+                GetPage(name: '/add_room', page: () => const AddRoomScreen()),
               ],
               localizationsDelegates: context.localizationDelegates,
               supportedLocales: context.supportedLocales,

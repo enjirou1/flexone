@@ -19,48 +19,51 @@ class QuestionCard extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            (question.user.photo != null && question.user.photo != "")
-            ? Container(
-                width: 35,
-                height: 35,
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(color: Colors.black),
-                    image: DecorationImage(
-                        image: NetworkImage(question.user.photo), fit: BoxFit.cover)),
-              )
-            : Container(
-                width: 35,
-                height: 35,
-                decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                        image: AssetImage('assets/images/profile-icon.png'),
-                        fit: BoxFit.cover)),
-              ),
-            const SizedBox(width: 10),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(question.user.name, style: poppinsTheme.caption!.copyWith(fontWeight: FontWeight.bold)),
-                Row(
-                  children: [
-                    Text(
-                      '${question.subject.name} (${question.grade.name})', 
-                      style: poppinsTheme.caption!.copyWith(fontSize: 10)
-                    ),
-                    const SizedBox(width: 5),
-                    Text(
-                      '+${tr('points', args: [question.point.toString()])}', 
-                      style: poppinsTheme.caption!.copyWith(fontSize: 10, fontWeight: FontWeight.bold)
-                    ),
-                  ],
+        GestureDetector(
+          onTap: () => Get.toNamed('/user/detail?id=${question.user.id}'),
+          child: Row(
+            children: [
+              (question.user.photo != null && question.user.photo != "")
+              ? Container(
+                  width: 35,
+                  height: 35,
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.black),
+                      image: DecorationImage(
+                          image: NetworkImage(question.user.photo), fit: BoxFit.cover)),
+                )
+              : Container(
+                  width: 35,
+                  height: 35,
+                  decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                          image: AssetImage('assets/images/profile-icon.png'),
+                          fit: BoxFit.cover)),
                 ),
-              ],
-            )
-          ]
+              const SizedBox(width: 10),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(question.user.name, style: poppinsTheme.caption!.copyWith(fontWeight: FontWeight.bold)),
+                  Row(
+                    children: [
+                      Text(
+                        '${question.subject.name} (${question.grade.name})', 
+                        style: poppinsTheme.caption!.copyWith(fontSize: 10)
+                      ),
+                      const SizedBox(width: 5),
+                      Text(
+                        '+${tr('points', args: [question.point.toString()])}', 
+                        style: poppinsTheme.caption!.copyWith(fontSize: 10, fontWeight: FontWeight.bold)
+                      ),
+                    ],
+                  ),
+                ],
+              )
+            ]
+          ),
         ),
         const SizedBox(height: 10),
         Text(

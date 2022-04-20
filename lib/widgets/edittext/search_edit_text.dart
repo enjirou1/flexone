@@ -8,9 +8,10 @@ class SearchEditText extends StatelessWidget {
   TextEditingController controller = TextEditingController();
   Function(String value) onSubmitted;
   Function() onClear;
-  Function() onPressed;
+  Function(String value) onChanged;
+  Function()? onPressed;
 
-  SearchEditText({ Key? key, required this.controller, required this.onSubmitted, required this.onClear, required this.onPressed }) : super(key: key);
+  SearchEditText({ Key? key, required this.controller, required this.onSubmitted, required this.onClear, required this.onChanged, this.onPressed }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +24,7 @@ class SearchEditText extends StatelessWidget {
           child: TextField(
             controller: controller,
             onSubmitted: onSubmitted,
+            onChanged: onChanged,
             decoration: InputDecoration(
               contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
               isDense: true,
@@ -46,10 +48,12 @@ class SearchEditText extends StatelessWidget {
             style: TextStyle(color: _textColor),
           ),
         ),
-        IconButton(
-          onPressed: onPressed, 
-          icon: const FaIcon(FontAwesomeIcons.filter)
-        )
+        if (onPressed != null) ...[
+          IconButton(
+            onPressed: onPressed, 
+            icon: const FaIcon(FontAwesomeIcons.filter)
+          )
+        ]
       ],
     );
   }

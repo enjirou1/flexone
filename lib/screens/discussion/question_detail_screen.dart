@@ -87,40 +87,44 @@ class _QuestionDetailScreenState extends State<QuestionDetailScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      leading: (widget.question.user.photo != null && widget.question.user.photo != "")
-                        ? Container(
-                            width: 50,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(color: Colors.black),
-                              image: DecorationImage(
-                                image: NetworkImage(widget.question.user.photo), 
-                                fit: BoxFit.cover
-                              )
-                            ),
-                          )
-                        : Container(
-                            width: 50,
-                            height: 50,
-                            decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                                image: AssetImage('assets/images/profile-icon.png'),
-                                fit: BoxFit.cover
-                              )
-                            ),
-                          ),
-                      title: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                    GestureDetector(
+                      onTap: () => Get.toNamed('/user/detail?id=${widget.question.user.id}'),
+                      child: Row(
                         children: [
-                          Text('${widget.question.user.name} #${widget.question.user.id}', style: poppinsTheme.bodyText2!.copyWith(fontWeight: FontWeight.bold)),
-                          Text(timeago.format(DateTime.parse(widget.question.createdAt), locale: 'en'), style: poppinsTheme.caption)
+                          (widget.question.user.photo != null && widget.question.user.photo != "")
+                          ? Container(
+                              width: 50,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(color: Colors.black),
+                                image: DecorationImage(
+                                  image: NetworkImage(widget.question.user.photo), 
+                                  fit: BoxFit.cover
+                                )
+                              ),
+                            )
+                          : Container(
+                              width: 50,
+                              height: 50,
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                  image: AssetImage('assets/images/profile-icon.png'),
+                                  fit: BoxFit.cover
+                                )
+                              ),
+                            ),
+                          const SizedBox(width: 15),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('${widget.question.user.name} #${widget.question.user.id}', style: poppinsTheme.bodyText2!.copyWith(fontWeight: FontWeight.bold)),
+                              Text(timeago.format(DateTime.parse(widget.question.createdAt), locale: 'en'), style: poppinsTheme.caption)
+                            ],
+                          ),
                         ],
                       ),
-                      onTap: () => Get.toNamed('/user/detail?id=${widget.question.user.id}'),
                     ),
                     const SizedBox(height: 15),
                     SelectableText(widget.question.text),
