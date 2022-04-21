@@ -99,6 +99,7 @@ class _ReportScreenState extends State<ReportScreen> {
                           onTap: () async {
                             try {
                               _file = await UploadService.getImage(0);
+                              Navigator.pop(context);
                               _image = await UploadService.uploadImage(
                                   _file!, "report", Get.parameters['id']!);
                             } on FirebaseException catch (e) {
@@ -115,8 +116,6 @@ class _ReportScreenState extends State<ReportScreen> {
                                   duration: const Duration(seconds: 2));
                             }
                             setState(() {});
-
-                            Navigator.pop(context);
                           },
                         ),
                         ListTile(
@@ -126,6 +125,7 @@ class _ReportScreenState extends State<ReportScreen> {
                           onTap: () async {
                             try {
                               _file = await UploadService.getImage(1);
+                              Navigator.pop(context);
                               _image = await UploadService.uploadImage(
                                   _file!, "report", Get.parameters['id']!);
                             } on FirebaseException catch (e) {
@@ -142,8 +142,6 @@ class _ReportScreenState extends State<ReportScreen> {
                                   duration: const Duration(seconds: 2));
                             }
                             setState(() {});
-
-                            Navigator.pop(context);
                           },
                         ),
                         ListTile(

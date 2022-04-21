@@ -132,6 +132,7 @@ class _NewAccountScreenState extends State<NewAccountScreen> {
                             onTap: () async {
                               try {
                                 _file = await UploadService.getImage(0);
+                                Navigator.pop(context);
                                 _image = await UploadService.uploadImage(_file!,
                                     "identity", _provider.user!.userId!);
                               } on FirebaseException catch (e) {
@@ -148,8 +149,6 @@ class _NewAccountScreenState extends State<NewAccountScreen> {
                                     duration: const Duration(seconds: 2));
                               }
                               setState(() {});
-
-                              Navigator.pop(context);
                             },
                           ),
                           ListTile(
@@ -159,6 +158,7 @@ class _NewAccountScreenState extends State<NewAccountScreen> {
                             onTap: () async {
                               try {
                                 _file = await UploadService.getImage(1);
+                                Navigator.pop(context);
                                 _image = await UploadService.uploadImage(_file!,
                                     "identity", _provider.user!.userId!);
                               } on FirebaseException catch (e) {
@@ -175,8 +175,6 @@ class _NewAccountScreenState extends State<NewAccountScreen> {
                                     duration: const Duration(seconds: 2));
                               }
                               setState(() {});
-
-                              Navigator.pop(context);
                             },
                           ),
                           ListTile(

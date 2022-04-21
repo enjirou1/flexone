@@ -113,6 +113,7 @@ class _EditRoomScreenState extends State<EditRoomScreen> {
                           onTap: () async {
                             try {
                               _file = await UploadService.getImage(0);
+                              Navigator.pop(context);
                               _image = await UploadService.uploadImage(_file!, "room", _provider.user!.userId!);
                             } on FirebaseException catch (e) {
                               Get.snackbar('Error', e.message!,
@@ -128,7 +129,6 @@ class _EditRoomScreenState extends State<EditRoomScreen> {
                               );
                             }
                             setState(() {});
-                            Navigator.pop(context);
                           },
                         ),
                         ListTile(
@@ -138,6 +138,7 @@ class _EditRoomScreenState extends State<EditRoomScreen> {
                           onTap: () async {
                             try {
                               _file = await UploadService.getImage(1);
+                              Navigator.pop(context);
                               _image = await UploadService.uploadImage(_file!, "room", _provider.user!.userId!);
                             } on FirebaseException catch (e) {
                               Get.snackbar('Error', e.message!,
@@ -153,7 +154,6 @@ class _EditRoomScreenState extends State<EditRoomScreen> {
                               );
                             }
                             setState(() {});
-                            Navigator.pop(context);
                           },
                         ),
                         ListTile(

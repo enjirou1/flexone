@@ -4,6 +4,7 @@ import 'package:flexone/data/models/room_result.dart';
 import 'package:flexone/data/providers/room.dart';
 import 'package:flexone/data/providers/user.dart';
 import 'package:flexone/screens/room/member_screen.dart';
+import 'package:flexone/screens/room/room_chat_screen.dart';
 import 'package:flexone/utils/input_validation.dart';
 import 'package:flexone/widgets/dialog/single_input_dialog.dart';
 import 'package:flexone/widgets/preview_image.dart';
@@ -179,9 +180,7 @@ class _DetailRoomScreenState extends State<DetailRoomScreen> {
                     const SizedBox(width: 5),
                     Expanded(
                       child: ElevatedButton.icon(
-                        onPressed: () {
-                    
-                        }, 
+                        onPressed: () => Get.to(RoomChatScreen(room: _roomProvider.room!)), 
                         icon: const FaIcon(FontAwesomeIcons.envelope, size: 15), 
                         label: Text("Chat", style: poppinsTheme.caption)
                       ),

@@ -6,10 +6,11 @@ import 'package:provider/provider.dart';
 
 class ChatEditText extends StatelessWidget {
   TextEditingController controller = TextEditingController();
+  Function()? onPickImage;
   Function() onSubmit;
   bool? followed;
 
-  ChatEditText({ Key? key, required this.controller, required this.onSubmit, this.followed }) : super(key: key);
+  ChatEditText({ Key? key, required this.controller, this.onPickImage, required this.onSubmit, this.followed }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +24,13 @@ class ChatEditText extends StatelessWidget {
       color: _containerColor,
       child: Row(
         children: [
+          if (onPickImage != null) ...[
+            IconButton(
+              onPressed: onPickImage, 
+              icon: const Icon(Icons.add_a_photo_rounded),
+              color: Colors.white,
+            ),
+          ],
           Expanded(
             child: TextField(
               controller: controller,

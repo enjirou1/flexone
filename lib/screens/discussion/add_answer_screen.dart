@@ -158,6 +158,7 @@ class _AddAnswerScreenState extends State<AddAnswerScreen> {
                           onTap: () async {
                             try {
                               _file = await UploadService.getImage(0);
+                              Navigator.pop(context);
                               _image = await UploadService.uploadImage(
                                 _file!, 
                                 "answer", 
@@ -177,8 +178,6 @@ class _AddAnswerScreenState extends State<AddAnswerScreen> {
                               );
                             }
                             setState(() {});
-    
-                            Navigator.pop(context);
                           },
                         ),
                         ListTile(
@@ -188,6 +187,7 @@ class _AddAnswerScreenState extends State<AddAnswerScreen> {
                           onTap: () async {
                             try {
                               _file = await UploadService.getImage(1);
+                              Navigator.pop(context);
                               _image = await UploadService.uploadImage(
                                 _file!, 
                                 "answer", 
@@ -207,8 +207,6 @@ class _AddAnswerScreenState extends State<AddAnswerScreen> {
                               );
                             }
                             setState(() {});
-    
-                            Navigator.pop(context);
                           },
                         ),
                         ListTile(

@@ -87,6 +87,7 @@ class _AddCertificateScreenState extends State<AddCertificateScreen> {
                           onTap: () async {
                             try {
                               _file = await UploadService.getImage(0);
+                              Navigator.pop(context);
                               _image = await UploadService.uploadImage(
                                 _file!,
                                 "certificate",
@@ -106,8 +107,6 @@ class _AddCertificateScreenState extends State<AddCertificateScreen> {
                               );
                             }
                             setState(() {});
-
-                            Navigator.pop(context);
                           },
                         ),
                         ListTile(
@@ -117,6 +116,7 @@ class _AddCertificateScreenState extends State<AddCertificateScreen> {
                           onTap: () async {
                             try {
                               _file = await UploadService.getImage(1);
+                              Navigator.pop(context);
                               _image = await UploadService.uploadImage(
                                 _file!,
                                 "certificate",
@@ -136,8 +136,6 @@ class _AddCertificateScreenState extends State<AddCertificateScreen> {
                               );
                             }
                             setState(() {});
-
-                            Navigator.pop(context);
                           },
                         ),
                       ],

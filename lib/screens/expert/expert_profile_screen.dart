@@ -220,6 +220,7 @@ class _ExpertProfileScreenState extends State<ExpertProfileScreen> {
                                         onTap: () async {
                                           try {
                                             _file = await UploadService.getImage(0);
+                                            Navigator.pop(context);
                                             _image = await UploadService.uploadImage(
                                               _file!,
                                               "identity",
@@ -239,8 +240,6 @@ class _ExpertProfileScreenState extends State<ExpertProfileScreen> {
                                             );
                                           }
                                           setState(() {});
-
-                                          Navigator.pop(context);
                                         },
                                       ),
                                       ListTile(
@@ -250,6 +249,7 @@ class _ExpertProfileScreenState extends State<ExpertProfileScreen> {
                                         onTap: () async {
                                           try {
                                             _file = await UploadService.getImage(1);
+                                            Navigator.pop(context);
                                             _image = await UploadService.uploadImage(
                                               _file!,
                                               "identity",
@@ -269,8 +269,6 @@ class _ExpertProfileScreenState extends State<ExpertProfileScreen> {
                                             );
                                           }
                                           setState(() {});
-
-                                          Navigator.pop(context);
                                         },
                                       ),
                                     ],

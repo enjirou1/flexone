@@ -171,6 +171,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     onTap: () async {
                                       try {
                                         _file = await UploadService.getImage(0);
+                                        Navigator.pop(context);
                                         _imageUrl =
                                             await UploadService.uploadImage(
                                                 _file!, "user", _user!.uid);
@@ -190,8 +191,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 const Duration(seconds: 2));
                                       }
                                       setState(() {});
-
-                                      Navigator.pop(context);
                                     },
                                   ),
                                   ListTile(
@@ -201,6 +200,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     onTap: () async {
                                       try {
                                         _file = await UploadService.getImage(1);
+                                        Navigator.pop(context);
                                         _imageUrl =
                                             await UploadService.uploadImage(
                                                 _file!, "user", _user!.uid);
@@ -220,8 +220,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 const Duration(seconds: 2));
                                       }
                                       setState(() {});
-
-                                      Navigator.pop(context);
                                     },
                                   ),
                                   ListTile(
