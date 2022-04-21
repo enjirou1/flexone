@@ -120,6 +120,8 @@ class _ExpertProfileScreenState extends State<ExpertProfileScreen> {
                                       buttonText: tr('withdraw'),
                                       controller: _nominalController,
                                       inputValidation: _nominalValidation,
+                                      inputType: TextInputType.number,
+                                      obsecureText: false,
                                       onPressed: () async {
                                         setState(() {
                                           int value = int.parse(_nominalController.text.isEmpty ? "0" : _nominalController.text);

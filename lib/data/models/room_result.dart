@@ -80,20 +80,56 @@ class Room {
     final data = (jsonObject as Map<String, dynamic>)['data'];
     return Room.createRoom(data);
   }
+
+  static Future<bool> checkJoin(String roomId, String userId) async {
+    final url = '$_baseUrl/$roomId/check/$userId';
+    final response = await http.get(Uri.parse(url));
+    final jsonObject = json.decode(response.body);
+    final data = (jsonObject as Map<String, dynamic>)['data'];
+    return data;
+  }
+
+  static Future join(String roomId, String userId, String password) async {
+    final url = '$_baseUrl/$roomId/join';
+    final response = await http.post(Uri.parse(url), body: {
+      "user_id": userId,
+      "password": password
+    });
+    final jsonObject = json.decode(response.body);
+    
+    if (response.statusCode != 200) {
+      throw Exception((jsonObject as Map<String, dynamic>)['message']);
+    }
+  }
+
+  static Future removeMember(String roomId, String userId) async {
+    final url = '$_baseUrl/$roomId/member/$userId';
+    await http.delete(Uri.parse(url));
+  }
+
+  static Future<List<User>> getMembers(String roomId) async {
+    final url = '$_baseUrl/$roomId/members';
+    final response = await http.get(Uri.parse(url));
+    final jsonObject = json.decode(response.body);
+    final data = (jsonObject as Map<String, dynamic>)['data'] as List;
+    return data.map<User>((user) => User.createUser({...user, "id": user['user_id'], "name": user['fullname']})).toList();
+  }
 }
 
 class User {
   late String id;
   late String name;
   late String photo;
+  late String email;
 
-  User({required this.id, required this.name, required this.photo});
+  User({required this.id, required this.name, required this.photo, required this.email});
 
   factory User.createUser(Map<String, dynamic> object) {
     return User(
       id: object['id'], 
       name: object['name'], 
-      photo: object['photo'] ?? ""
+      photo: object['photo'] ?? "",
+      email: object['email'] ?? ""
     );
   }
 }

@@ -38,6 +38,9 @@
         "delete_room": {
             "title": "Apakah anda yakin untuk menghapus ruangan ini?"
         },
+        "remove_member": {
+            "title": "Apakah anda yakin untuk menghapus user ini dari ruangan?"
+        },
         "withdraw": {
             "title": "Anda yakin untuk menarik saldo?",
             "content": "Saldo akan ditarik ke rekening anda",
@@ -65,6 +68,7 @@
     "email-already-in-use": "Email telah digunakan",
     "english": "Bahasa Inggris",
     "enter_nominal": "Masukkan nominal",
+    "enter_password": "Masukkan password",
     "error": {
         "account_name": {
             "empty": "Nama pemilik rekening tidak boleh kosong"
@@ -132,9 +136,11 @@
     "invalid-email": "Format email salah",
     "job": "Pekerjaan",
     "job:": "Pekerjaan:",
+    "join": "Gabung",
     "joined": "Bergabung",
     "logout": "Keluar",
     "members": "Anggota",
+    "members:": "Anggota:",
     "messages": "Pesan",
     "my_classes": "Kelas saya",
     "my_consultations": "Konsultasi saya",
@@ -175,6 +181,7 @@
     "sign_in_with_google": "Masuk dengan google",
     "sign_up": "Daftar",
     "skills": "Kemampuan",
+    "slot": "Slot",
     "slot:": "Slot:",
     "stock": "Stok",
     "subject": "Subjek",

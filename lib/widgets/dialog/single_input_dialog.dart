@@ -9,6 +9,8 @@ class SingleInputDialog extends StatelessWidget {
   String buttonText;
   TextEditingController controller;
   InputValidation inputValidation;
+  TextInputType inputType;
+  bool obsecureText;
   Function() onPressed;
 
   SingleInputDialog(
@@ -18,6 +20,8 @@ class SingleInputDialog extends StatelessWidget {
       required this.buttonText,
       required this.controller,
       required this.inputValidation,
+      required this.inputType,
+      required this.obsecureText,
       required this.onPressed})
       : super(key: key);
 
@@ -31,7 +35,8 @@ class SingleInputDialog extends StatelessWidget {
       actions: [
         TextField(
             controller: controller,
-            keyboardType: TextInputType.number,
+            keyboardType: inputType,
+            obscureText: obsecureText,
             style: const TextStyle(color: Colors.black),
             decoration: InputDecoration(
                 labelText: label,
