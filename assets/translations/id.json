@@ -27,6 +27,7 @@
     "city": "Kota",
     "city:": "Kota:",
     "class": "Kelas",
+    "classes": "Kelas",
     "classes_joined": "Kelas yang diikuti",
     "classes_owned": "Kelas yang dimiliki",
     "close": "Tutup",
@@ -46,6 +47,9 @@
         "delete_room": {
             "title": "Apakah anda yakin untuk menghapus ruangan ini?"
         },
+        "remove_consultation": {
+            "title": "Apakah anda yakin menghapus konsultasi ini dari cart?"
+        },
         "remove_member": {
             "title": "Apakah anda yakin untuk menghapus user ini dari ruangan?"
         },
@@ -56,6 +60,7 @@
         }
     },
     "consultation": "Konsultasi",
+    "consultations": "Konsultasi",
     "consultations_joined": "Konsultasi yang diikuti",
     "consultations_owned": "Konsultasi yang dimiliki",
     "consultation_requests": "Permintaan konsultasi",
@@ -261,5 +266,9 @@
     "give_rating": "Beri penilaian",
     "view_review": "Lihat ulasan",
     "rejection_detail": "Detail penolakan",
-    "review": "Ulasan"
+    "review": "Ulasan",
+    "cart": "Keranjang",
+    "pay_now": "Bayar sekarang",
+    "cart_is_empty": "Keranjang kosong",
+    "consult_now": "Konsultasi sekarang"
 }

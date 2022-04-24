@@ -48,9 +48,10 @@ class ConsultationRequest {
 
 class Consultation {
   late String id;
+  int? itemId;
   late SimpleExpert? expert;
   late String name;
-  late Proof proof;
+  Proof? proof;
   late String topic;
   late String photo;
   late String description;
@@ -65,14 +66,15 @@ class Consultation {
   Detail? detail;
   static const String _baseUrl = 'https://api.flexone.online/v1/consultation';
 
-  Consultation({required this.id, required this.expert, required this.name, required this.proof, required this.topic, required this.photo, required this.description, required this.link, required this.price, required this.discountPrice, required this.rating, required this.totalRatings, required this.status, required this.totalParticipants, required this.createdAt, this.detail});
+  Consultation({required this.id, this.itemId, required this.expert, required this.name, this.proof, required this.topic, required this.photo, required this.description, required this.link, required this.price, required this.discountPrice, required this.rating, required this.totalRatings, required this.status, required this.totalParticipants, required this.createdAt, this.detail});
 
   factory Consultation.createConsultation(Map<String, dynamic> object) {
     return Consultation(
       id: object['id'],
+      itemId: object['item_id'],
       expert: object['expert'] != null ? SimpleExpert.createExpert(object['expert']) : null,
       name: object['name'],
-      proof: Proof.createProof(object['proof']),
+      proof: object['proof'] != null ? Proof.createProof(object['proof']) : null,
       topic: object['topic'],
       photo: object['photo'] ?? "",
       description: object['description'] ?? "",

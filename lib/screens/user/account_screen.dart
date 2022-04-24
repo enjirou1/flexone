@@ -72,11 +72,6 @@ class AccountScreen extends StatelessWidget {
         ),
       ],
       ListTile(
-        leading: const Icon(Icons.receipt_long_rounded, color: Color(0XFFBDBDBD)),
-        title: const Text('transactions').tr(),
-        onTap: null,
-      ),
-      ListTile(
         leading: const Icon(Icons.search_rounded, color: Color(0XFFBDBDBD)),
         title: const Text('search_user').tr(),
         onTap: () => Get.toNamed('/user'),

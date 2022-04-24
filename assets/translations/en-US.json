@@ -27,6 +27,7 @@
     "city": "City",
     "city:": "City:",
     "class": "Class",
+    "classes": "Classes",
     "classes_joined": "Classes joined",
     "classes_owned": "Classes owned",
     "close": "Close",
@@ -46,6 +47,9 @@
         "delete_room": {
             "title": "Are you sure to delete this room?"
         },
+        "remove_consultation": {
+            "title": "Are you sure to remove this consultation from cart?"
+        },
         "remove_member": {
             "title": "Are you sure to remove this member from room?"
         },
@@ -56,6 +60,7 @@
         }
     },
     "consultation": "Consultation",
+    "consultations": "Consultations",
     "consultations_joined": "Consultations joined",
     "consultations_owned": "Consultations owned",
     "consultation_requests": "Consultation requests",
@@ -261,5 +266,9 @@
     "give_rating": "Give rating",
     "view_review": "View review",
     "rejection_detail": "Rejection detail",
-    "review": "Review"
+    "review": "Review",
+    "cart": "Cart",
+    "pay_now": "Pay now",
+    "cart_is_empty": "Cart is empty",
+    "consult_now": "Consult now"
 }

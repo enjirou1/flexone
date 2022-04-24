@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flexone/common/style.dart';
 import 'package:flexone/data/models/consultation_result.dart';
 import 'package:flexone/data/providers/user.dart';
+import 'package:flexone/utils/launcher.dart';
 import 'package:flexone/widgets/card/my_consultation_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -181,6 +182,9 @@ class _MyConsultationScreenState extends State<MyConsultationScreen> {
                               ],
                             )
                           );
+                        },
+                        onConsult: () {
+                          Launcher.launchExternalApplication(_consultations[index].link);
                         },
                       )
                     : const Center(

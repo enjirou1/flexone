@@ -1,35 +1,19 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flexone/common/style.dart';
 import 'package:flexone/data/models/consultation_result.dart';
-import 'package:flexone/data/providers/preferences.dart';
 import 'package:flexone/screens/consultation/consultation_detail_screen.dart';
 import 'package:flexone/utils/format.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 
-class MyConsultationCard extends StatelessWidget {
+class ConsultationItemCard extends StatelessWidget {
   Consultation consultation;
-  String? status;
-  Function()? onViewDetail;
-  Function()? onGiveRating;
-  Function()? onViewReview;
-  Function()? onConsult;
-  Map<String, dynamic> statusColor = {
-    "pending": Colors.amber,
-    "rejected": Colors.red,
-    "accepted": Colors.grey,
-    "paid": Colors.green
-  };
+  Function() onRemoved;
 
-  MyConsultationCard({ Key? key, required this.consultation, this.status, this.onViewDetail, this.onGiveRating, this.onViewReview, this.onConsult }) : super(key: key);
+  ConsultationItemCard({ Key? key, required this.consultation, required this.onRemoved }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final _preferencesProvider = Provider.of<PreferencesProvider>(context, listen: false);
-    final Color _tileColor = _preferencesProvider.isDarkTheme ? const Color(0xFF616161) : Colors.white;
-
     return InkWell(
       onTap: () => Get.to(ConsultationDetailScreen(consultation: consultation)),
       child: Row(
@@ -75,6 +59,49 @@ class MyConsultationCard extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 2.0),
                   child: Text(consultation.expert!.name, style: poppinsTheme.caption!.copyWith(fontSize: 11)),
                 ),
+                const SizedBox(height: 5),
+                if (consultation.discountPrice > 0) ...[
+                  Padding(
+                    padding: const EdgeInsets.only(left: 2.0),
+                    child: Row(
+                      children: [
+                        Text(
+                          convertToRupiah(consultation.price),
+                          style: poppinsTheme.bodyText2!.copyWith(
+                            fontSize: 12,
+                            decoration: TextDecoration.lineThrough
+                          )
+                        ),
+                        const SizedBox(width: 5),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(2),
+                            color: Colors.indigo
+                          ),
+                          child: Text(
+                            getDiscount(consultation.price, consultation.discountPrice),
+                            style: poppinsTheme.caption!.copyWith(color: Colors.white),
+                          ),
+                        )
+                      ],
+                    )
+                  ),
+                  const SizedBox(height: 5),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 2.0),
+                    child: Text(
+                      convertToRupiah(consultation.discountPrice),
+                      style: poppinsTheme.bodyText1!.copyWith(fontSize: 15, fontWeight: FontWeight.bold),
+                    ),
+                  )
+                ]
+                else ...[
+                  Text(
+                    convertToRupiah(consultation.price), 
+                    style: poppinsTheme.bodyText1!.copyWith(fontSize: 15, fontWeight: FontWeight.bold),
+                  ),
+                ],
                 const SizedBox(height: 10),
                 Row(
                   children: [
@@ -102,68 +129,13 @@ class MyConsultationCard extends StatelessWidget {
                     )
                   ],
                 ),
-                const SizedBox(height: 10),
-                Text(
-                  tr(consultation.detail!.status),
-                  style: poppinsTheme.caption!.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: statusColor[consultation.detail!.status]
-                  ),
-                )
               ],
             ),
           ),
-          if (consultation.detail!.status != "pending" && consultation.detail!.status != "accepted") ...[
-            PopupMenuButton(
-              icon: const FaIcon(FontAwesomeIcons.ellipsisVertical),
-              color: _tileColor,
-              itemBuilder: (BuildContext context) => <PopupMenuEntry>[
-                if (consultation.detail!.status == "paid") ...[
-                  PopupMenuItem(
-                    padding: EdgeInsets.zero,
-                    child: (consultation.detail!.rating == 0) ? 
-                      ListTile(
-                        leading: const Icon(Icons.star),
-                        title: const Text('give_rating').tr(),
-                        tileColor: _tileColor,
-                        dense: true,
-                        onTap: onGiveRating,
-                      )
-                    :
-                      ListTile(
-                        leading: const Icon(Icons.star),
-                        title: const Text('view_review').tr(),
-                        tileColor: _tileColor,
-                        dense: true,
-                        onTap: onViewReview,
-                      ),
-                  ),
-                  PopupMenuItem(
-                    padding: EdgeInsets.zero,
-                    child: ListTile(
-                      leading: const Icon(Icons.people),
-                      title: const Text('consult_now').tr(),
-                      tileColor: _tileColor,
-                      dense: true,
-                      onTap: onConsult,
-                    ),
-                  ),
-                ],
-                if (consultation.detail!.status == "rejected") ...[
-                  PopupMenuItem(
-                    padding: EdgeInsets.zero,
-                    child: ListTile(
-                      leading: const Icon(Icons.info_outline_rounded),
-                      title: const Text('rejection_detail').tr(),
-                      tileColor: _tileColor,
-                      dense: true,
-                      onTap: onViewDetail,
-                    ),
-                  ),
-                ]
-              ],
-            ),
-          ]
+          IconButton(
+            onPressed: onRemoved, 
+            icon: const Icon(Icons.delete, color: Colors.red)
+          )
         ]
       ),
     );

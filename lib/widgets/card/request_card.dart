@@ -21,34 +21,35 @@ class RequestCard extends StatelessWidget {
       children: [
         Row(
           children: [
-          (request.user.photo != null && request.user.photo != "")
-          ? GestureDetector(
+          GestureDetector(
             onTap: () => Get.toNamed('/user/detail?id=${request.user.id}'),
-            child: Container(
-                width: 35,
-                height: 35,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(color: Colors.black),
-                  image: DecorationImage(
-                    image: NetworkImage(request.user.photo!), 
-                    fit: BoxFit.cover
-                  )
-                ),
-              ),
-          )
-          : Container(
-              width: 35,
-              height: 35,
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.white,
-                image: DecorationImage(
-                  image: AssetImage('assets/images/profile-icon.png'),
-                  fit: BoxFit.cover
+            child: (request.user.photo != null && request.user.photo != "") ? 
+                Container(
+                  width: 35,
+                  height: 35,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: Colors.black),
+                    image: DecorationImage(
+                      image: NetworkImage(request.user.photo!), 
+                      fit: BoxFit.cover
+                    )
+                  ),
                 )
-              ),
-            ),
+              : 
+                Container(
+                  width: 35,
+                  height: 35,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white,
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/profile-icon.png'),
+                      fit: BoxFit.cover
+                    )
+                  ),
+                ),
+          ),
           const SizedBox(width: 10),
           Text('${request.user.name} #${request.user.id}')
           ],

@@ -45,13 +45,13 @@ class _EditConsultationScreenState extends State<EditConsultationScreen> {
   void initState() {
     _nameController.text = widget.consultation.name;
     _descriptionController.text = widget.consultation.description;
-    _proofDetailController.text = widget.consultation.proof.detail;
+    _proofDetailController.text = widget.consultation.proof!.detail;
     _topicController.text = widget.consultation.topic;
     _linkController.text = widget.consultation.link;
     _priceController.text = widget.consultation.price.toString();
     _discountPriceController.text = widget.consultation.discountPrice.toString();
     _image = widget.consultation.photo;
-    _proofImage = widget.consultation.proof.image;
+    _proofImage = widget.consultation.proof!.image;
     super.initState();
   }
 
@@ -345,7 +345,7 @@ class _EditConsultationScreenState extends State<EditConsultationScreen> {
               Align(
                 alignment: Alignment.centerLeft,
                 child: GestureDetector(
-                  onTap: () => Get.to(PreviewImage(image: widget.consultation.proof.image)),
+                  onTap: () => Get.to(PreviewImage(image: widget.consultation.proof!.image)),
                   child: (_proofImage != "")
                     ? Container(
                         width: MediaQuery.of(context).size.width - 50,
