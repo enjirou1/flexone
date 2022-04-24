@@ -1,26 +1,30 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flexone/data/models/room_result.dart';
+import 'package:flexone/data/models/consultation_result.dart';
+import 'package:flexone/data/models/expert_result.dart';
 import 'package:flexone/data/providers/user.dart';
-import 'package:flexone/screens/room/edit_room_screen.dart';
-import 'package:flexone/widgets/card/room_card.dart';
+import 'package:flexone/screens/consultation/edit_consultation_screen.dart';
+import 'package:flexone/widgets/card/consultation_card.dart';
 import 'package:flexone/widgets/dialog/confirmation_dialog.dart';
 import 'package:flexone/widgets/edittext/search_edit_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-class MyRoomScreen extends StatefulWidget {
-  const MyRoomScreen({ Key? key }) : super(key: key);
+class ConsultationOwnedScreen extends StatefulWidget {
+  Expert expert;
+
+  ConsultationOwnedScreen({ Key? key, required this.expert }) : super(key: key);
 
   @override
-  State<MyRoomScreen> createState() => _MyRoomScreenState();
+  State<ConsultationOwnedScreen> createState() => _ConsultationOwnedScreenState();
 }
 
-class _MyRoomScreenState extends State<MyRoomScreen> {
-  final TextEditingController _controller2 = TextEditingController();
+class _ConsultationOwnedScreenState extends State<ConsultationOwnedScreen> {
+  final TextEditingController _controller = TextEditingController();
   final ScrollController _scrollController = ScrollController();
-  List<Room> _rooms = [];
+  List<Consultation> _consultations = [];
   String _keywords = "";
+  int? _lowest = null, _highest = null, _rating = null;
   bool _hasReachedMax = false;
 
   @override
@@ -29,17 +33,20 @@ class _MyRoomScreenState extends State<MyRoomScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('my_rooms').tr(),
+        title: const Text('consultations_owned').tr(),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10),
         child: Column(
           children: [
             SearchEditText(
-              controller: _controller2,
+              controller: _controller,
               onSubmitted: (String value) {
                 _keywords = value;
-                _rooms.clear();
+                _lowest = null;
+                _highest = null;
+                _rating = null;
+                _consultations.clear();
                 _hasReachedMax = false;
                 setState(() {});
               },
@@ -49,24 +56,29 @@ class _MyRoomScreenState extends State<MyRoomScreen> {
               },
               onClear: () {
                 if (_keywords != "") {
-                  _controller2.text = "";
+                  _controller.text = "";
                   _keywords = "";
                 }
-                _rooms.clear();
+
+                _lowest = null;
+                _highest = null;
+                _rating = null;
+                _consultations.clear();
                 _hasReachedMax = false;
+
                 setState(() {});
-              },
+              }
             ),
             Expanded(
-              child: FutureBuilder<List<Room>>(
-                future: Room.getJoinedRooms(_provider.user!.userId!, _rooms.length, 20, _keywords),
+              child: FutureBuilder<List<Consultation>>(
+                future: Consultation.getConsultationsOwned(widget.expert.expertId!, _consultations.length, 20, _keywords),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
-                    List<Room> data = snapshot.data!;
+                    List<Consultation> data = snapshot.data!;
             
-                    if (_rooms.isEmpty) {
+                    if (_consultations.isEmpty) {
                       Future.delayed(Duration.zero, () {
-                        _rooms.addAll(data);
+                        _consultations.addAll(data);
                         data = [];
                         setState(() {});
                       });
@@ -86,10 +98,10 @@ class _MyRoomScreenState extends State<MyRoomScreen> {
             
                       if (currentScroll == maxScroll) {
                         if (!_hasReachedMax) {
-                          List<Room> temp = [];
-                          temp.addAll(_rooms);
-                          _rooms.clear();
-                          _rooms.addAll([...temp, ...data]);
+                          List<Consultation> temp = [];
+                          temp.addAll(_consultations);
+                          _consultations.clear();
+                          _consultations.addAll([...temp, ...data]);
                           data.clear();
                           setState(() {});
                         }
@@ -103,36 +115,48 @@ class _MyRoomScreenState extends State<MyRoomScreen> {
                       child: ListView.separated(
                         controller: _scrollController,
                         itemBuilder: (context, index) {
-                          return (index < _rooms.length)
-                            ? RoomCard(
-                                room: _rooms[index], 
-                                isOwner: _rooms[index].user.id == _provider.user!.userId!,
+                          return (index < _consultations.length)
+                            ? ConsultationCard(
+                                consultation: _consultations[index],
+                                status: _consultations[index].status,
                                 onRemoved: () {
                                   showDialog(
                                     context: context, 
                                     builder: (context) => ConfirmationDialog(
-                                      title: 'confirmation.delete_room.title',
+                                      title: 'confirmation.close_consultation.title',
+                                      content: 'confirmation.close_consultation.content',
                                       buttonText: 'delete', 
                                       onCancel: () {
                                         Navigator.pop(context);
                                       }, 
                                       onPressed: () async {
-                                        await Room.deleteRoom(_rooms[index].id);
-                                        _rooms.removeAt(index);
-                                        Navigator.pop(context);
-                                        setState(() {});
+                                        try {
+                                          await Consultation.deleteConsultation(_consultations[index].id);
+                                          Navigator.pop(context);
+                                          _consultations.clear();
+                                          _hasReachedMax = false;
+                                          setState(() {});
+                                        } catch (e) {
+                                          Get.snackbar(tr('failed'), e.toString(),
+                                            snackPosition: SnackPosition.BOTTOM,
+                                            colorText: Colors.white,
+                                            backgroundColor: Colors.red,
+                                            animationDuration: const Duration(milliseconds: 300),
+                                            duration: const Duration(seconds: 2)
+                                          );
+                                        }
                                       }
                                     )
                                   );
                                 },
-                                onPressed: () async {
-                                  final result = await Get.to(EditRoomScreen(room: _rooms[index]));
+                                onUpdated: () async {
+                                  final result = await Get.to(EditConsultationScreen(consultation: _consultations[index]));
                                   if (result) {
-                                    _rooms.clear();
+                                    _consultations.clear();
                                     _hasReachedMax = false;
                                     setState(() {});
                                     Get.snackbar(
-                                      tr('success'), tr('success_detail.update_room'),
+                                      tr('success'), tr('success_detail.update_consultation'),
                                       snackPosition: SnackPosition.BOTTOM,
                                       animationDuration: const Duration(milliseconds: 300),
                                       backgroundColor: Colors.green,
@@ -151,7 +175,7 @@ class _MyRoomScreenState extends State<MyRoomScreen> {
                                 ),
                               );
                         },
-                        itemCount: _hasReachedMax ? _rooms.length : _rooms.length + 1,
+                        itemCount: _hasReachedMax ? _consultations.length : _consultations.length + 1,
                         separatorBuilder: (context, index) {
                           return const Divider();
                         },
@@ -173,24 +197,15 @@ class _MyRoomScreenState extends State<MyRoomScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
         onPressed: () async {
-          final result = await Get.toNamed('/add_room');
+          final result = await Get.toNamed('/add_consultation');
           if (result) {
-            _rooms.clear();
+            _consultations.clear();
             _hasReachedMax = false;
             setState(() {});
-            Get.snackbar(
-              tr('success'), tr('success_detail.create_room'),
-              snackPosition: SnackPosition.BOTTOM,
-              animationDuration: const Duration(milliseconds: 300),
-              backgroundColor: Colors.green,
-              colorText: Colors.white,
-              icon: const Icon(Icons.check, color: Colors.white),
-              duration: const Duration(seconds: 1)
-            );
           }
         },
-        child: const Icon(Icons.add),
       ),
     );
   }

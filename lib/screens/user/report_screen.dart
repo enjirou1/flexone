@@ -175,6 +175,7 @@ class _ReportScreenState extends State<ReportScreen> {
                       decoration: BoxDecoration(
                           border: Border.all(color: Colors.black),
                           borderRadius: BorderRadius.circular(5),
+                          color: Colors.white,
                           image: const DecorationImage(
                               image: AssetImage('assets/images/image-icon.png'),
                               fit: BoxFit.cover)),

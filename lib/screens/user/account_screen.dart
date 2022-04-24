@@ -38,8 +38,8 @@ class AccountScreen extends StatelessWidget {
 
     final List<Widget> loggedinMenus = [
       const ProfileCard(),
-      _provider.user?.expertId == null
-      ? ListTile(
+      if (_provider.user?.expertId == null) ...[
+         ListTile(
           leading: const Icon(Icons.account_box_rounded, color: Color(0XFFBDBDBD)),
           title: const Text('create_expert_account').tr(),
           onTap: () async {
@@ -58,11 +58,19 @@ class AccountScreen extends StatelessWidget {
             }
           },
         )
-      : ListTile(
+      ]
+      else ...[
+        ListTile(
           leading: const Icon(Icons.account_box_rounded, color: Color(0XFFBDBDBD)),
           title: const Text('expert').tr(),
           onTap: () => Get.toNamed('/expert/profile'),
         ),
+        ListTile(
+          leading: const Icon(Icons.list_rounded, color: Color(0XFFBDBDBD)),
+          title: const Text('consultation_requests').tr(),
+          onTap: () => Get.toNamed('/request'),
+        ),
+      ],
       ListTile(
         leading: const Icon(Icons.receipt_long_rounded, color: Color(0XFFBDBDBD)),
         title: const Text('transactions').tr(),
@@ -86,7 +94,7 @@ class AccountScreen extends StatelessWidget {
       ListTile(
         leading: const Icon(Icons.people_alt_rounded, color: Color(0XFFBDBDBD)),
         title: const Text('my_consultations').tr(),
-        onTap: null,
+        onTap: () => Get.toNamed('/my_consultations'),
       ),
       ListTile(
         leading: const Icon(Icons.class__rounded, color: Color(0XFFBDBDBD)),

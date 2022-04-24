@@ -42,6 +42,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
               onSubmitted: (String value) {
                 _keywords = value;
                 _questions.clear();
+                _hasReachedMax = false;
                 setState(() {});
               },
               decoration: InputDecoration(
@@ -66,6 +67,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                       _controller.text = "";
                       _keywords = "";
                       _questions.clear();
+                      _hasReachedMax = false;
                       setState(() {});
                     }
                   },
@@ -175,7 +177,8 @@ class _QuestionScreenState extends State<QuestionScreen> {
         onPressed: () async {
           final result = await Get.toNamed('add_question');
           if (result != null) {
-            _questions.insert(0, result);
+            _questions.clear();
+            _hasReachedMax = false;
             setState(() {});
           }
         },

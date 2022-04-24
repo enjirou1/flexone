@@ -109,6 +109,7 @@ class _QuestionDetailScreenState extends State<QuestionDetailScreen> {
                               height: 50,
                               decoration: const BoxDecoration(
                                 shape: BoxShape.circle,
+                                color: Colors.white,
                                 image: DecorationImage(
                                   image: AssetImage('assets/images/profile-icon.png'),
                                   fit: BoxFit.cover
@@ -189,6 +190,7 @@ class _QuestionDetailScreenState extends State<QuestionDetailScreen> {
                                           onPressed: () async {
                                             await Question.rating(_answers[index].answerId, _provider.user!.userId!, _rating.toString());
                                             _answers.clear();
+                                            _hasReachedMax = false;
                                             setState(() {});
                                             Navigator.pop(context);
                                           }, 

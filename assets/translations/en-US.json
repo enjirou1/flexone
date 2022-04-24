@@ -11,6 +11,7 @@
     "additional_info": "Additional info",
     "address": "Address",
     "address:": "Address:",
+    "all": "Semua",
     "already_have_an_account": "Already have an account?",
     "answer": "Answer",
     "answers": "Answers",
@@ -20,17 +21,24 @@
     "bought_at": "Bought at {}",
     "buy": "Buy",
     "cancel": "Cancel",
+    "certificate": "Certificate",
     "certificates": "Certificates",
     "choose_language": "Choose language",
     "city": "City",
     "city:": "City:",
     "class": "Class",
     "classes_joined": "Classes joined",
+    "classes_owned": "Classes owned",
+    "close": "Close",
     "comments": "Comments",
     "confirmation": {
         "buy_merchandise": {
             "title": "Are you sure to buy {}?",
             "content": "Item will be delivered after processing by admin. Make sure your address is filled in correctly."
+        },
+        "close_consultation": {
+            "title": "Are you sure to close this consultation?",
+            "content": "Consultation can't be removed if someone still following this consultation"
         },
         "delete_question": {
             "title": "Are you sure to delete this question?"
@@ -49,9 +57,13 @@
     },
     "consultation": "Consultation",
     "consultations_joined": "Consultations joined",
+    "consultations_owned": "Consultations owned",
+    "consultation_requests": "Consultation requests",
     "create_an_account": "Create an account",
+    "create_consultation": "Create consultation",
     "create_expert_account": "Create expert account",
     "create_room": "Create room",
+    "created_at": "Created at",
     "dark_mode": "Dark mode",
     "delete": "Delete",
     "delete_photo": "Delete photo",
@@ -59,8 +71,10 @@
     "description:": "Description:",
     "detail": "Detail",
     "detail:": "Detail:",
+    "discount_price:": "Discount price:",
     "discussion": "Discussion",
     "edit": "Edit",
+    "edit_consultation": "Edit consultation",
     "edit_profile": "Edit profile",
     "edit_room": "Edit room",
     "education": "Education",
@@ -75,6 +89,15 @@
         },
         "account_number": {
             "empty": "Bank account number cannot be empty"
+        },
+        "certificate": {
+            "empty": "Certificate is required"
+        },
+        "date": {
+            "empty": "Date cannot be empty"
+        },
+        "detail": {
+            "empty": "Detail cannot be empty"
         },
         "education": {
             "empty": "Education cannot be empty"
@@ -101,6 +124,9 @@
             "minimum": "Minimum withdrawal is Rp. 10000",
             "not_enough_saldo": "Not enough saldo"
         },
+        "notes": {
+            "empty": "Notes cannot be empty"
+        },
         "password": {
             "empty": "Password cannot be empty"
         },
@@ -111,6 +137,9 @@
             "empty": "Minimum point is 1 point",
             "not_enough": "Not enough point"
         },
+        "price": {
+            "empty": "Price cannot be empty"
+        },
         "reason": {
             "empty": "Reason cannot be empty"
         },
@@ -120,6 +149,9 @@
         },
         "text": {
             "empty": "Content cannot be empty"
+        },
+        "topic": {
+            "empty": "Topic cannot be empty"
         }
     },
     "expert": "Expert",
@@ -132,6 +164,7 @@
     "give_answer": "Give answer",
     "grade": "Grade",
     "grade_and_subject": "Grade & Subject",
+    "highest_price": "Highest price",
     "indonesia": "Indonesia",
     "invalid-email": "Invalid email",
     "job": "Job",
@@ -139,6 +172,7 @@
     "join": "Join",
     "joined": "Joined",
     "logout": "Logout",
+    "lowest_price": "Lowest price",
     "members": "Members",
     "members:": "Members:",
     "messages": "Messages",
@@ -159,11 +193,13 @@
     "point:": "Point:",
     "preview": "Preview",
     "price": "Price",
+    "price:": "Price:",
     "private": "Private",
     "profile": "Profile",
     "province:": "Province:",
     "public": "Public",
     "questions_asked": "Questions asked",
+    "rating_rb": "{} & up", 
     "reason:": "Reason:",
     "remove": "Remove",
     "report": "Report",
@@ -192,11 +228,16 @@
         "buy_merchandise": "{} bought successfully",
         "create_expert": "Successfully created expert account",
         "create_room": "Successfully created room",
+        "update_consultation": "Successully updated consultation",
         "update_profile": "Successully updated profile",
         "update_room": "Successully updated room",
         "report": "Successfully reported user",
+        "reschedule": "Successfully rescheduled",
+        "send_request": "Request is successfully sent",
         "withdraw_saldo": "Successfully withdrew saldo to bank account"
     },
+    "topic": "Topic",
+    "topic:": "Topic:",
     "transactions": "Transactions",
     "type_something": "Ketik sesuatu",
     "user-not-found": "User not found",
@@ -204,5 +245,21 @@
     "view_answer": "View answer",
     "weak-password": "Weak password",
     "withdraw": "Withdraw",
-    "wrong-password": "Wrong Password"
+    "wrong-password": "Wrong Password",
+    "notes": "Notes",
+    "send_request": "Send request",
+    "choose_date": "Choose date",
+    "pending": "Pending",
+    "accepted": "Accepted",
+    "rejected": "Rejected",
+    "paid": "Paid",
+    "reject": "Reject",
+    "accept": "Accept",
+    "reason": "Reason",
+    "reject_request": "Reject request",
+    "reschedule": "Reschedule",
+    "give_rating": "Give rating",
+    "view_review": "View review",
+    "rejection_detail": "Rejection detail",
+    "review": "Review"
 }

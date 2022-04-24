@@ -4,7 +4,7 @@ import 'package:flexone/data/models/user_result.dart';
 import 'package:flexone/data/providers/question.dart';
 import 'package:flexone/data/providers/user.dart';
 import 'package:flexone/screens/class_screen.dart';
-import 'package:flexone/screens/consultation_screen.dart';
+import 'package:flexone/screens/consultation/consultation_screen.dart';
 import 'package:flexone/screens/discussion/discussion_screen.dart';
 import 'package:flexone/screens/room/room_screen.dart';
 import 'package:flexone/screens/user/account_screen.dart';

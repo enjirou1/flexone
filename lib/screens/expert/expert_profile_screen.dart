@@ -7,6 +7,8 @@ import 'package:flexone/data/providers/certificates.dart';
 import 'package:flexone/data/providers/preferences.dart';
 import 'package:flexone/data/providers/user.dart';
 import 'package:flexone/data/services/upload_service.dart';
+import 'package:flexone/screens/consultation/consultation_owned_screen.dart';
+import 'package:flexone/utils/format.dart';
 import 'package:flexone/utils/input_validation.dart';
 import 'package:flexone/widgets/card/card_with_header.dart';
 import 'package:flexone/widgets/dialog/confirmation_dialog.dart';
@@ -52,10 +54,38 @@ class _ExpertProfileScreenState extends State<ExpertProfileScreen> {
     final _certificateProvider = Provider.of<CertificateProvider>(context, listen: true);
     final Color _fontColor = _preferencesProvider.isDarkTheme ? Colors.white : secondaryColor;
     final Color _borderColor = _preferencesProvider.isDarkTheme ? Colors.white : Colors.black;
+    final Color _tileColor = _preferencesProvider.isDarkTheme ? const Color(0xFF616161) : Colors.white;
     
     return Scaffold(
       appBar: AppBar(
         title: const Text('expert_account').tr(),
+        actions: [
+          PopupMenuButton(
+            icon: const FaIcon(FontAwesomeIcons.ellipsisVertical),
+            color: _tileColor,
+            itemBuilder: (BuildContext context) => <PopupMenuEntry>[
+              PopupMenuItem(
+                padding: EdgeInsets.zero,
+                child: ListTile(
+                  leading: const Icon(Icons.people_alt_rounded),
+                  title: const Text('consultations_owned').tr(),
+                  tileColor: _tileColor,
+                  dense: true,
+                  onTap: () => Get.to(ConsultationOwnedScreen(expert: _expert!)),
+                ),
+              ),
+              PopupMenuItem(
+                padding: EdgeInsets.zero,
+                child: ListTile(
+                  leading: const Icon(Icons.class__rounded),
+                  title: const Text('classes_owned').tr(),
+                  tileColor: _tileColor,
+                  dense: true,
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
       body: FutureBuilder(
           future: Future.wait([
@@ -102,7 +132,7 @@ class _ExpertProfileScreenState extends State<ExpertProfileScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              NumberFormat.currency(locale: 'id', symbol: 'Rp ').format(_saldo),
+                              convertToRupiah(_saldo),
                               style: poppinsTheme.bodyText1!.copyWith(fontWeight: FontWeight.bold),
                             ),
                             const SizedBox(width: 20),
@@ -294,6 +324,7 @@ class _ExpertProfileScreenState extends State<ExpertProfileScreen> {
                                     decoration: BoxDecoration(
                                       border: Border.all(color: _borderColor),
                                       borderRadius: BorderRadius.circular(5),
+                                      color: Colors.white,
                                       image: const DecorationImage(
                                         image: AssetImage('assets/images/image-icon.png'),
                                         fit: BoxFit.fill

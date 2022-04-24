@@ -107,6 +107,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                                 height: 120,
                                 decoration: const BoxDecoration(
                                   shape: BoxShape.circle,
+                                  color: Colors.white,
                                   image: DecorationImage(
                                     image: AssetImage('assets/images/profile-icon.png'),
                                     fit: BoxFit.cover

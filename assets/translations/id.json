@@ -11,6 +11,7 @@
     "additional_info": "Info tambahan",
     "address": "Alamat",
     "address:": "Alamat:",
+    "all": "Semua",
     "already_have_an_account": "Sudah memiliki akun?",
     "answer": "Jawaban",
     "answers": "Jawaban",
@@ -20,17 +21,24 @@
     "bought_at": "Dibeli pada {}",
     "buy": "Beli",
     "cancel": "Batal",
+    "certificate": "Sertifikat",
     "certificates": "Sertifikat",
     "choose_language": "Pilih bahasa",
     "city": "Kota",
     "city:": "Kota:",
     "class": "Kelas",
     "classes_joined": "Kelas yang diikuti",
+    "classes_owned": "Kelas yang dimiliki",
+    "close": "Tutup",
     "comments": "Komentar",
     "confirmation": {
         "buy_merchandise": {
             "title": "Anda yakin untuk membeli {}?",
             "content": "Barang akan dikirimkan setelah diproses oleh admin. Pastikan alamat sudah terisi dengan benar."
+        },
+        "close_consultation": {
+            "title": "Anda yakin untuk menutup konsultasi ini?",
+            "content": "Konsultasi tidak dapat dihapus jika masih ada yang mengikuti konsultasi"
         },
         "delete_question": {
             "title": "Apakah anda yakin untuk menghapus pertanyaan ini?"
@@ -49,9 +57,13 @@
     },
     "consultation": "Konsultasi",
     "consultations_joined": "Konsultasi yang diikuti",
+    "consultations_owned": "Konsultasi yang dimiliki",
+    "consultation_requests": "Permintaan konsultasi",
     "create_an_account": "Buat akun",
+    "create_consultation": "Buat konsultasi",
     "create_expert_account": "Buat akun expert",
     "create_room": "Buat ruangan",
+    "created_at": "Dibuat pada",
     "dark_mode": "Mode dark",
     "delete": "Hapus",
     "delete_photo": "Hapus foto",
@@ -59,8 +71,10 @@
     "detail:": "Detail:",
     "description": "Deskripsi",
     "description:": "Deskripsi:",
+    "discount_price:": "Harga diskon:",
     "discussion": "Diskusi",
     "edit": "Ubah",
+    "edit_consultation": "Ubah konsultasi",
     "edit_profile": "Ubah profil",
     "edit_room": "Ubah ruangan",
     "education": "Edukasi",
@@ -75,6 +89,15 @@
         },
         "account_number": {
             "empty": "Nomor rekening tidak boleh kosong"
+        },
+        "certificate": {
+            "empty": "Sertifikat diperlukan"
+        },
+        "date": {
+            "empty": "Tanggal tidak boleh kosong"
+        },
+        "detail": {
+            "empty": "Detail tidak boleh kosong"
         },
         "education": {
             "empty": "Edukasi tidak boleh kosong"
@@ -101,6 +124,9 @@
             "minimum": "Minimal penarikan Rp. 10000",
             "not_enough_saldo": "Saldo tidak cukup"
         },
+        "notes": {
+            "empty": "Catatan tidak boleh kosong"
+        },
         "password": {
             "empty": "Password tidak boleh kosong"
         },
@@ -111,6 +137,9 @@
             "empty": "Poin minimum adalah 1 poin",
             "not_enough": "Poin tidak cukup"
         },
+        "price": {
+            "empty": "Harga tidak boleh kosong"
+        },
         "reason": {
             "empty": "Alasan tidak boleh kosong"
         },
@@ -120,6 +149,9 @@
         },
         "text": {
             "empty": "Isi tidak boleh kosong"
+        },
+        "topic": {
+            "empty": "Topik tidak boleh kosong"
         }
     },
     "expert": "Expert",
@@ -132,6 +164,7 @@
     "give_answer": "Beri jawaban",
     "grade": "Tingkatan",
     "grade_and_subject": "Tingkatan & Subjek",
+    "highest_price": "Harga tertinggi",
     "indonesia": "Bahasa Indonesia",
     "invalid-email": "Format email salah",
     "job": "Pekerjaan",
@@ -139,6 +172,7 @@
     "join": "Gabung",
     "joined": "Bergabung",
     "logout": "Keluar",
+    "lowest_price": "Harga terendah",
     "members": "Anggota",
     "members:": "Anggota:",
     "messages": "Pesan",
@@ -159,11 +193,13 @@
     "point:": "Point:",
     "preview": "Preview",
     "price": "Harga",
+    "price:": "Harga:",
     "private": "Private",
     "profile": "Profil",
     "province:": "Provinsi:",
     "public": "Public",
     "questions_asked": "Pertanyaan yang ditanyakan",
+    "rating_rb": "{} & keatas", 
     "reason:": "Alasan:",
     "remove": "Hapus",
     "report": "Lapor",
@@ -193,10 +229,15 @@
         "create_expert": "Berhasil membuat akun expert",
         "create_room": "Berhasil membuat ruangan",
         "report": "Berhasil melaporkan user",
+        "reschedule": "Berhasil menjadwalkan ulang",
+        "send_request": "Permintaan berhasil terkirim",
+        "update_consultation": "Berhasil ubah konsultasi",
         "update_profile": "Berhasil ubah profil",
         "update_room": "Berhasil ubah ruangan",
         "withdraw_saldo": "Berhasil menarik saldo ke rekening"
     },
+    "topic": "Topik",
+    "topic:": "Topik:",
     "transactions": "Transaksi",
     "type_something": "Type something",
     "user-not-found": "User tidak ditemukan",
@@ -204,5 +245,21 @@
     "view_answer": "Lihat jawaban",
     "weak-password": "Password lemah",
     "withdraw": "Tarik",
-    "wrong-password": "Password salah"
+    "wrong-password": "Password salah",
+    "notes": "Catatan",
+    "send_request": "Kirim permintaan",
+    "choose_date": "Pilih tanggal",
+    "pending": "Menunggu",
+    "accepted": "Diterima",
+    "rejected": "Ditolak",
+    "paid": "Dibayar",
+    "reject": "Tolak",
+    "accept": "Terima",
+    "reason": "Alasan",
+    "reject_request": "Tolak permintaan",
+    "reschedule": "Jadwal ulang",
+    "give_rating": "Beri penilaian",
+    "view_review": "Lihat ulasan",
+    "rejection_detail": "Detail penolakan",
+    "review": "Ulasan"
 }

@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flexone/common/style.dart';
 import 'package:flexone/data/models/merchandise_result.dart';
+import 'package:flexone/utils/format.dart';
 import 'package:flexone/widgets/card/card_with_header.dart';
 import 'package:flexone/widgets/preview_image.dart';
 import 'package:flutter/material.dart';
@@ -88,12 +89,12 @@ class _MerchandiseDetailScreenState extends State<MerchandiseDetailScreen> {
                         padding: const EdgeInsets.only(top: 20, bottom: 8),
                         child: Text("price", style: poppinsTheme.bodyText2!.copyWith(fontWeight: FontWeight.bold)).tr(),
                       ),
-                      Text(tr("points", args: [NumberFormat.decimalPattern(context.locale == const Locale('id') ? 'id' : 'en_US').format(widget.merchandise.price)])),
+                      Text(tr("points", args: [convertToDecimalPattern(context.locale == const Locale('id') ? 'id' : 'en_US', widget.merchandise.price)])),
                       Padding(
                         padding: const EdgeInsets.only(top: 20, bottom: 8),
                         child: Text("stock", style: poppinsTheme.bodyText2!.copyWith(fontWeight: FontWeight.bold)).tr(),
                       ),
-                      Text(NumberFormat.decimalPattern(context.locale == const Locale('id') ? 'id' : 'en_US').format(widget.merchandise.stock))
+                      Text(convertToDecimalPattern(context.locale == const Locale('id') ? 'id' : 'en_US', widget.merchandise.stock))
                     ],
                   )
                 )

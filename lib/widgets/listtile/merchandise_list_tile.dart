@@ -31,6 +31,7 @@ class MerchandiseListTile extends StatelessWidget {
             height: 60,
             decoration: BoxDecoration(
               border: Border.all(color: Colors.black),
+              color: Colors.white,
               image: const DecorationImage(
                 image: AssetImage('assets/images/photo-icon.png'), 
                 fit: BoxFit.contain

@@ -209,6 +209,7 @@ class _NewAccountScreenState extends State<NewAccountScreen> {
                         decoration: BoxDecoration(
                             border: Border.all(color: _borderColor),
                             borderRadius: BorderRadius.circular(5),
+                            color: Colors.white,
                             image: const DecorationImage(
                                 image:
                                     AssetImage('assets/images/image-icon.png'),

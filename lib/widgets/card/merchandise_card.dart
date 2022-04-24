@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flexone/common/style.dart';
 import 'package:flexone/data/models/merchandise_result.dart';
 import 'package:flexone/screens/merchandise/detail_screen.dart';
+import 'package:flexone/utils/format.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -38,7 +39,7 @@ class MerchandiseCard extends StatelessWidget {
                         style: poppinsTheme.bodyText2
                       ),
                       Text(
-                        tr("points", args: [NumberFormat.decimalPattern(context.locale == const Locale('id') ? 'id' : 'en_US').format(merchandise.price)]), 
+                        tr("points", args: [convertToDecimalPattern(context.locale == const Locale('id') ? 'id' : 'en_US', merchandise.price)]), 
                         overflow: TextOverflow.ellipsis, 
                         style: poppinsTheme.bodyText2!.copyWith(fontWeight: FontWeight.bold)
                       ),

@@ -3,6 +3,7 @@ import 'package:flexone/common/style.dart';
 import 'package:flexone/data/models/merchandise_result.dart';
 import 'package:flexone/data/models/user_result.dart';
 import 'package:flexone/data/providers/user.dart';
+import 'package:flexone/utils/format.dart';
 import 'package:flexone/widgets/dialog/confirmation_dialog.dart';
 import 'package:flexone/widgets/card/merchandise_card.dart';
 import 'package:flutter/material.dart';
@@ -82,7 +83,7 @@ class _ShopScreenState extends State<ShopScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('my_points', style: poppinsTheme.bodyText1!.copyWith(fontWeight: FontWeight.bold)).tr(args: [NumberFormat.decimalPattern(context.locale == const Locale('id') ? 'id' : 'en_US').format(_provider.user!.point)]),
+                        Text('my_points', style: poppinsTheme.bodyText1!.copyWith(fontWeight: FontWeight.bold)).tr(args: [convertToDecimalPattern(context.locale == const Locale('id') ? 'id' : 'en_US', _provider.user!.point!)]),
                         ElevatedButton.icon(
                           onPressed: () => Get.toNamed('/merchandise-history'),
                           icon: const Icon(Icons.history),

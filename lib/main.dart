@@ -10,7 +10,9 @@ import 'package:flexone/data/providers/room.dart';
 import 'package:flexone/data/providers/user.dart';
 import 'package:flexone/screens/auth/register_screen.dart';
 import 'package:flexone/screens/auth/login_screen.dart';
-import 'package:flexone/screens/discussion/add_answer_screen.dart';
+import 'package:flexone/screens/consultation/add_consultation_screen.dart';
+import 'package:flexone/screens/consultation/my_consultation_screen.dart';
+import 'package:flexone/screens/consultation/request/request_screen.dart';
 import 'package:flexone/screens/discussion/add_question_screen.dart';
 import 'package:flexone/screens/expert/add_certificate_screen.dart';
 import 'package:flexone/screens/expert/add_skill_screen.dart';
@@ -86,6 +88,9 @@ class MyApp extends StatelessWidget {
                 GetPage(name: '/add_question', page: () => const AddQuestionScreen()),
                 GetPage(name: '/my_rooms', page: () => const MyRoomScreen()),
                 GetPage(name: '/add_room', page: () => const AddRoomScreen()),
+                GetPage(name: '/add_consultation', page: () => const AddConsultationScreen()),
+                GetPage(name: '/request', page: () => const RequestScreen()),
+                GetPage(name: '/my_consultations', page: () => const MyConsultationScreen()),
               ],
               localizationsDelegates: context.localizationDelegates,
               supportedLocales: context.supportedLocales,

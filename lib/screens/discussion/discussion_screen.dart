@@ -37,6 +37,7 @@ class _DiscussionScreenState extends State<DiscussionScreen> {
               _grade = 0;
               _subject = 0;
               _questions.clear();
+              _hasReachedMax = false;
               setState(() {});
             },
             onChanged: (String value) {
@@ -52,6 +53,7 @@ class _DiscussionScreenState extends State<DiscussionScreen> {
               _grade = 0;
               _subject = 0;
               _questions.clear();
+              _hasReachedMax = false;
 
               setState(() {});
             },

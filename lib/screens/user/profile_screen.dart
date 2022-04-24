@@ -149,6 +149,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           height: 150,
                           decoration: const BoxDecoration(
                               shape: BoxShape.circle,
+                              color: Colors.white,
                               image: DecorationImage(
                                   image: AssetImage(
                                       'assets/images/profile-icon.png'),

@@ -39,6 +39,7 @@ class _UserScreenState extends State<UserScreen> {
             onSubmitted: (String value) {
               _keywords = value;
               _users.clear();
+              _hasReachedMax = false;
               setState(() {});
             },
             decoration: InputDecoration(
