@@ -215,7 +215,13 @@ class _ClassDetailScreenState extends State<ClassDetailScreen> {
                               ),
                             ],
                             const SizedBox(height: 5),
-                            if (_provider.user!.userId! != widget.classModel.expert!.userId && widget.classModel.joined == false) ...[
+                            if (_provider.user == null) ...[
+                              ElevatedButton(
+                                onPressed: () => Get.toNamed('/login'), 
+                                child: const Text('Login')
+                              )
+                            ],
+                            if (_provider.user?.userId != widget.classModel.expert!.userId && widget.classModel.joined == false && _provider.user != null) ...[
                               ElevatedButton(
                                 onPressed: () async {
                                   try {

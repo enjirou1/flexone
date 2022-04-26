@@ -127,7 +127,7 @@ class _MyRoomScreenState extends State<MyRoomScreen> {
                                 },
                                 onPressed: () async {
                                   final result = await Get.to(EditRoomScreen(room: _rooms[index]));
-                                  if (result) {
+                                  if (result != null) {
                                     _rooms.clear();
                                     _hasReachedMax = false;
                                     setState(() {});
@@ -175,7 +175,7 @@ class _MyRoomScreenState extends State<MyRoomScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           final result = await Get.toNamed('/add_room');
-          if (result) {
+          if (result != null) {
             _rooms.clear();
             _hasReachedMax = false;
             setState(() {});

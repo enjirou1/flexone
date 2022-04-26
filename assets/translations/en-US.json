@@ -56,6 +56,9 @@
         "delete_section": {
             "title": "Are you sure to delete this section?"
         },
+        "logout": {
+            "title": "Are you sure you want to logout?"
+        },
         "remove_class": {
             "title": "Are you sure to remove this class from cart?"
         },

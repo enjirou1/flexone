@@ -9,10 +9,10 @@ import 'package:timeago/timeago.dart' as timeago;
 
 class QuestionCard extends StatelessWidget {
   Question question;
-  String userId;
+  String? userId;
   Function()? onRemoved;
 
-  QuestionCard({ Key? key, required this.question, required this.userId, this.onRemoved }) : super(key: key);
+  QuestionCard({ Key? key, required this.question, this.userId, this.onRemoved }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +106,7 @@ class QuestionCard extends StatelessWidget {
             ElevatedButton(
               onPressed: () => Get.to(QuestionDetailScreen(question: question)), 
               child: Text(
-                (question.user.id == userId) ? 'view_answer' : 'give_answer', 
+                (question.user.id == userId || userId == null) ? 'view_answer' : 'give_answer', 
                 style: poppinsTheme.caption
               ).tr(),
             ),

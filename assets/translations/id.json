@@ -56,6 +56,9 @@
         "delete_section": {
             "title": "Apakah anda yakin untuk menghapus bagian ini?"
         },
+        "logout": {
+            "title": "Apakah anda yakin ingin logout?"
+        },
         "remove_class": {
             "title": "Apakah anda yakin menghapus kelas ini dari cart?"
         },

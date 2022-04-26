@@ -8,9 +8,9 @@ class ChatEditText extends StatelessWidget {
   TextEditingController controller = TextEditingController();
   Function()? onPickImage;
   Function() onSubmit;
-  bool? followed;
+  bool? enabled;
 
-  ChatEditText({ Key? key, required this.controller, this.onPickImage, required this.onSubmit, this.followed }) : super(key: key);
+  ChatEditText({ Key? key, required this.controller, this.onPickImage, required this.onSubmit, this.enabled }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class ChatEditText extends StatelessWidget {
               minLines: 1,
               maxLines: 3,
               decoration: InputDecoration(
-                enabled: followed ?? true,
+                enabled: enabled ?? true,
                 contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                 isDense: true,
                 fillColor: _editTextColor,

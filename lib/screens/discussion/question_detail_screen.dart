@@ -227,7 +227,7 @@ class _QuestionDetailScreenState extends State<QuestionDetailScreen> {
           }
         },
       ),
-      floatingActionButton: (_provider.user!.userId! != widget.question.user.id) ? 
+      floatingActionButton: (_provider.user?.userId != widget.question.user.id && _provider.user != null) ? 
         FloatingActionButton(
           onPressed: () async {
             final result = await Get.to(AddAnswerScreen(question: widget.question));

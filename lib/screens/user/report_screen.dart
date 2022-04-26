@@ -39,7 +39,7 @@ class _ReportScreenState extends State<ReportScreen> {
           leading: Align(
               alignment: Alignment.center,
               child: IconButton(
-                  onPressed: () => Get.back(result: false),
+                  onPressed: () => Get.back(result: null),
                   icon: const FaIcon(FontAwesomeIcons.xmark))),
           title: const Text('report').tr(),
           actions: [

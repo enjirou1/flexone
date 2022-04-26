@@ -122,6 +122,7 @@ class _CommentScreenState extends State<CommentScreen> {
           ),
           ChatEditText(
             controller: _controller, 
+            enabled: _provider.user != null,
             onSubmit: () async {
               if (_controller.text.isNotEmpty) {
                 await Question.comment(widget.answer.answerId, _provider.user!.userId!, _controller.text);

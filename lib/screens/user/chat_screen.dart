@@ -130,7 +130,7 @@ class _ChatScreenState extends State<ChatScreen> {
           ),
           ChatEditText(
             controller: _controller, 
-            followed: widget.followed,
+            enabled: widget.followed,
             onSubmit: () {
               if (_controller.text.isNotEmpty) {
                 _messages.add({

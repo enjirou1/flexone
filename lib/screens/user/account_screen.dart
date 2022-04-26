@@ -4,6 +4,7 @@ import 'package:flexone/data/providers/google_sign_in.dart';
 import 'package:flexone/data/providers/preferences.dart';
 import 'package:flexone/data/providers/user.dart';
 import 'package:flexone/widgets/card/profile_card.dart';
+import 'package:flexone/widgets/dialog/confirmation_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -126,9 +127,21 @@ class AccountScreen extends StatelessWidget {
           style: TextStyle(color: Colors.red),
         ).tr(),
         onTap: () {
-          final provider = Provider.of<GoogleSignInProvider>(context, listen: false);
-          provider.logout();
-          Get.offAllNamed('/');
+          showDialog(
+            context: context, 
+            builder: (context) => ConfirmationDialog(
+              title: "confirmation.logout.title", 
+              buttonText: "logout", 
+              onCancel: () {
+                Navigator.pop(context);
+              }, 
+              onPressed: () {
+                final provider = Provider.of<GoogleSignInProvider>(context, listen: false);
+                provider.logout();
+                Get.offAllNamed('/');
+              }
+            )
+          );
         },
       ),
     ];

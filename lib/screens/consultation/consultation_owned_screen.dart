@@ -151,7 +151,7 @@ class _ConsultationOwnedScreenState extends State<ConsultationOwnedScreen> {
                                 },
                                 onUpdated: () async {
                                   final result = await Get.to(EditConsultationScreen(consultation: _consultations[index]));
-                                  if (result) {
+                                  if (result != null) {
                                     _consultations.clear();
                                     _hasReachedMax = false;
                                     setState(() {});
@@ -200,7 +200,7 @@ class _ConsultationOwnedScreenState extends State<ConsultationOwnedScreen> {
         child: const Icon(Icons.add),
         onPressed: () async {
           final result = await Get.toNamed('/add_consultation');
-          if (result) {
+          if (result != null) {
             _consultations.clear();
             _hasReachedMax = false;
             setState(() {});

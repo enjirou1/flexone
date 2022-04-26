@@ -217,8 +217,17 @@ class _ConsultationDetailScreenState extends State<ConsultationDetailScreen> {
                   style: poppinsTheme.headline5!.copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
-              if (_provider.user!.userId! != widget.consultation.expert!.userId) ...[
-                const SizedBox(height: 10),
+              const SizedBox(height: 10),
+              if (_provider.user == null) ...[
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () => Get.toNamed('/login'),
+                    child: const Text('Login'),
+                  ),
+                )
+              ],
+              if (_provider.user?.userId != widget.consultation.expert!.userId && _provider.user != null) ...[
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(

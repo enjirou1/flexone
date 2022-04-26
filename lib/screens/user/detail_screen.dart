@@ -51,7 +51,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                     onPressed: () async {
                       final result = await Get.toNamed('/report?id=${Get.parameters['id']}');
 
-                      if (result) {
+                      if (result != null) {
                         Get.snackbar(
                           tr('success'), tr('success_detail.report'),
                           snackPosition: SnackPosition.BOTTOM,

@@ -114,7 +114,7 @@ class _DiscussionScreenState extends State<DiscussionScreen> {
                       controller: _scrollController,
                       itemBuilder: (context, index) {
                         return (index < _questions.length)
-                          ? QuestionCard(question: _questions[index], userId: _provider.user!.userId!)
+                          ? QuestionCard(question: _questions[index], userId: _provider.user?.userId)
                           : const Center(
                               child: SizedBox(
                                 width: 40,
