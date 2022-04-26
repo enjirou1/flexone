@@ -4,6 +4,7 @@ import 'package:flexone/common/style.dart';
 import 'package:flexone/data/providers/certificates.dart';
 import 'package:flexone/data/providers/email_sign_in.dart';
 import 'package:flexone/data/providers/google_sign_in.dart';
+import 'package:flexone/data/providers/module.dart';
 import 'package:flexone/data/providers/preferences.dart';
 import 'package:flexone/data/providers/question.dart';
 import 'package:flexone/data/providers/room.dart';
@@ -62,8 +63,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => EmailSignInProvider()),
         ChangeNotifierProvider(create: (_) => UserProvider()),
         ChangeNotifierProvider(create: (_) => CertificateProvider()),
-        ChangeNotifierProvider(create: (_) => (QuestionProvider())),
+        ChangeNotifierProvider(create: (_) => QuestionProvider()),
         ChangeNotifierProvider(create: (_) => RoomProvider()),
+        ChangeNotifierProvider(create: (_) => ModuleProvider()),
       ],
       child: Consumer<PreferencesProvider>(
         builder: (context, provider, _) {

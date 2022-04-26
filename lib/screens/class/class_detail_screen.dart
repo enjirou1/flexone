@@ -5,6 +5,7 @@ import 'package:flexone/common/style.dart';
 import 'package:flexone/data/models/class_result.dart';
 import 'package:flexone/data/providers/preferences.dart';
 import 'package:flexone/data/providers/user.dart';
+import 'package:flexone/screens/class/syllabus_detail_screen.dart';
 import 'package:flexone/utils/format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart' hide Text;
@@ -52,7 +53,7 @@ class _ClassDetailScreenState extends State<ClassDetailScreen> {
         ) : lightTheme,
       child: Scaffold(
         appBar: AppBar(
-          title: Text(widget.classModel.name, style: poppinsTheme.bodyText1),
+          title: Text(widget.classModel.name, style: notoSansDisplayTheme.bodyText1),
         ),
         body: RawKeyboardListener(
           focusNode: FocusNode(),
@@ -99,7 +100,7 @@ class _ClassDetailScreenState extends State<ClassDetailScreen> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(left: 2.0),
-                              child: Text(widget.classModel.name, style: poppinsTheme.bodyText1!.copyWith(fontWeight: FontWeight.bold)),
+                              child: Text(widget.classModel.name, style: notoSansDisplayTheme.headline6),
                             ),
                             const SizedBox(height: 5),
                             InkWell(
@@ -141,11 +142,11 @@ class _ClassDetailScreenState extends State<ClassDetailScreen> {
                               children: [
                                 const Icon(Icons.people, size: 20),
                                 const SizedBox(width: 5),
-                                Text(widget.classModel.totalParticipants.toString(), style: poppinsTheme.caption),
+                                Text(widget.classModel.totalParticipants.toString(), style: notoSansDisplayTheme.caption),
                                 const SizedBox(width: 15),
                                 const FaIcon(FontAwesomeIcons.clock, size: 15),
                                 const SizedBox(width: 5),
-                                Text('hours_wp', style: poppinsTheme.caption).tr(args: [widget.classModel.estimatedTime.toString()]),
+                                Text('hours_wp', style: notoSansDisplayTheme.caption).tr(args: [widget.classModel.estimatedTime.toString()]),
                               ],
                             ),
                             const SizedBox(height: 5),
@@ -163,9 +164,9 @@ class _ClassDetailScreenState extends State<ClassDetailScreen> {
                                   direction: Axis.horizontal,
                                 ),
                                 const SizedBox(width: 5),
-                                Text(widget.classModel.rating.toString(), style: poppinsTheme.caption!.copyWith(fontSize: 13, color: Colors.amber)),
+                                Text(widget.classModel.rating.toString(), style: notoSansDisplayTheme.caption!.copyWith(fontSize: 13, color: Colors.amber)),
                                 const SizedBox(width: 5),
-                                Text('(${widget.classModel.totalRatings})', style: poppinsTheme.caption!.copyWith(fontSize: 12))
+                                Text('(${widget.classModel.totalRatings})', style: notoSansDisplayTheme.caption!.copyWith(fontSize: 12))
                               ],
                             ),
                             const SizedBox(height: 5),
@@ -176,7 +177,7 @@ class _ClassDetailScreenState extends State<ClassDetailScreen> {
                                   children: [
                                     Text(
                                       convertToRupiah(widget.classModel.price),
-                                      style: poppinsTheme.caption!.copyWith(
+                                      style: notoSansDisplayTheme.caption!.copyWith(
                                         fontSize: 11,
                                         decoration: TextDecoration.lineThrough
                                       )
@@ -190,7 +191,7 @@ class _ClassDetailScreenState extends State<ClassDetailScreen> {
                                       ),
                                       child: Text(
                                         getDiscount(widget.classModel.price, widget.classModel.discountPrice),
-                                        style: poppinsTheme.caption!.copyWith(
+                                        style: notoSansDisplayTheme.caption!.copyWith(
                                           fontSize: 11,
                                           color: Colors.white
                                         ),
@@ -204,14 +205,14 @@ class _ClassDetailScreenState extends State<ClassDetailScreen> {
                                 padding: const EdgeInsets.only(left: 2.0),
                                 child: Text(
                                   convertToRupiah(widget.classModel.discountPrice),
-                                  style: poppinsTheme.bodyText2!.copyWith(fontSize: 14, fontWeight: FontWeight.bold),
+                                  style: notoSansDisplayTheme.bodyText2!.copyWith(fontSize: 14, fontWeight: FontWeight.bold),
                                 ),
                               )
                             ]
                             else ...[
                               Text(
                                 convertToRupiah(widget.classModel.price), 
-                                style: poppinsTheme.bodyText2!.copyWith(fontSize: 14, fontWeight: FontWeight.bold),
+                                style: notoSansDisplayTheme.bodyText2!.copyWith(fontSize: 14, fontWeight: FontWeight.bold),
                               ),
                             ],
                             const SizedBox(height: 5),
@@ -238,6 +239,13 @@ class _ClassDetailScreenState extends State<ClassDetailScreen> {
                                 }, 
                                 child: const Text('join').tr()
                               )
+                            ] else ...[
+                              ElevatedButton(
+                                onPressed: () {
+                                  Get.to(SyllabusDetailScreen(classId: widget.classModel.id));
+                                }, 
+                                child: const Text('learn').tr()
+                              )
                             ]
                           ],
                         ),
@@ -256,7 +264,7 @@ class _ClassDetailScreenState extends State<ClassDetailScreen> {
                           Expanded(
                             child: Text(
                               widget.classModel.subject!.name, 
-                              style: poppinsTheme.bodyText2,
+                              style: notoSansDisplayTheme.bodyText2,
                             ),
                           ),
                         ],
@@ -271,7 +279,7 @@ class _ClassDetailScreenState extends State<ClassDetailScreen> {
                           Expanded(
                             child: Text(
                               widget.classModel.grade!.name, 
-                              style: poppinsTheme.bodyText2,
+                              style: notoSansDisplayTheme.bodyText2,
                             ),
                           ),
                         ],
@@ -286,7 +294,7 @@ class _ClassDetailScreenState extends State<ClassDetailScreen> {
                           Expanded(
                             child: Text(
                               widget.classModel.totalModules.toString(), 
-                              style: poppinsTheme.bodyText2,
+                              style: notoSansDisplayTheme.bodyText2,
                             ),
                           ),
                         ],
@@ -300,7 +308,7 @@ class _ClassDetailScreenState extends State<ClassDetailScreen> {
                           ),
                           Text(
                             convertToDateFormat('dd/MM/y', widget.classModel.createdAt), 
-                            style: poppinsTheme.bodyText2,
+                            style: notoSansDisplayTheme.bodyText2,
                           ),
                         ],
                       ),

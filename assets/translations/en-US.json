@@ -299,5 +299,8 @@
     "edit_section": "Edit section",
     "edit_module": "Edit module",
     "total_modules": "Total modules",
-    "already_added_in_cart": "Already added in cart"
+    "already_added_in_cart": "Already added in cart",
+    "learn": "Learn",
+    "previous": "Previous",
+    "next": "Next"
 }
