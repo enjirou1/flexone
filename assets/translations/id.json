@@ -41,11 +41,23 @@
             "title": "Anda yakin untuk menutup konsultasi ini?",
             "content": "Konsultasi tidak dapat dihapus jika masih ada yang mengikuti konsultasi"
         },
+        "delete_class": {
+            "title": "Anda yakin untuk menghapus kelas ini?"
+        },
+        "delete_module": {
+            "title": "Apakah anda yakin untuk menghapus modul ini?"
+        },
         "delete_question": {
             "title": "Apakah anda yakin untuk menghapus pertanyaan ini?"
         },
         "delete_room": {
             "title": "Apakah anda yakin untuk menghapus ruangan ini?"
+        },
+        "delete_section": {
+            "title": "Apakah anda yakin untuk menghapus bagian ini?"
+        },
+        "remove_class": {
+            "title": "Apakah anda yakin menghapus kelas ini dari cart?"
         },
         "remove_consultation": {
             "title": "Apakah anda yakin menghapus konsultasi ini dari cart?"
@@ -270,5 +282,19 @@
     "cart": "Keranjang",
     "pay_now": "Bayar sekarang",
     "cart_is_empty": "Keranjang kosong",
-    "consult_now": "Konsultasi sekarang"
+    "consult_now": "Konsultasi sekarang",
+    "hours": "jam",
+    "hours_wp": "{} jam",
+    "estimated_time": "Waktu estimasi",
+    "estimated_time:": "Waktu estimasi:",
+    "create_class": "Buat kelas",
+    "edit_class": "Ubah kelas",
+    "syllabus": "Silabus",
+    "modules": "Modul",
+    "new_section": "Bagian baru",
+    "new_module": "Modul baru",
+    "edit_section": "Ubah bagian",
+    "edit_module": "Ubah modul",
+    "total_modules": "Total modul",
+    "already_added_in_cart": "Sudah ditambahkan didalam keranjang"
 }

@@ -1,24 +1,25 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flexone/common/style.dart';
-import 'package:flexone/data/models/consultation_result.dart';
+import 'package:flexone/data/models/class_result.dart';
 import 'package:flexone/data/providers/user.dart';
 import 'package:flexone/utils/launcher.dart';
+import 'package:flexone/widgets/card/my_class_card.dart';
 import 'package:flexone/widgets/card/my_consultation_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 
-class MyConsultationScreen extends StatefulWidget {
-  const MyConsultationScreen({ Key? key }) : super(key: key);
+class MyClassScreen extends StatefulWidget {
+  const MyClassScreen({ Key? key }) : super(key: key);
 
   @override
-  State<MyConsultationScreen> createState() => _MyConsultationScreenState();
+  State<MyClassScreen> createState() => _MyClassScreenState();
 }
 
-class _MyConsultationScreenState extends State<MyConsultationScreen> {
+class _MyClassScreenState extends State<MyClassScreen> {
   final ScrollController _scrollController = ScrollController();
   final TextEditingController _controller = TextEditingController();
-  List<Consultation> _consultations = [];
+  List<Class> _classes = [];
   bool _hasReachedMax = false;
   double _rating = 5.0;
 
@@ -28,19 +29,19 @@ class _MyConsultationScreenState extends State<MyConsultationScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('my_consultations').tr(),
+        title: const Text('my_classes').tr(),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10),
-        child: FutureBuilder<List<Consultation>>(
-          future: Consultation.getConsultationsJoined(_provider.user!.userId!, _consultations.length, 20),
+        child: FutureBuilder<List<Class>>(
+          future: Class.getClassesJoined(_provider.user!.userId!, _classes.length, 20),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
-              List<Consultation> data = snapshot.data!;
+              List<Class> data = snapshot.data!;
     
-              if (_consultations.isEmpty) {
+              if (_classes.isEmpty) {
                 Future.delayed(Duration.zero, () {
-                  _consultations.addAll(data);
+                  _classes.addAll(data);
                   data = [];
                   setState(() {});
                 });
@@ -60,10 +61,10 @@ class _MyConsultationScreenState extends State<MyConsultationScreen> {
     
                 if (currentScroll == maxScroll) {
                   if (!_hasReachedMax) {
-                    List<Consultation> temp = [];
-                    temp.addAll(_consultations);
-                    _consultations.clear();
-                    _consultations.addAll([...temp, ...data]);
+                    List<Class> temp = [];
+                    temp.addAll(_classes);
+                    _classes.clear();
+                    _classes.addAll([...temp, ...data]);
                     data.clear();
                     setState(() {});
                   }
@@ -75,9 +76,9 @@ class _MyConsultationScreenState extends State<MyConsultationScreen> {
               return ListView.separated(
                 controller: _scrollController,
                 itemBuilder: (context, index) {
-                  return (index < _consultations.length)
-                    ? MyConsultationCard(
-                        consultation: _consultations[index],
+                  return (index < _classes.length)
+                    ? MyClassCard(
+                        classModel: _classes[index],
                         onGiveRating: () {
                           showDialog(
                             context: context, 
@@ -118,13 +119,13 @@ class _MyConsultationScreenState extends State<MyConsultationScreen> {
                                 Center(
                                   child: ElevatedButton(
                                     onPressed: () async {
-                                      await Consultation.giveRating(
-                                        _consultations[index].detail!.id, 
-                                        _consultations[index].id, 
+                                      await Class.giveRating(
+                                        _classes[index].id,
+                                        _provider.user!.userId!,
                                         _rating.toInt(), 
                                         _controller.text
                                       );
-                                      _consultations.clear();
+                                      _classes.clear();
                                       _hasReachedMax = false;
                                       setState(() {});
                                       Navigator.pop(context);
@@ -144,7 +145,7 @@ class _MyConsultationScreenState extends State<MyConsultationScreen> {
                               actions: [
                                 Center(
                                   child: RatingBarIndicator(
-                                    rating: _consultations[index].detail!.rating.toDouble(),
+                                    rating: _classes[index].detail!.rating.toDouble(),
                                     unratedColor: Colors.grey,
                                     itemBuilder: (context, index) => const Icon(
                                         Icons.star,
@@ -159,33 +160,13 @@ class _MyConsultationScreenState extends State<MyConsultationScreen> {
                                 Center(
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(horizontal: 10),
-                                    child: Text(_consultations[index].detail!.review!, style: poppinsTheme.bodyText2!.copyWith(color: Colors.black)),
+                                    child: Text(_classes[index].detail!.review!, style: poppinsTheme.bodyText2!.copyWith(color: Colors.black)),
                                   )
                                 ),
                                 const SizedBox(height: 20),
                               ],
                             )
                           );
-                        },
-                        onViewDetail: () {
-                          showDialog(
-                            context: context, 
-                            builder: (context) => AlertDialog(
-                              title: Center(child: Text('rejection_detail', style: poppinsTheme.bodyText1!.copyWith(fontWeight: FontWeight.bold)).tr()),
-                              actions: [
-                                Center(
-                                  child: Text(
-                                    _consultations[index].detail!.reason!,
-                                    style: poppinsTheme.bodyText2!.copyWith(color: Colors.black),
-                                  )
-                                ),
-                                const SizedBox(height: 20)
-                              ],
-                            )
-                          );
-                        },
-                        onConsult: () {
-                          Launcher.launchExternalApplication(_consultations[index].link);
                         },
                       )
                     : const Center(
@@ -196,7 +177,7 @@ class _MyConsultationScreenState extends State<MyConsultationScreen> {
                         ),
                       );
                 },
-                itemCount: _hasReachedMax ? _consultations.length : _consultations.length + 1,
+                itemCount: _hasReachedMax ? _classes.length : _classes.length + 1,
                 separatorBuilder: (context, index) {
                   return const Divider();
                 },

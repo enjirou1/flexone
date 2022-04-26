@@ -41,11 +41,23 @@
             "title": "Are you sure to close this consultation?",
             "content": "Consultation can't be removed if someone still following this consultation"
         },
+        "delete_class": {
+            "title": "Are you sure to delete this class?"
+        },
+        "delete_module": {
+            "title": "Are you sure to delete this module?"
+        },
         "delete_question": {
             "title": "Are you sure to delete this question?"
         },
         "delete_room": {
             "title": "Are you sure to delete this room?"
+        },
+        "delete_section": {
+            "title": "Are you sure to delete this section?"
+        },
+        "remove_class": {
+            "title": "Are you sure to remove this class from cart?"
         },
         "remove_consultation": {
             "title": "Are you sure to remove this consultation from cart?"
@@ -270,5 +282,19 @@
     "cart": "Cart",
     "pay_now": "Pay now",
     "cart_is_empty": "Cart is empty",
-    "consult_now": "Consult now"
+    "consult_now": "Consult now",
+    "hours": "hours",
+    "hours_wp": "{} hours",
+    "estimated_time": "Estimated time",
+    "estimated_time:": "Estimated time:",
+    "create_class": "Create class",
+    "edit_class": "Edit class",
+    "syllabus": "Syllabus",
+    "modules": "Modules",
+    "new_section": "New section",
+    "new_module": "New module",
+    "edit_section": "Edit section",
+    "edit_module": "Edit module",
+    "total_modules": "Total modules",
+    "already_added_in_cart": "Already added in cart"
 }

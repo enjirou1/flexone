@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flexone/data/models/class_result.dart';
 import 'package:flexone/data/models/consultation_result.dart';
 import 'package:http/http.dart' as http;
 
@@ -6,16 +7,19 @@ class Cart {
   late String invoice;
   late int total;
   late List<Consultation> consultationItems;
+  late List<Class> classItems;
   static const String _baseUrl = 'https://api.flexone.online/v1';
 
-  Cart({required this.invoice, required this.total, required this.consultationItems});
+  Cart({required this.invoice, required this.total, required this.consultationItems, required this.classItems});
 
   factory Cart.createCart(Map<String, dynamic> object) {
     return Cart(
       invoice: object['invoice'],
       total: object['total'],
       consultationItems: List<Map<String, dynamic>>.from(object['consultations'] as List)
-                        .map((consultation) => Consultation.createConsultation(consultation)).toList()
+                        .map((consultation) => Consultation.createConsultation(consultation)).toList(),
+      classItems: List<Map<String, dynamic>>.from(object['classes'] as List)
+                        .map((item) => Class.createClass(item)).toList(),
     );
   }
 

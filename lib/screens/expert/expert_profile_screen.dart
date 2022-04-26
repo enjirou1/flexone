@@ -7,6 +7,7 @@ import 'package:flexone/data/providers/certificates.dart';
 import 'package:flexone/data/providers/preferences.dart';
 import 'package:flexone/data/providers/user.dart';
 import 'package:flexone/data/services/upload_service.dart';
+import 'package:flexone/screens/class/class_owned_screen.dart';
 import 'package:flexone/screens/consultation/consultation_owned_screen.dart';
 import 'package:flexone/utils/format.dart';
 import 'package:flexone/utils/input_validation.dart';
@@ -81,6 +82,7 @@ class _ExpertProfileScreenState extends State<ExpertProfileScreen> {
                   title: const Text('classes_owned').tr(),
                   tileColor: _tileColor,
                   dense: true,
+                  onTap: () => Get.to(ClassOwnedScreen()),
                 ),
               ),
             ],

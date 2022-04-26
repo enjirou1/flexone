@@ -4,6 +4,7 @@ import 'package:flexone/data/models/transaction_result.dart';
 import 'package:flexone/data/providers/user.dart';
 import 'package:flexone/utils/format.dart';
 import 'package:flexone/utils/launcher.dart';
+import 'package:flexone/widgets/card/class_item_card.dart';
 import 'package:flexone/widgets/card/consultation_item_card.dart';
 import 'package:flexone/widgets/dialog/confirmation_dialog.dart';
 import 'package:flutter/material.dart';
@@ -132,6 +133,37 @@ class _CartScreenState extends State<CartScreen> {
                     const SizedBox(height: 15),
                     Text('classes', style: poppinsTheme.headline6).tr(),
                     const SizedBox(height: 15),
+                    ListView.separated(
+                      primary: false,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return ClassItemCard(
+                          classModel: snapshot.data!.classItems[index],
+                          onRemoved: () {
+                            showDialog(
+                              context: context, 
+                              builder: (context) => ConfirmationDialog(
+                                title: 'confirmation.remove_class.title',
+                                buttonText: 'delete', 
+                                onCancel: () {
+                                  Navigator.pop(context);
+                                }, 
+                                onPressed: () async {
+                                  await Cart.removeItem(_provider.user!.userId!, 'class', snapshot.data!.classItems[index].itemId!);
+                                  Navigator.pop(context);
+                                  _cart = null;
+                                  setState(() {});
+                                }
+                              )
+                            );
+                          },
+                        );
+                      },
+                      itemCount: snapshot.data!.classItems.length,
+                      separatorBuilder: (context, index) {
+                        return const Divider();
+                      },
+                    ),
                   ],
                 )
               ),

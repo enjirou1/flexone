@@ -94,7 +94,7 @@ class AccountScreen extends StatelessWidget {
       ListTile(
         leading: const Icon(Icons.class__rounded, color: Color(0XFFBDBDBD)),
         title: const Text('my_classes').tr(),
-        onTap: null,
+        onTap: () => Get.toNamed('/my_classes'),
       ),
       ListTile(
         leading: const Icon(Icons.meeting_room_rounded, color: Color(0XFFBDBDBD)),

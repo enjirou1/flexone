@@ -11,6 +11,8 @@ import 'package:flexone/data/providers/user.dart';
 import 'package:flexone/screens/auth/register_screen.dart';
 import 'package:flexone/screens/auth/login_screen.dart';
 import 'package:flexone/screens/cart_screen.dart';
+import 'package:flexone/screens/class/add_class_screen.dart';
+import 'package:flexone/screens/class/my_class_screen.dart';
 import 'package:flexone/screens/consultation/add_consultation_screen.dart';
 import 'package:flexone/screens/consultation/my_consultation_screen.dart';
 import 'package:flexone/screens/consultation/request/request_screen.dart';
@@ -93,6 +95,8 @@ class MyApp extends StatelessWidget {
                 GetPage(name: '/request', page: () => const RequestScreen()),
                 GetPage(name: '/my_consultations', page: () => const MyConsultationScreen()),
                 GetPage(name: '/cart', page: () => const CartScreen()),
+                GetPage(name: '/add_class', page: () => const AddClassScreen()),
+                GetPage(name: '/my_classes', page: () => const MyClassScreen()),
               ],
               localizationsDelegates: context.localizationDelegates,
               supportedLocales: context.supportedLocales,
