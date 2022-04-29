@@ -50,6 +50,8 @@ class Consultation {
   late String id;
   int? itemId;
   late SimpleExpert? expert;
+  late SimpleUser? user;
+  String? expertId;
   late String name;
   Proof? proof;
   late String topic;
@@ -66,13 +68,15 @@ class Consultation {
   Detail? detail;
   static const String _baseUrl = 'https://api.flexone.online/v1/consultation';
 
-  Consultation({required this.id, this.itemId, required this.expert, required this.name, this.proof, required this.topic, required this.photo, required this.description, required this.link, required this.price, required this.discountPrice, required this.rating, required this.totalRatings, required this.status, required this.totalParticipants, required this.createdAt, this.detail});
+  Consultation({required this.id, this.itemId, required this.expert, required this.user, this.expertId, required this.name, this.proof, required this.topic, required this.photo, required this.description, required this.link, required this.price, required this.discountPrice, required this.rating, required this.totalRatings, required this.status, required this.totalParticipants, required this.createdAt, this.detail});
 
   factory Consultation.createConsultation(Map<String, dynamic> object) {
     return Consultation(
       id: object['id'],
       itemId: object['item_id'],
       expert: object['expert'] != null ? SimpleExpert.createExpert(object['expert']) : null,
+      user: object['user'] != null ? SimpleUser.createUser(object['user']) : null,
+      expertId: object['expert_id'],
       name: object['name'],
       proof: object['proof'] != null ? Proof.createProof(object['proof']) : null,
       topic: object['topic'],
@@ -207,10 +211,20 @@ class Consultation {
       "review": review
     });
   }
+
+  static Future<List<Consultation>> getReviews(String expertId, int start, int limit) async {
+    String url = 'https://api.flexone.online/v1/expert/$expertId/consultation/reviews?start=$start&limit=$limit';
+    final response = await http.get(Uri.parse(url));
+    final jsonObject = json.decode(response.body);
+    final data = (jsonObject as Map<String, dynamic>)['data'] as List;
+    return data.map<Consultation>((consultation) => Consultation.createConsultation(consultation)).toList();
+  }
 }
 
 class Detail {
   late int id;
+  String? invoice;
+  int? transactionId;
   late String appointmentDate;
   late String explanation;
   late bool isDone;
@@ -219,13 +233,15 @@ class Detail {
   late String status;
   String? reason;
   late String joinedAt;
-  String? finishedAt;
+  bool? finished;
 
-  Detail({required this.id, required this.appointmentDate, required this.explanation, required this.isDone, required this.rating, this.reason, this.review, required this.status, required this.joinedAt, this.finishedAt});
+  Detail({required this.id, this.invoice, this.transactionId, required this.appointmentDate, required this.explanation, required this.isDone, required this.rating, this.reason, this.review, required this.status, required this.joinedAt, this.finished});
 
   factory Detail.createDetail(Map<String, dynamic> object) {
     return Detail(
       id: object['id'],
+      invoice: object['invoice'],
+      transactionId: object['transaction_id'],
       appointmentDate: object['appointment_date'], 
       explanation: object['explanation'], 
       isDone: object['is_done'], 
@@ -234,7 +250,7 @@ class Detail {
       reason: object['reason'], 
       status: object['status'], 
       joinedAt: object['joined_at'],
-      finishedAt: object['finished_at']
+      finished: object['finished']
     );
   }
 }

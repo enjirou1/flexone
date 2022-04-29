@@ -82,7 +82,17 @@ class _ExpertProfileScreenState extends State<ExpertProfileScreen> {
                   title: const Text('classes_owned').tr(),
                   tileColor: _tileColor,
                   dense: true,
-                  onTap: () => Get.to(ClassOwnedScreen()),
+                  onTap: () => Get.to(const ClassOwnedScreen()),
+                ),
+              ),
+              PopupMenuItem(
+                padding: EdgeInsets.zero,
+                child: ListTile(
+                  leading: const Icon(Icons.star),
+                  title: const Text('reviews').tr(),
+                  tileColor: _tileColor,
+                  dense: true,
+                  onTap: () => Get.toNamed('/reviews')
                 ),
               ),
             ],

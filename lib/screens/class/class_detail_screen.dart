@@ -103,41 +103,43 @@ class _ClassDetailScreenState extends State<ClassDetailScreen> {
                               child: Text(widget.classModel.name, style: notoSansDisplayTheme.headline6),
                             ),
                             const SizedBox(height: 5),
-                            InkWell(
-                              onTap: () => Get.toNamed('/user/detail?id=${widget.classModel.expert!.userId}'),
-                              child: Row(
-                                children: [
-                                  (widget.classModel.expert!.photo != null && widget.classModel.expert!.photo != "")
-                                  ? Container(
-                                      width: 25,
-                                      height: 25,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        border: Border.all(color: Colors.black),
-                                        image: DecorationImage(
-                                          image: NetworkImage(widget.classModel.expert!.photo!), 
-                                          fit: BoxFit.cover
-                                        )
+                            if (widget.classModel.expert != null) ...[
+                              InkWell(
+                                onTap: () => Get.toNamed('/user/detail?id=${widget.classModel.expert!.userId}'),
+                                child: Row(
+                                  children: [
+                                    (widget.classModel.expert!.photo != null && widget.classModel.expert!.photo != "")
+                                    ? Container(
+                                        width: 25,
+                                        height: 25,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          border: Border.all(color: Colors.black),
+                                          image: DecorationImage(
+                                            image: NetworkImage(widget.classModel.expert!.photo!), 
+                                            fit: BoxFit.cover
+                                          )
+                                        ),
+                                      )
+                                    : Container(
+                                        width: 25,
+                                        height: 25,
+                                        decoration: const BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: Colors.white,
+                                          image: DecorationImage(
+                                            image: AssetImage('assets/images/profile-icon.png'),
+                                            fit: BoxFit.cover
+                                          )
+                                        ),
                                       ),
-                                    )
-                                  : Container(
-                                      width: 25,
-                                      height: 25,
-                                      decoration: const BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Colors.white,
-                                        image: DecorationImage(
-                                          image: AssetImage('assets/images/profile-icon.png'),
-                                          fit: BoxFit.cover
-                                        )
-                                      ),
-                                    ),
-                                  const SizedBox(width: 5),
-                                  Text(widget.classModel.expert!.name),
-                                ],
+                                    const SizedBox(width: 5),
+                                    Text(widget.classModel.expert!.name),
+                                  ],
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 5),
+                              const SizedBox(height: 5),
+                            ],
                             Row(
                               children: [
                                 const Icon(Icons.people, size: 20),
@@ -222,7 +224,8 @@ class _ClassDetailScreenState extends State<ClassDetailScreen> {
                                 child: const Text('Login')
                               )
                             ],
-                            if (_provider.user?.userId != widget.classModel.expert!.userId && widget.classModel.joined == false && _provider.user != null) ...[
+                            // widget.classModel.expertId is not null when getReviews is called
+                            if (_provider.user?.userId != widget.classModel.expert?.userId && widget.classModel.joined == false && _provider.user != null && widget.classModel.expertId == null) ...[
                               ElevatedButton(
                                 onPressed: () async {
                                   try {

@@ -7,6 +7,8 @@ class Class {
   late String id;
   int? itemId;
   SimpleExpert? expert;
+  SimpleUser? user;
+  String? expertId;
   Subject? subject;
   Grade? grade;
   late String name;
@@ -25,13 +27,15 @@ class Class {
   Detail? detail;
   static const String _baseUrl = 'https://api.flexone.online/v1/class';
 
-  Class({required this.id, this.itemId, this.expert, this.subject, this.grade, required this.name, this.photo, this.description, required this.price, required this.discountPrice, required this.estimatedTime, required this.rating, required this.totalRatings, required this.totalParticipants, required this.totalModules, required this.joined, required this.createdAt, this.detail, this.sections});
+  Class({required this.id, this.itemId, this.expert, this.user, this.expertId, this.subject, this.grade, required this.name, this.photo, this.description, required this.price, required this.discountPrice, required this.estimatedTime, required this.rating, required this.totalRatings, required this.totalParticipants, required this.totalModules, required this.joined, required this.createdAt, this.detail, this.sections});
 
   factory Class.createClass(Map<String, dynamic> object) {
     return Class(
       id: object['id'], 
       itemId: object['item_id'],
       expert: object['expert'] != null ? SimpleExpert.createExpert(object['expert']) : null,
+      user: object['user'] != null ? SimpleUser.createUser(object['user']) : null,
+      expertId: object['expert_id'],
       subject: object['subject'] != null ? Subject.createSubject(object['subject']) : null,
       grade: object['grade'] != null ? Grade.createGrade(object['grade']) : null,
       name: object['name'], 
@@ -184,20 +188,32 @@ class Class {
       "review": review
     });
   }
+
+  static Future<List<Class>> getReviews(String expertId, int start, int limit) async {
+    String url = 'https://api.flexone.online/v1/expert/$expertId/class/reviews?start=$start&limit=$limit';
+    final response = await http.get(Uri.parse(url));
+    final jsonObject = json.decode(response.body);
+    final data = (jsonObject as Map<String, dynamic>)['data'] as List;
+    return data.map<Class>((item) => Class.createClass(item)).toList();
+  }
 }
 
 class Detail {
   late int id;
+  late String invoice;
   late int rating;
   String? review;
+  late String joinedAt;
 
-  Detail({required this.id, required this.rating, this.review});
+  Detail({required this.id, required this.invoice, required this.rating, this.review, required this.joinedAt});
 
   factory Detail.createDetail(Map<String, dynamic> object) {
     return Detail(
       id: object['id'],
+      invoice: object['invoice'],
       rating: object['rating'],
-      review: object['review'], 
+      review: object['review'],
+      joinedAt: object['joined_at'] 
     );
   }
 }
@@ -235,6 +251,22 @@ class Module {
       name: object['name'],
       content: object['content'],
       createdAt: object['created_at']
+    );
+  }
+}
+
+class SimpleUser {
+  late String id;
+  late String name;
+  late String? photo;
+
+  SimpleUser({required this.id, required this.name, this.photo});
+
+  factory SimpleUser.createUser(Map<String, dynamic> object) {
+    return SimpleUser(
+      id: object['id'], 
+      name: object['name'],
+      photo: object['photo'] ?? "",
     );
   }
 }

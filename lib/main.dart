@@ -23,6 +23,7 @@ import 'package:flexone/screens/expert/add_skill_screen.dart';
 import 'package:flexone/screens/expert/certificate_screen.dart';
 import 'package:flexone/screens/expert/expert_profile_screen.dart';
 import 'package:flexone/screens/expert/new_account_screen.dart';
+import 'package:flexone/screens/expert/reviews_screen.dart';
 import 'package:flexone/screens/main_screen.dart';
 import 'package:flexone/screens/merchandise/history_screen.dart';
 import 'package:flexone/screens/merchandise/shop_screen.dart';
@@ -99,6 +100,7 @@ class MyApp extends StatelessWidget {
                 GetPage(name: '/cart', page: () => const CartScreen()),
                 GetPage(name: '/add_class', page: () => const AddClassScreen()),
                 GetPage(name: '/my_classes', page: () => const MyClassScreen()),
+                GetPage(name: '/reviews', page: () => const ReviewScreen()),
               ],
               localizationsDelegates: context.localizationDelegates,
               supportedLocales: context.supportedLocales,

@@ -141,40 +141,42 @@ class _ConsultationDetailScreenState extends State<ConsultationDetailScreen> {
                 ],
               ),
               const SizedBox(height: 10),
-              InkWell(
-                onTap: () => Get.toNamed('/user/detail?id=${widget.consultation.expert!.userId}'),
-                child: Row(
-                  children: [
-                    (widget.consultation.expert!.photo != null && widget.consultation.expert!.photo != "")
-                    ? Container(
-                        width: 25,
-                        height: 25,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(color: Colors.black),
-                          image: DecorationImage(
-                            image: NetworkImage(widget.consultation.expert!.photo!), 
-                            fit: BoxFit.cover
-                          )
+              if (widget.consultation.expert != null) ...[
+                InkWell(
+                  onTap: () => Get.toNamed('/user/detail?id=${widget.consultation.expert!.userId}'),
+                  child: Row(
+                    children: [
+                      (widget.consultation.expert!.photo != null && widget.consultation.expert!.photo != "")
+                      ? Container(
+                          width: 25,
+                          height: 25,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(color: Colors.black),
+                            image: DecorationImage(
+                              image: NetworkImage(widget.consultation.expert!.photo!), 
+                              fit: BoxFit.cover
+                            )
+                          ),
+                        )
+                      : Container(
+                          width: 25,
+                          height: 25,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.white,
+                            image: DecorationImage(
+                              image: AssetImage('assets/images/profile-icon.png'),
+                              fit: BoxFit.cover
+                            )
+                          ),
                         ),
-                      )
-                    : Container(
-                        width: 25,
-                        height: 25,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.white,
-                          image: DecorationImage(
-                            image: AssetImage('assets/images/profile-icon.png'),
-                            fit: BoxFit.cover
-                          )
-                        ),
-                      ),
-                    const SizedBox(width: 5),
-                    Text(widget.consultation.expert!.name),
-                  ],
+                      const SizedBox(width: 5),
+                      Text(widget.consultation.expert!.name),
+                    ],
+                  ),
                 ),
-              ),
+              ],
               const SizedBox(height: 30),
               if (widget.consultation.discountPrice > 0) ...[
                 Padding(
@@ -227,7 +229,8 @@ class _ConsultationDetailScreenState extends State<ConsultationDetailScreen> {
                   ),
                 )
               ],
-              if (_provider.user?.userId != widget.consultation.expert!.userId && _provider.user != null) ...[
+              // widget.consultation.expertId is not null when getReviews is called
+              if (_provider.user?.userId != widget.consultation.expert?.userId && _provider.user != null && widget.consultation.expertId == null) ...[
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(

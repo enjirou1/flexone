@@ -25,90 +25,97 @@ class MyClassCard extends StatelessWidget {
         classModel.joined = true;
         Get.to(ClassDetailScreen(classModel: classModel));
       },
-      child: Row(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          (classModel.photo != null && classModel.photo != "")
-          ? Container(
-              width: 70,
-              height: 70,
-              decoration: BoxDecoration(
-                shape: BoxShape.rectangle,
-                borderRadius: const BorderRadius.all(Radius.circular(5)),
-                image: DecorationImage(
-                  image: NetworkImage(classModel.photo!), 
-                  fit: BoxFit.cover
+          Text(classModel.detail!.invoice, style: poppinsTheme.caption),
+          const SizedBox(height: 15),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              (classModel.photo != null && classModel.photo != "")
+              ? Container(
+                  width: 70,
+                  height: 70,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.rectangle,
+                    borderRadius: const BorderRadius.all(Radius.circular(5)),
+                    image: DecorationImage(
+                      image: NetworkImage(classModel.photo!), 
+                      fit: BoxFit.cover
+                    )
+                  ),
                 )
-              ),
-            )
-          : Container(
-              width: 70,
-              height: 70,
-              decoration: const BoxDecoration(
-                shape: BoxShape.rectangle,
-                borderRadius: BorderRadius.all(Radius.circular(5)),
-                color: Colors.white,
-                image: DecorationImage(
-                  image: AssetImage('assets/images/photo-icon.png'),
-                  fit: BoxFit.cover
-                )
-              ),
-            ),
-          const SizedBox(width: 10),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 2.0),
-                  child: Text(classModel.name, style: poppinsTheme.caption!.copyWith(fontSize: 13, fontWeight: FontWeight.bold)),
+              : Container(
+                  width: 70,
+                  height: 70,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                    color: Colors.white,
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/photo-icon.png'),
+                      fit: BoxFit.cover
+                    )
+                  ),
                 ),
-                const SizedBox(height: 5),
-                Padding(
-                  padding: const EdgeInsets.only(left: 2.0),
-                  child: Text(classModel.expert!.name, style: poppinsTheme.caption!.copyWith(fontSize: 11)),
-                ),
-                const SizedBox(height: 5),
-                Row(
+              const SizedBox(width: 10),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Icon(Icons.people, size: 15),
-                    const SizedBox(width: 5),
-                    Text(classModel.totalParticipants.toString(), style: poppinsTheme.caption),
-                    const SizedBox(width: 15),
-                    const FaIcon(FontAwesomeIcons.clock, size: 12),
-                    const SizedBox(width: 5),
-                    Text('hours_wp', style: poppinsTheme.caption).tr(args: [classModel.estimatedTime.toString()]),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 2.0),
+                      child: Text(classModel.name, style: poppinsTheme.caption!.copyWith(fontSize: 13, fontWeight: FontWeight.bold)),
+                    ),
+                    const SizedBox(height: 5),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 2.0),
+                      child: Text(classModel.expert!.name, style: poppinsTheme.caption!.copyWith(fontSize: 11)),
+                    ),
+                    const SizedBox(height: 5),
+                    Row(
+                      children: [
+                        const Icon(Icons.people, size: 15),
+                        const SizedBox(width: 5),
+                        Text(classModel.totalParticipants.toString(), style: poppinsTheme.caption),
+                        const SizedBox(width: 15),
+                        const FaIcon(FontAwesomeIcons.clock, size: 12),
+                        const SizedBox(width: 5),
+                        Text('hours_wp', style: poppinsTheme.caption).tr(args: [classModel.estimatedTime.toString()]),
+                      ],
+                    ),
                   ],
                 ),
-              ],
-            ),
-          ),
-          PopupMenuButton(
-            icon: const FaIcon(FontAwesomeIcons.ellipsisVertical),
-            color: _tileColor,
-            itemBuilder: (BuildContext context) => <PopupMenuEntry>[
-              PopupMenuItem(
-                padding: EdgeInsets.zero,
-                child: (classModel.detail!.rating == 0) ? 
-                  ListTile(
-                    leading: const Icon(Icons.star),
-                    title: const Text('give_rating').tr(),
-                    tileColor: _tileColor,
-                    dense: true,
-                    onTap: onGiveRating,
-                  )
-                :
-                  ListTile(
-                    leading: const Icon(Icons.star),
-                    title: const Text('view_review').tr(),
-                    tileColor: _tileColor,
-                    dense: true,
-                    onTap: onViewReview,
-                  ),
               ),
-            ],
+              PopupMenuButton(
+                icon: const FaIcon(FontAwesomeIcons.ellipsisVertical),
+                color: _tileColor,
+                itemBuilder: (BuildContext context) => <PopupMenuEntry>[
+                  PopupMenuItem(
+                    padding: EdgeInsets.zero,
+                    child: (classModel.detail!.rating == 0) ? 
+                      ListTile(
+                        leading: const Icon(Icons.star),
+                        title: const Text('give_rating').tr(),
+                        tileColor: _tileColor,
+                        dense: true,
+                        onTap: onGiveRating,
+                      )
+                    :
+                      ListTile(
+                        leading: const Icon(Icons.star),
+                        title: const Text('view_review').tr(),
+                        tileColor: _tileColor,
+                        dense: true,
+                        onTap: onViewReview,
+                      ),
+                  ),
+                ],
+              ),
+            ]
           ),
-        ]
+        ],
       ),
     );
   }
