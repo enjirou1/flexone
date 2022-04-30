@@ -44,6 +44,10 @@ class _MainScreenState extends State<MainScreen> {
       UserModel.getUserByEmail(_user.email).then((value) {
         provider.setUser(value!);
       });
+    } else {
+      Future.delayed(Duration.zero, () {
+        provider.logout();
+      });
     }
 
     return Scaffold(

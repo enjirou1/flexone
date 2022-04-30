@@ -15,4 +15,9 @@ class UserProvider extends ChangeNotifier {
     _user!.point = point;
     notifyListeners();
   }
+
+  void logout() async {
+    _user = null;
+    notifyListeners();
+  }
 }

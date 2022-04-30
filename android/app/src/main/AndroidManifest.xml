@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.flexone">
    <application
-        android:label="flexone"
+        android:label="Flexone"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
