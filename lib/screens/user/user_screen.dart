@@ -109,7 +109,7 @@ class _UserScreenState extends State<UserScreen> {
                             ),
                           );
                   },
-                  itemCount: _hasReachedMax ? _users.length : _users.length + 1,
+                  itemCount: (_hasReachedMax || _users.isEmpty) ? _users.length : _users.length + 1,
                   separatorBuilder: (BuildContext context, int index) {
                     return const Divider();
                   },

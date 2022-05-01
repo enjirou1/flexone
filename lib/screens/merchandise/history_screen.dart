@@ -79,7 +79,7 @@ class _MerchandiseHistoryScreenState extends State<MerchandiseHistoryScreen> {
                       ),
                     );
                 },
-                itemCount: _hasReachedMax ? _histories.length : _histories.length + 1,
+                itemCount: (_hasReachedMax || _histories.isEmpty) ? _histories.length : _histories.length + 1,
                 separatorBuilder: (BuildContext context, int index) {
                   return const Divider();
                 },

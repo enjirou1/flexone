@@ -103,7 +103,7 @@ class _CommentScreenState extends State<CommentScreen> {
                                     ),
                                   );
                             },
-                            itemCount: _hasReachedMax ? _comments.length : _comments.length + 1,
+                            itemCount: (_hasReachedMax || _comments.isEmpty) ? _comments.length : _comments.length + 1,
                             separatorBuilder: (BuildContext context, int index) {
                               return const Divider();
                             },

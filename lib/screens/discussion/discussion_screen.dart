@@ -123,7 +123,7 @@ class _DiscussionScreenState extends State<DiscussionScreen> {
                               ),
                             );
                       },
-                      itemCount: _hasReachedMax ? _questions.length : _questions.length + 1,
+                      itemCount: (_hasReachedMax || _questions.isEmpty) ? _questions.length : _questions.length + 1,
                       separatorBuilder: (context, index) {
                         return const Divider();
                       },

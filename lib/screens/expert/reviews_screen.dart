@@ -120,7 +120,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
                       ),
                     );
               },
-              itemCount: _hasReachedMax ? _consultations.length : _consultations.length + 1,
+              itemCount: (_hasReachedMax || _consultations.isEmpty) ? _consultations.length : _consultations.length + 1,
               separatorBuilder: (context, index) {
                 return const Divider();
               },

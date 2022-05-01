@@ -142,7 +142,7 @@ class _ShopScreenState extends State<ShopScreen> {
                             )
                           : const Center(child: SizedBox(width: 40, height: 40, child: CircularProgressIndicator()));
                       },
-                      itemCount: _hasReachedMax ? _merchandises.length : _merchandises.length + 1, 
+                      itemCount: (_hasReachedMax || _merchandises.isEmpty) ? _merchandises.length : _merchandises.length + 1, 
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         crossAxisSpacing: 5,

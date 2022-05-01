@@ -177,7 +177,7 @@ class _MyClassScreenState extends State<MyClassScreen> {
                         ),
                       );
                 },
-                itemCount: _hasReachedMax ? _classes.length : _classes.length + 1,
+                itemCount: (_hasReachedMax || _classes.isEmpty) ? _classes.length : _classes.length + 1,
                 separatorBuilder: (context, index) {
                   return const Divider();
                 },

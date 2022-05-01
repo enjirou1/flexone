@@ -151,7 +151,7 @@ class _MyRoomScreenState extends State<MyRoomScreen> {
                                 ),
                               );
                         },
-                        itemCount: _hasReachedMax ? _rooms.length : _rooms.length + 1,
+                        itemCount: (_hasReachedMax || _rooms.isEmpty) ? _rooms.length : _rooms.length + 1,
                         separatorBuilder: (context, index) {
                           return const Divider();
                         },

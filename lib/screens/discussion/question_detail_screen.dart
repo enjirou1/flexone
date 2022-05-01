@@ -211,7 +211,7 @@ class _QuestionDetailScreenState extends State<QuestionDetailScreen> {
                               ),
                             );
                       },
-                      itemCount: _hasReachedMax ? _answers.length : _answers.length + 1,
+                      itemCount: (_hasReachedMax || _answers.isEmpty) ? _answers.length : _answers.length + 1,
                       separatorBuilder: (BuildContext context, int index) {
                         return const Divider();
                       },

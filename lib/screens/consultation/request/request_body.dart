@@ -218,7 +218,7 @@ class _RequestBodyState extends State<RequestBody> {
                       ),
                     );
               },
-              itemCount: _hasReachedMax ? _requests.length : _requests.length + 1,
+              itemCount: (_hasReachedMax || _requests.isEmpty) ? _requests.length : _requests.length + 1,
               separatorBuilder: (context, index) {
                 return const Divider();
               },
