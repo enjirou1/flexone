@@ -223,32 +223,43 @@ class _ClassDetailScreenState extends State<ClassDetailScreen> {
                                 onPressed: () => Get.toNamed('/login'), 
                                 child: const Text('Login')
                               )
-                            ],
-                            // widget.classModel.expertId is not null when getReviews is called
-                            if (_provider.user?.userId != widget.classModel.expert?.userId && widget.classModel.joined == false && _provider.user != null && widget.classModel.expertId == null) ...[
-                              ElevatedButton(
-                                onPressed: () async {
-                                  try {
-                                    await Class.joinClass(widget.classModel.id, _provider.user!.userId!);
-                                  } catch (e) {
-                                    Get.snackbar(tr('failed'), tr('already_added_in_cart'),
-                                      snackPosition: SnackPosition.BOTTOM,
-                                      colorText: Colors.white,
-                                      backgroundColor: Colors.red,
-                                      animationDuration: const Duration(milliseconds: 300),
-                                      duration: const Duration(seconds: 2)
-                                    );
-                                  }
-                                }, 
-                                child: const Text('join').tr()
-                              )
-                            ] else ...[
-                              ElevatedButton(
-                                onPressed: () {
-                                  Get.to(SyllabusDetailScreen(classId: widget.classModel.id));
-                                }, 
-                                child: const Text('learn').tr()
-                              )
+                            ]
+                            else ...[
+                              // widget.classModel.expertId is not null when getReviews is called
+                              if (_provider.user?.userId != widget.classModel.expert?.userId && widget.classModel.joined == false && widget.classModel.expertId == null) ...[
+                                ElevatedButton(
+                                  onPressed: () async {
+                                    try {
+                                      await Class.joinClass(widget.classModel.id, _provider.user!.userId!);
+                                      Get.snackbar(
+                                        tr('success'), tr('success_detail.add_to_cart'),
+                                        snackPosition: SnackPosition.BOTTOM,
+                                        animationDuration: const Duration(milliseconds: 300),
+                                        backgroundColor: Colors.green,
+                                        colorText: Colors.white,
+                                        icon: const Icon(Icons.check, color: Colors.white),
+                                        duration: const Duration(seconds: 1)
+                                      );
+                                    } catch (e) {
+                                      Get.snackbar(tr('failed'), tr('already_added_in_cart'),
+                                        snackPosition: SnackPosition.BOTTOM,
+                                        colorText: Colors.white,
+                                        backgroundColor: Colors.red,
+                                        animationDuration: const Duration(milliseconds: 300),
+                                        duration: const Duration(seconds: 2)
+                                      );
+                                    }
+                                  }, 
+                                  child: const Text('join').tr()
+                                )
+                              ] else ...[
+                                ElevatedButton(
+                                  onPressed: () {
+                                    Get.to(SyllabusDetailScreen(classId: widget.classModel.id));
+                                  }, 
+                                  child: const Text('learn').tr()
+                                )
+                              ]
                             ]
                           ],
                         ),

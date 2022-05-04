@@ -110,22 +110,33 @@ class _ShopScreenState extends State<ShopScreen> {
                                       buttonText: 'buy', 
                                       onCancel: () => Navigator.pop(context), 
                                       onPressed: () async {
-                                        await Merchandise.buyMerchandise(_merchandises[index].id, _provider.user!.userId!);
-                                        await UserModel.getUserByEmail(_provider.user!.email).then((value) {
-                                          _provider.setUser(value!);
-                                        });
-                                        _merchandises[index].stock--;
-                                        setState(() {});
-                                        Navigator.pop(context);
-                                        Get.snackbar(
-                                          tr('success'), tr('success_detail.buy_merchandise', args: [_merchandises[index].name]),
-                                          snackPosition: SnackPosition.BOTTOM,
-                                          animationDuration: const Duration(milliseconds: 300),
-                                          backgroundColor: Colors.green,
-                                          colorText: Colors.white,
-                                          icon: const Icon(Icons.check, color: Colors.white),
-                                          duration: const Duration(seconds: 1)
-                                        );
+                                        if (_provider.user!.address!.isNotEmpty) {
+                                          await Merchandise.buyMerchandise(_merchandises[index].id, _provider.user!.userId!);
+                                          await UserModel.getUserByEmail(_provider.user!.email).then((value) {
+                                            _provider.setUser(value!);
+                                          });
+                                          _merchandises[index].stock--;
+                                          setState(() {});
+                                          Navigator.pop(context);
+                                          Get.snackbar(
+                                            tr('success'), tr('success_detail.buy_merchandise', args: [_merchandises[index].name]),
+                                            snackPosition: SnackPosition.BOTTOM,
+                                            animationDuration: const Duration(milliseconds: 300),
+                                            backgroundColor: Colors.green,
+                                            colorText: Colors.white,
+                                            icon: const Icon(Icons.check, color: Colors.white),
+                                            duration: const Duration(seconds: 1)
+                                          );
+                                        } else {
+                                          Get.snackbar(
+                                            tr('failed'), tr('error.buy_merchandise.address'),
+                                            snackPosition: SnackPosition.BOTTOM,
+                                            animationDuration: const Duration(milliseconds: 300),
+                                            backgroundColor: Colors.red,
+                                            colorText: Colors.white,
+                                            duration: const Duration(seconds: 2)
+                                          );
+                                        }
                                       }
                                     ),
                                   );

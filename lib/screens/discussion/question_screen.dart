@@ -4,6 +4,7 @@ import 'package:flexone/data/providers/preferences.dart';
 import 'package:flexone/data/providers/user.dart';
 import 'package:flexone/widgets/card/question_card.dart';
 import 'package:flexone/widgets/dialog/confirmation_dialog.dart';
+import 'package:flexone/widgets/edittext/search_edit_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -37,7 +38,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
         padding: const EdgeInsets.all(10),
         child: Column(
           children: [
-            TextField(
+            SearchEditText(
               controller: _controller,
               onSubmitted: (String value) {
                 _keywords = value;
@@ -45,35 +46,19 @@ class _QuestionScreenState extends State<QuestionScreen> {
                 _hasReachedMax = false;
                 setState(() {});
               },
-              decoration: InputDecoration(
-                contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                isDense: true,
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5),
-                  borderSide: BorderSide(color: _textColor)
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5),
-                  borderSide: BorderSide(color: _textColor)
-                ),
-                hintText: tr("search"),
-                hintStyle: TextStyle(
-                  color: _textColor
-                ),
-                suffixIcon: IconButton(
-                  icon: const FaIcon(FontAwesomeIcons.xmark), 
-                  onPressed: () {
-                    if (_keywords != "") {
-                      _controller.text = "";
-                      _keywords = "";
-                      _questions.clear();
-                      _hasReachedMax = false;
-                      setState(() {});
-                    }
-                  },
-                )
-              ),
-              style: TextStyle(color: _textColor),
+              onChanged: (String value) {
+                _keywords = value;
+                setState(() {});
+              },
+              onClear: () {
+                if (_keywords != "") {
+                  _controller.text = "";
+                  _keywords = "";
+                }
+                _questions.clear();
+                _hasReachedMax = false;
+                setState(() {});
+              },
             ),
             Expanded(
               child: FutureBuilder<List<Question>>(

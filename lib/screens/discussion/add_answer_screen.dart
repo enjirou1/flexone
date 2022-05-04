@@ -75,11 +75,15 @@ class _AddAnswerScreenState extends State<AddAnswerScreen> {
                     padding: const EdgeInsets.all(10),
                     child: Text('answer', style: poppinsTheme.bodyText1).tr(),
                   ),
-                  Padding(
+                  Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
+                    height: MediaQuery.of(context).size.height - 300,
                     child: TextField(
                       controller: _controller,
                       keyboardType: TextInputType.multiline,
+                      minLines: null,
+                      maxLines: null,
+                      expands: true,
                       cursorColor: Colors.indigo,
                       decoration: InputDecoration(
                         enabledBorder: const UnderlineInputBorder(

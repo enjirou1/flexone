@@ -110,6 +110,9 @@
         "account_number": {
             "empty": "Nomor rekening tidak boleh kosong"
         },
+        "buy_merchandise": {
+            "address": "Isi alamat anda"
+        },
         "certificate": {
             "empty": "Sertifikat diperlukan"
         },
@@ -245,6 +248,7 @@
     "success": "Berhasil",
     "success_detail": {
         "add_certificate": "Berhasil menambahkan sertifikat",
+        "add_to_cart": "Berhasil ditambahkan ke keranjang",
         "buy_merchandise": "{} berhasil dibeli",
         "create_expert": "Berhasil membuat akun expert",
         "create_room": "Berhasil membuat ruangan",

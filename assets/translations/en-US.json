@@ -110,6 +110,9 @@
         "account_number": {
             "empty": "Bank account number cannot be empty"
         },
+        "buy_merchandise": {
+            "address": "Please fill your address"
+        },
         "certificate": {
             "empty": "Certificate is required"
         },
@@ -245,6 +248,7 @@
     "success": "Success",
     "success_detail": {
         "add_certificate": "Successfully added certificate",
+        "add_to_cart": "Successfully added to cart",
         "buy_merchandise": "{} bought successfully",
         "create_expert": "Successfully created expert account",
         "create_room": "Successfully created room",

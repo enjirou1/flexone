@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flexone/common/style.dart';
 import 'package:flexone/data/providers/user.dart';
+import 'package:flexone/screens/user/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -75,7 +76,7 @@ class ProfileCard extends StatelessWidget {
                 alignment: Alignment.topRight,
                 child: IconButton(
                     onPressed: () {
-                      Get.toNamed('/profile');
+                      Get.to(ProfileScreen(user: _provider.user!));
                     },
                     icon: const Icon(Icons.edit)))
           ],

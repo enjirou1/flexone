@@ -24,9 +24,11 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
   @override
   Widget build(BuildContext context) {
     final _provider = Provider.of<UserProvider>(context, listen: false);
-    UserModel.checkFollow(_provider.user!.userId!, Get.parameters['id']!).then((value) {
-      _followed = value;
-    });
+    if (_provider.user != null) {
+      UserModel.checkFollow(_provider.user!.userId!, Get.parameters['id']!).then((value) {
+        _followed = value;
+      });
+    }
 
     return FutureBuilder(
       future: Future.wait([
@@ -42,7 +44,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                 style: poppinsTheme.bodyText1
               ),
               actions: [
-                if (_provider.user!.userId! != Get.parameters['id'])
+                if (_provider.user?.userId! != Get.parameters['id'] && _provider.user != null)
                   IconButton(
                     icon: const Icon(
                       Icons.report_rounded,
@@ -125,7 +127,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                           const SizedBox(height: 5),
                           Center(child: Text(snapshot.data![0].email!)),
                           const SizedBox(height: 15),
-                          if (_provider.user!.userId! != Get.parameters['id'])
+                          if (_provider.user?.userId! != Get.parameters['id'] && _provider.user != null)
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
