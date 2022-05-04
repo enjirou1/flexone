@@ -30,31 +30,34 @@ class BubbleRoomChat extends StatelessWidget {
                 child: Text(name, style: poppinsTheme.caption),
               )
             ],
-            (avatar != "" && avatar != null) ? 
-              Container(
-                width: 30,
-                height: 30,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                    image: NetworkImage(avatar!), 
-                    fit: BoxFit.cover
-                  )
+            GestureDetector(
+              onTap: () => Get.toNamed('/user/detail?id=$id'),
+              child: (avatar != "" && avatar != null) ? 
+                Container(
+                  width: 30,
+                  height: 30,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      image: NetworkImage(avatar!), 
+                      fit: BoxFit.cover
+                    )
+                  ),
+                )
+              : 
+                Container(
+                  width: 30,
+                  height: 30,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white,
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/profile-icon.png'),
+                      fit: BoxFit.contain
+                    )
+                  ),
                 ),
-              )
-            : 
-              Container(
-                width: 30,
-                height: 30,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.white,
-                  image: DecorationImage(
-                    image: AssetImage('assets/images/profile-icon.png'),
-                    fit: BoxFit.contain
-                  )
-                ),
-              ),
+            ),
             if (!status) ...[
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 5),
