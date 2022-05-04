@@ -21,152 +21,125 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
-  InputValidation _emailValidation =
-      InputValidation(isValid: true, message: '');
-  InputValidation _passwordValidation =
-      InputValidation(isValid: true, message: '');
+  InputValidation _emailValidation = InputValidation(isValid: true, message: '');
+  InputValidation _passwordValidation = InputValidation(isValid: true, message: '');
   InputValidation _nameValidation = InputValidation(isValid: true, message: '');
 
   @override
   Widget build(BuildContext context) {
     final _provider = Provider.of<PreferencesProvider>(context, listen: false);
-    final Color _fontColor =
-        _provider.isDarkTheme ? Colors.white : Colors.black;
+    final Color _fontColor = _provider.isDarkTheme ? Colors.white : Colors.black;
 
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        body:
-            Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-          Text(
-            'sign_up',
-            style: poppinsTheme.headline4,
-          ).tr(),
-          Column(
-            children: [
-              Container(
-                width: 300,
-                padding: const EdgeInsets.symmetric(vertical: 30),
-                child: Column(children: [
-                  TextField(
-                    controller: _nameController,
-                    decoration: InputDecoration(
-                        icon: const Icon(Icons.person),
-                        labelText: tr("fullname:"),
-                        errorText: _nameValidation.isValid
-                            ? null
-                            : _nameValidation.message),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly, 
+          children: [
+            Text('sign_up', style: poppinsTheme.headline4).tr(),
+            Column(
+              children: [
+                Container(
+                  width: 300,
+                  padding: const EdgeInsets.symmetric(vertical: 30),
+                  child: Column(
+                    children: [
+                      TextField(
+                        controller: _nameController,
+                        decoration: InputDecoration(
+                          icon: const Icon(Icons.person),
+                          labelText: tr("fullname:"),
+                          errorText: _nameValidation.isValid ? null : _nameValidation.message
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      TextField(
+                        controller: _emailController,
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: InputDecoration(
+                          icon: const Icon(Icons.email),
+                          labelText: "Email: ",
+                          errorText: _emailValidation.isValid ? null : _emailValidation.message
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      TextField(
+                        controller: _passwordController,
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          icon: const Icon(Icons.vpn_key),
+                          labelText: "Password: ",
+                          errorText: _passwordValidation.isValid ? null : _passwordValidation.message
+                        ),
+                      ),
+                    ]
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  TextField(
-                    controller: _emailController,
-                    decoration: InputDecoration(
-                        icon: const Icon(Icons.email),
-                        labelText: "Email: ",
-                        errorText: _emailValidation.isValid
-                            ? null
-                            : _emailValidation.message),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  TextField(
-                    controller: _passwordController,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                        icon: const Icon(Icons.vpn_key),
-                        labelText: "Password: ",
-                        errorText: _passwordValidation.isValid
-                            ? null
-                            : _passwordValidation.message),
-                  ),
-                ]),
-              ),
-              SizedBox(
-                width: 300,
-                child: OutlinedButton.icon(
-                  onPressed: () async {
-                    _emailController.text.isEmpty
-                        ? _emailValidation = InputValidation(
-                            isValid: false, message: tr('error.email.empty'))
-                        : _emailValidation =
-                            InputValidation(isValid: true, message: '');
-                    _passwordController.text.isEmpty
-                        ? _passwordValidation = InputValidation(
-                            isValid: false, message: tr('error.password.empty'))
-                        : _passwordValidation =
-                            InputValidation(isValid: true, message: '');
-                    _nameController.text.isEmpty
-                        ? _nameValidation = InputValidation(
-                            isValid: false, message: tr('error.name.empty'))
-                        : _nameValidation =
-                            InputValidation(isValid: true, message: '');
-
-                    if (_emailValidation.isValid &&
-                        _passwordValidation.isValid &&
-                        _nameValidation.isValid) {
-                      try {
-                        final provider = Provider.of<EmailSignInProvider>(
-                            context,
-                            listen: false);
-                        await provider.signUp(
-                            _emailController.text, _passwordController.text);
-                        await UserModel.register(
-                            _emailController.text,
-                            _passwordController.text,
-                            _nameController.text,
-                            "0");
-                        Get.offAllNamed('/');
-                      } on FirebaseAuthException catch (e) {
-                        if (e.code == "invalid-email" ||
-                            e.code == "email-already-in-use") {
-                          _emailValidation = InputValidation(
-                              isValid: false, message: tr(e.code));
-                        } else if (e.code == "weak-password") {
-                          _passwordValidation = InputValidation(
-                              isValid: false, message: tr(e.code));
-                        } else {
-                          Get.snackbar("Error", tr(e.code),
-                              snackPosition: SnackPosition.BOTTOM,
-                              animationDuration:
-                                  const Duration(milliseconds: 300),
-                              duration: const Duration(seconds: 2));
-                        }
-                      } catch (e) {
-                        print(e);
-                      }
-                    }
-
-                    setState(() {});
-                  },
-                  label:
-                      Text('sign_up', style: TextStyle(color: _fontColor)).tr(),
-                  icon: FaIcon(
-                    FontAwesomeIcons.rightToBracket,
-                    color: _fontColor,
-                  ),
-                  style: OutlinedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(vertical: 10)),
                 ),
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text('already_have_an_account').tr(),
-              const SizedBox(width: 10),
-              TextButton(
-                child: const Text('sign_in').tr(),
-                onPressed: () {
-                  Get.offNamed('/login');
-                },
-              )
-            ],
-          )
-        ]),
+                SizedBox(
+                  width: 300,
+                  child: OutlinedButton.icon(
+                    onPressed: () async {
+                      _emailController.text.isEmpty
+                        ? _emailValidation = InputValidation(isValid: false, message: tr('error.email.empty'))
+                        : _emailValidation = InputValidation(isValid: true, message: '');
+                      _passwordController.text.isEmpty
+                        ? _passwordValidation = InputValidation(isValid: false, message: tr('error.password.empty'))
+                        : _passwordValidation = InputValidation(isValid: true, message: '');
+                      _nameController.text.isEmpty
+                        ? _nameValidation = InputValidation(isValid: false, message: tr('error.name.empty'))
+                        : _nameValidation = InputValidation(isValid: true, message: '');
+
+                      if (_emailValidation.isValid && _passwordValidation.isValid && _nameValidation.isValid) {
+                        try {
+                          final provider = Provider.of<EmailSignInProvider>(context, listen: false);
+                          await provider.signUp(_emailController.text, _passwordController.text);
+                          await UserModel.register(_emailController.text, _passwordController.text, _nameController.text, "0");
+                          Get.offAllNamed('/');
+                        } on FirebaseAuthException catch (e) {
+                          if (e.code == "invalid-email" || e.code == "email-already-in-use") {
+                            _emailValidation = InputValidation(isValid: false, message: tr(e.code));
+                          } else if (e.code == "weak-password") {
+                            _passwordValidation = InputValidation(isValid: false, message: tr(e.code));
+                          } else {
+                            Get.snackbar("Error", tr(e.code),
+                              snackPosition: SnackPosition.BOTTOM,
+                              animationDuration: const Duration(milliseconds: 300),
+                              duration: const Duration(seconds: 2)
+                            );
+                          }
+                        } catch (e) {
+                          print(e);
+                        }
+                      }
+
+                      setState(() {});
+                    },
+                    label: Text('sign_up', style: TextStyle(color: _fontColor)).tr(),
+                    icon: FaIcon(FontAwesomeIcons.rightToBracket, color: _fontColor),
+                    style: OutlinedButton.styleFrom(padding: const EdgeInsets.symmetric(vertical: 10)),
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text('already_have_an_account').tr(),
+                const SizedBox(width: 10),
+                TextButton(
+                  child: const Text('sign_in').tr(),
+                  onPressed: () {
+                    Get.offNamed('/login');
+                  },
+                )
+              ],
+            )
+          ]
+        ),
       ),
     );
   }

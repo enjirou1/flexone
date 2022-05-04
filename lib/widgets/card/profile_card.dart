@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flexone/common/style.dart';
 import 'package:flexone/data/providers/user.dart';
 import 'package:flexone/screens/user/profile_screen.dart';
@@ -11,9 +10,8 @@ class ProfileCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _user = FirebaseAuth.instance.currentUser;
     final _provider = Provider.of<UserProvider>(context, listen: true);
-    String? _imagePath = _provider.user!.photo ?? _user!.photoURL;
+    String? _imagePath = _provider.user!.photo;
 
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
@@ -28,27 +26,30 @@ class ProfileCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 (_imagePath != null && _imagePath != "")
-                    ? Container(
-                        width: 70,
-                        height: 70,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(color: Colors.black),
-                            image: DecorationImage(
-                                image: NetworkImage(_imagePath),
-                                fit: BoxFit.cover)),
+                ? Container(
+                    width: 70,
+                    height: 70,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.black),
+                      image: DecorationImage(
+                        image: NetworkImage(_imagePath),
+                        fit: BoxFit.cover
                       )
-                    : Container(
-                        width: 70,
-                        height: 70,
-                        decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.white,
-                            image: DecorationImage(
-                                image: AssetImage(
-                                    'assets/images/profile-icon.png'),
-                                fit: BoxFit.cover)),
-                      ),
+                    ),
+                  )
+                : Container(
+                    width: 70,
+                    height: 70,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.white,
+                      image: DecorationImage(
+                        image: AssetImage('assets/images/profile-icon.png'),
+                        fit: BoxFit.cover
+                      )
+                    ),
+                  ),
                 Padding(
                   padding: const EdgeInsets.only(left: 15),
                   child: Column(
@@ -56,8 +57,7 @@ class ProfileCard extends StatelessWidget {
                     children: [
                       Text(
                         _provider.user!.fullname!,
-                        style: poppinsTheme.bodyText1
-                            ?.copyWith(fontWeight: FontWeight.bold),
+                        style: poppinsTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold),
                       ),
                       Text(
                         _provider.user!.email!,
@@ -73,12 +73,14 @@ class ProfileCard extends StatelessWidget {
               ],
             ),
             Align(
-                alignment: Alignment.topRight,
-                child: IconButton(
-                    onPressed: () {
-                      Get.to(ProfileScreen(user: _provider.user!));
-                    },
-                    icon: const Icon(Icons.edit)))
+              alignment: Alignment.topRight,
+              child: IconButton(
+                onPressed: () {
+                  Get.to(ProfileScreen(user: _provider.user!));
+                },
+                icon: const Icon(Icons.edit)
+              )
+            )
           ],
         ),
       ),
