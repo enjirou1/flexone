@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flexone/common/style.dart';
 import 'package:flexone/data/models/dicussion_result.dart';
 import 'package:flexone/data/providers/preferences.dart';
 import 'package:flexone/data/providers/user.dart';
@@ -101,48 +102,54 @@ class _QuestionScreenState extends State<QuestionScreen> {
                   }
             
                   if (snapshot.hasData) {
-                    return Padding(
-                      padding: const EdgeInsets.only(top: 20),
-                      child: ListView.separated(
-                        controller: _scrollController,
-                        itemBuilder: (context, index) {
-                          return (index < _questions.length)
-                            ? QuestionCard(
-                                question: _questions[index],
-                                userId: _provider.user!.userId!,
-                                onRemoved: () {
-                                  showDialog(
-                                    context: context, 
-                                    builder: (context) => ConfirmationDialog(
-                                      title: 'confirmation.delete_question.title',
-                                      buttonText: 'delete', 
-                                      onCancel: () {
-                                        Navigator.pop(context);
-                                      }, 
-                                      onPressed: () async {
-                                        await Question.deleteQuestion(_questions[index].questionId);
-                                        _questions.removeAt(index);
-                                        Navigator.pop(context);
-                                        setState(() {});
-                                      }
-                                    )
-                                  );
-                                },
-                              )
-                            : const Center(
-                                child: SizedBox(
-                                  width: 40,
-                                  height: 40,
-                                  child: CircularProgressIndicator(),
-                                ),
-                              );
-                        },
-                        itemCount: (_hasReachedMax || _questions.isEmpty) ? _questions.length : _questions.length + 1,
-                        separatorBuilder: (context, index) {
-                          return const Divider();
-                        },
-                      ),
-                    );
+                    if (snapshot.data!.isNotEmpty) {
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 20),
+                        child: ListView.separated(
+                          controller: _scrollController,
+                          itemBuilder: (context, index) {
+                            return (index < _questions.length)
+                              ? QuestionCard(
+                                  question: _questions[index],
+                                  userId: _provider.user!.userId!,
+                                  onRemoved: () {
+                                    showDialog(
+                                      context: context, 
+                                      builder: (context) => ConfirmationDialog(
+                                        title: 'confirmation.delete_question.title',
+                                        buttonText: 'delete', 
+                                        onCancel: () {
+                                          Navigator.pop(context);
+                                        }, 
+                                        onPressed: () async {
+                                          await Question.deleteQuestion(_questions[index].questionId);
+                                          _questions.removeAt(index);
+                                          Navigator.pop(context);
+                                          setState(() {});
+                                        }
+                                      )
+                                    );
+                                  },
+                                )
+                              : const Center(
+                                  child: SizedBox(
+                                    width: 40,
+                                    height: 40,
+                                    child: CircularProgressIndicator(),
+                                  ),
+                                );
+                          },
+                          itemCount: (_hasReachedMax || _questions.isEmpty) ? _questions.length : _questions.length + 1,
+                          separatorBuilder: (context, index) {
+                            return const Divider();
+                          },
+                        ),
+                      );
+                    } else {
+                      return Center(
+                        child: Text("empty_text.my_questions", style: poppinsTheme.bodyText1).tr(),
+                      );
+                    }
                   } else if (snapshot.hasError) {
                     return Center(
                       child: Text(snapshot.error.toString()),

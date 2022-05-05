@@ -11,11 +11,11 @@ class ProfileCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _provider = Provider.of<UserProvider>(context, listen: true);
-    String? _imagePath = _provider.user!.photo;
+    String? _imagePath = _provider.user?.photo;
 
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
-      onTap: () => Get.toNamed('/user/detail?id=${_provider.user!.userId}'),
+      onTap: () => Get.toNamed('/user/detail?id=${_provider.user?.userId}'),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
         child: Row(
@@ -56,15 +56,15 @@ class ProfileCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        _provider.user!.fullname!,
+                        _provider.user == null ? "" : _provider.user!.fullname!,
                         style: poppinsTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        _provider.user!.email!,
+                        _provider.user == null ? "" : _provider.user!.email!,
                         style: poppinsTheme.caption,
                       ),
                       Text(
-                        '${_provider.user!.point} points',
+                        '${_provider.user == null ? 0 : _provider.user!.point} points',
                         style: poppinsTheme.caption,
                       )
                     ],

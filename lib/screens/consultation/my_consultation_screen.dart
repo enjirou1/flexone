@@ -72,135 +72,141 @@ class _MyConsultationScreenState extends State<MyConsultationScreen> {
             }
     
             if (snapshot.hasData) {
-              return ListView.separated(
-                controller: _scrollController,
-                itemBuilder: (context, index) {
-                  return (index < _consultations.length)
-                    ? MyConsultationCard(
-                        consultation: _consultations[index],
-                        onGiveRating: () {
-                          showDialog(
-                            context: context, 
-                            builder: (context) => AlertDialog(
-                              title: Center(child: Text('Rating', style: poppinsTheme.bodyText1!.copyWith(fontWeight: FontWeight.bold),)),
-                              actions: [
-                                Center(
-                                  child: RatingBar.builder(
-                                    initialRating: 5,
-                                    minRating: 1,
-                                    direction: Axis.horizontal,
-                                    itemCount: 5,
-                                    itemPadding: const EdgeInsets.symmetric(horizontal: 4),
-                                    itemBuilder: (context, _) => const Icon(
-                                      Icons.star,
-                                      color: Colors.yellow,
-                                    ), 
-                                    onRatingUpdate: (rating) {
-                                      _rating = rating;
-                                      setState(() {});
-                                    }
-                                  ),
-                                ),
-                                const SizedBox(height: 10),
-                                Padding(
-                                  padding: const EdgeInsets.all(10),
-                                  child: TextField(
-                                    controller: _controller,
-                                    style: const TextStyle(color: Colors.black),
-                                    decoration: InputDecoration(
-                                      labelText: tr("review"),
-                                      labelStyle: const TextStyle(color: Colors.black),
-                                      isDense: true
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(height: 10),
-                                Center(
-                                  child: ElevatedButton(
-                                    onPressed: () async {
-                                      await Consultation.giveRating(
-                                        _consultations[index].detail!.id, 
-                                        _consultations[index].id, 
-                                        _rating.toInt(), 
-                                        _controller.text
-                                      );
-                                      _consultations.clear();
-                                      _hasReachedMax = false;
-                                      setState(() {});
-                                      Navigator.pop(context);
-                                    }, 
-                                    child: const Text('OK')
-                                  ),
-                                )
-                              ],
-                            )
-                          );
-                        },
-                        onViewReview: () {
-                          showDialog(
-                            context: context, 
-                            builder: (context) => AlertDialog(
-                              title: Center(child: Text('Rating', style: poppinsTheme.bodyText1!.copyWith(fontWeight: FontWeight.bold),)),
-                              actions: [
-                                Center(
-                                  child: RatingBarIndicator(
-                                    rating: _consultations[index].detail!.rating.toDouble(),
-                                    unratedColor: Colors.grey,
-                                    itemBuilder: (context, index) => const Icon(
+              if (snapshot.data!.isNotEmpty) {
+                return ListView.separated(
+                  controller: _scrollController,
+                  itemBuilder: (context, index) {
+                    return (index < _consultations.length)
+                      ? MyConsultationCard(
+                          consultation: _consultations[index],
+                          onGiveRating: () {
+                            showDialog(
+                              context: context, 
+                              builder: (context) => AlertDialog(
+                                title: Center(child: Text('Rating', style: poppinsTheme.bodyText1!.copyWith(fontWeight: FontWeight.bold),)),
+                                actions: [
+                                  Center(
+                                    child: RatingBar.builder(
+                                      initialRating: 5,
+                                      minRating: 1,
+                                      direction: Axis.horizontal,
+                                      itemCount: 5,
+                                      itemPadding: const EdgeInsets.symmetric(horizontal: 4),
+                                      itemBuilder: (context, _) => const Icon(
                                         Icons.star,
-                                        color: Colors.amber,
+                                        color: Colors.yellow,
+                                      ), 
+                                      onRatingUpdate: (rating) {
+                                        _rating = rating;
+                                        setState(() {});
+                                      }
                                     ),
-                                    itemCount: 5,
-                                    itemSize: 30,
-                                    direction: Axis.horizontal,
                                   ),
-                                ),
-                                const SizedBox(height: 20),
-                                Center(
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                                    child: Text(_consultations[index].detail!.review!, style: poppinsTheme.bodyText2!.copyWith(color: Colors.black)),
+                                  const SizedBox(height: 10),
+                                  Padding(
+                                    padding: const EdgeInsets.all(10),
+                                    child: TextField(
+                                      controller: _controller,
+                                      style: const TextStyle(color: Colors.black),
+                                      decoration: InputDecoration(
+                                        labelText: tr("review"),
+                                        labelStyle: const TextStyle(color: Colors.black),
+                                        isDense: true
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Center(
+                                    child: ElevatedButton(
+                                      onPressed: () async {
+                                        await Consultation.giveRating(
+                                          _consultations[index].detail!.id, 
+                                          _consultations[index].id, 
+                                          _rating.toInt(), 
+                                          _controller.text
+                                        );
+                                        _consultations.clear();
+                                        _hasReachedMax = false;
+                                        setState(() {});
+                                        Navigator.pop(context);
+                                      }, 
+                                      child: const Text('OK')
+                                    ),
                                   )
-                                ),
-                                const SizedBox(height: 20),
-                              ],
-                            )
-                          );
-                        },
-                        onViewDetail: () {
-                          showDialog(
-                            context: context, 
-                            builder: (context) => AlertDialog(
-                              title: Center(child: Text('rejection_detail', style: poppinsTheme.bodyText1!.copyWith(fontWeight: FontWeight.bold)).tr()),
-                              actions: [
-                                Center(
-                                  child: Text(
-                                    _consultations[index].detail!.reason!,
-                                    style: poppinsTheme.bodyText2!.copyWith(color: Colors.black),
-                                  )
-                                ),
-                                const SizedBox(height: 20)
-                              ],
-                            )
-                          );
-                        },
-                        onConsult: () {
-                          Launcher.launchExternalApplication(_consultations[index].link);
-                        },
-                      )
-                    : const Center(
-                        child: SizedBox(
-                          width: 40,
-                          height: 40,
-                          child: CircularProgressIndicator(),
-                        ),
-                      );
-                },
-                itemCount: (_hasReachedMax || _consultations.isEmpty) ? _consultations.length : _consultations.length + 1,
-                separatorBuilder: (context, index) {
-                  return const Divider();
-                },
-              );
+                                ],
+                              )
+                            );
+                          },
+                          onViewReview: () {
+                            showDialog(
+                              context: context, 
+                              builder: (context) => AlertDialog(
+                                title: Center(child: Text('Rating', style: poppinsTheme.bodyText1!.copyWith(fontWeight: FontWeight.bold),)),
+                                actions: [
+                                  Center(
+                                    child: RatingBarIndicator(
+                                      rating: _consultations[index].detail!.rating.toDouble(),
+                                      unratedColor: Colors.grey,
+                                      itemBuilder: (context, index) => const Icon(
+                                          Icons.star,
+                                          color: Colors.amber,
+                                      ),
+                                      itemCount: 5,
+                                      itemSize: 30,
+                                      direction: Axis.horizontal,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 20),
+                                  Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                                      child: Text(_consultations[index].detail!.review!, style: poppinsTheme.bodyText2!.copyWith(color: Colors.black)),
+                                    )
+                                  ),
+                                  const SizedBox(height: 20),
+                                ],
+                              )
+                            );
+                          },
+                          onViewDetail: () {
+                            showDialog(
+                              context: context, 
+                              builder: (context) => AlertDialog(
+                                title: Center(child: Text('rejection_detail', style: poppinsTheme.bodyText1!.copyWith(fontWeight: FontWeight.bold)).tr()),
+                                actions: [
+                                  Center(
+                                    child: Text(
+                                      _consultations[index].detail!.reason!,
+                                      style: poppinsTheme.bodyText2!.copyWith(color: Colors.black),
+                                    )
+                                  ),
+                                  const SizedBox(height: 20)
+                                ],
+                              )
+                            );
+                          },
+                          onConsult: () {
+                            Launcher.launchExternalApplication(_consultations[index].link);
+                          },
+                        )
+                      : const Center(
+                          child: SizedBox(
+                            width: 40,
+                            height: 40,
+                            child: CircularProgressIndicator(),
+                          ),
+                        );
+                  },
+                  itemCount: (_hasReachedMax || _consultations.isEmpty) ? _consultations.length : _consultations.length + 1,
+                  separatorBuilder: (context, index) {
+                    return const Divider();
+                  },
+                );
+              } else {
+                return Center(
+                  child: Text("empty_text.my_consultations", style: poppinsTheme.bodyText1).tr(),
+                );
+              }
             } else if (snapshot.hasError) {
               return Center(
                 child: Text(snapshot.error.toString()),

@@ -100,6 +100,15 @@
     "education": "Edukasi",
     "education:": "Edukasi:",
     "email-already-in-use": "Email telah digunakan",
+    "empty_text": {
+        "classes_owned": "Anda belum memiliki kelas.",
+        "consultations_owned": "Anda belum memiliki konsultasi.",
+        "history": "Anda belum membeli merchandise.",
+        "my_classes": "Anda belum bergabung kelas manapun.",
+        "my_consultations": "Anda belum bergabung konsultasi manapun.",
+        "my_questions": "Anda belum bertanya apapun.",
+        "my_rooms": "Anda belum bergabung ruangan manapun."
+    },
     "english": "Bahasa Inggris",
     "enter_nominal": "Masukkan nominal",
     "enter_password": "Masukkan password",
@@ -194,6 +203,7 @@
     "job:": "Pekerjaan:",
     "join": "Gabung",
     "joined": "Bergabung",
+    "link_vm:": "Link untuk pertemuan virtual:",
     "logout": "Keluar",
     "lowest_price": "Harga terendah",
     "members": "Anggota",

@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flexone/common/style.dart';
 import 'package:flexone/data/models/consultation_result.dart';
 import 'package:flexone/data/models/expert_result.dart';
 import 'package:flexone/data/providers/user.dart';
@@ -110,77 +111,83 @@ class _ConsultationOwnedScreenState extends State<ConsultationOwnedScreen> {
                   }
             
                   if (snapshot.hasData) {
-                    return Padding(
-                      padding: const EdgeInsets.only(top: 20),
-                      child: ListView.separated(
-                        controller: _scrollController,
-                        itemBuilder: (context, index) {
-                          return (index < _consultations.length)
-                            ? ConsultationCard(
-                                consultation: _consultations[index],
-                                status: _consultations[index].status,
-                                onRemoved: () {
-                                  showDialog(
-                                    context: context, 
-                                    builder: (context) => ConfirmationDialog(
-                                      title: 'confirmation.close_consultation.title',
-                                      content: 'confirmation.close_consultation.content',
-                                      buttonText: 'delete', 
-                                      onCancel: () {
-                                        Navigator.pop(context);
-                                      }, 
-                                      onPressed: () async {
-                                        try {
-                                          await Consultation.deleteConsultation(_consultations[index].id);
+                    if (snapshot.data!.isNotEmpty) {
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 20),
+                        child: ListView.separated(
+                          controller: _scrollController,
+                          itemBuilder: (context, index) {
+                            return (index < _consultations.length)
+                              ? ConsultationCard(
+                                  consultation: _consultations[index],
+                                  status: _consultations[index].status,
+                                  onRemoved: () {
+                                    showDialog(
+                                      context: context, 
+                                      builder: (context) => ConfirmationDialog(
+                                        title: 'confirmation.close_consultation.title',
+                                        content: 'confirmation.close_consultation.content',
+                                        buttonText: 'delete', 
+                                        onCancel: () {
                                           Navigator.pop(context);
-                                          _consultations.clear();
-                                          _hasReachedMax = false;
-                                          setState(() {});
-                                        } catch (e) {
-                                          Get.snackbar(tr('failed'), e.toString(),
-                                            snackPosition: SnackPosition.BOTTOM,
-                                            colorText: Colors.white,
-                                            backgroundColor: Colors.red,
-                                            animationDuration: const Duration(milliseconds: 300),
-                                            duration: const Duration(seconds: 2)
-                                          );
+                                        }, 
+                                        onPressed: () async {
+                                          try {
+                                            await Consultation.deleteConsultation(_consultations[index].id);
+                                            Navigator.pop(context);
+                                            _consultations.clear();
+                                            _hasReachedMax = false;
+                                            setState(() {});
+                                          } catch (e) {
+                                            Get.snackbar(tr('failed'), e.toString(),
+                                              snackPosition: SnackPosition.BOTTOM,
+                                              colorText: Colors.white,
+                                              backgroundColor: Colors.red,
+                                              animationDuration: const Duration(milliseconds: 300),
+                                              duration: const Duration(seconds: 2)
+                                            );
+                                          }
                                         }
-                                      }
-                                    )
-                                  );
-                                },
-                                onUpdated: () async {
-                                  final result = await Get.to(EditConsultationScreen(consultation: _consultations[index]));
-                                  if (result != null) {
-                                    _consultations.clear();
-                                    _hasReachedMax = false;
-                                    setState(() {});
-                                    Get.snackbar(
-                                      tr('success'), tr('success_detail.update_consultation'),
-                                      snackPosition: SnackPosition.BOTTOM,
-                                      animationDuration: const Duration(milliseconds: 300),
-                                      backgroundColor: Colors.green,
-                                      colorText: Colors.white,
-                                      icon: const Icon(Icons.check, color: Colors.white),
-                                      duration: const Duration(seconds: 1)
+                                      )
                                     );
-                                  }
-                                },
-                              )
-                            : const Center(
-                                child: SizedBox(
-                                  width: 40,
-                                  height: 40,
-                                  child: CircularProgressIndicator(),
-                                ),
-                              );
-                        },
-                        itemCount: (_hasReachedMax || _consultations.isEmpty) ? _consultations.length : _consultations.length + 1,
-                        separatorBuilder: (context, index) {
-                          return const Divider();
-                        },
-                      ),
-                    );
+                                  },
+                                  onUpdated: () async {
+                                    final result = await Get.to(EditConsultationScreen(consultation: _consultations[index]));
+                                    if (result != null) {
+                                      _consultations.clear();
+                                      _hasReachedMax = false;
+                                      setState(() {});
+                                      Get.snackbar(
+                                        tr('success'), tr('success_detail.update_consultation'),
+                                        snackPosition: SnackPosition.BOTTOM,
+                                        animationDuration: const Duration(milliseconds: 300),
+                                        backgroundColor: Colors.green,
+                                        colorText: Colors.white,
+                                        icon: const Icon(Icons.check, color: Colors.white),
+                                        duration: const Duration(seconds: 1)
+                                      );
+                                    }
+                                  },
+                                )
+                              : const Center(
+                                  child: SizedBox(
+                                    width: 40,
+                                    height: 40,
+                                    child: CircularProgressIndicator(),
+                                  ),
+                                );
+                          },
+                          itemCount: (_hasReachedMax || _consultations.isEmpty) ? _consultations.length : _consultations.length + 1,
+                          separatorBuilder: (context, index) {
+                            return const Divider();
+                          },
+                        ),
+                      );        
+                    } else {
+                      return Center(
+                        child: Text("empty_text.consultations_owned", style: poppinsTheme.bodyText1).tr(),
+                      );
+                    }
                   } else if (snapshot.hasError) {
                     return Center(
                       child: Text(snapshot.error.toString()),

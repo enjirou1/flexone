@@ -71,6 +71,9 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
                 if (_provider.user!.point! - int.parse(_pointController.text) < 0) {
                   isValid = false;
                   _pointValidation = InputValidation(isValid: false, message: tr('error.point.not_enough'));
+                } else if (_pointController.text == "0") {
+                  isValid = false;
+                  _pointValidation = InputValidation(isValid: false, message: tr('error.point.empty'));
                 } else {
                   _pointValidation = InputValidation(isValid: true, message: '');
                 }

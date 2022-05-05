@@ -100,6 +100,15 @@
     "education": "Education",
     "education:": "Education:",
     "email-already-in-use": "Email already in use",
+    "empty_text": {
+        "classes_owned": "You don't have any classes yet.",
+        "consultations_owned": "You don't have any consultations yet.",
+        "history": "You haven't bought any merchandises yet.",
+        "my_classes": "You haven't joined any classes yet.",
+        "my_consultations": "You haven't joined any consultations yet.",
+        "my_questions": "You haven't asked any questions yet.",
+        "my_rooms": "You haven't joined any rooms yet."
+    },
     "english": "English",
     "enter_nominal": "Enter nominal",
     "enter_password": "Enter password",
@@ -194,6 +203,7 @@
     "job:": "Job:",
     "join": "Join",
     "joined": "Joined",
+    "link_vm:": "Link for virtual meeting:",
     "logout": "Logout",
     "lowest_price": "Lowest price",
     "members": "Members",

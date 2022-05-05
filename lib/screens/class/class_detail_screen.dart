@@ -231,6 +231,7 @@ class _ClassDetailScreenState extends State<ClassDetailScreen> {
                                   onPressed: () async {
                                     try {
                                       await Class.joinClass(widget.classModel.id, _provider.user!.userId!);
+                                      _provider.addItem();
                                       Get.snackbar(
                                         tr('success'), tr('success_detail.add_to_cart'),
                                         snackPosition: SnackPosition.BOTTOM,

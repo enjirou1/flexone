@@ -117,6 +117,7 @@ class _CartScreenState extends State<CartScreen> {
                                   }, 
                                   onPressed: () async {
                                     await Cart.removeItem(_provider.user!.userId!, 'consultation', snapshot.data!.consultationItems[index].itemId!);
+                                    _provider.removeItem();
                                     Navigator.pop(context);
                                     _cart = null;
                                     setState(() {});
@@ -151,6 +152,7 @@ class _CartScreenState extends State<CartScreen> {
                                   }, 
                                   onPressed: () async {
                                     await Cart.removeItem(_provider.user!.userId!, 'class', snapshot.data!.classItems[index].itemId!);
+                                    _provider.removeItem();
                                     Navigator.pop(context);
                                     _cart = null;
                                     setState(() {});

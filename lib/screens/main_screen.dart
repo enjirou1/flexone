@@ -1,5 +1,8 @@
+import 'package:badges/badges.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flexone/common/style.dart';
+import 'package:flexone/data/models/transaction_result.dart';
 import 'package:flexone/data/models/user_result.dart';
 import 'package:flexone/data/providers/user.dart';
 import 'package:flexone/screens/class/class_screen.dart';
@@ -43,6 +46,9 @@ class _MainScreenState extends State<MainScreen> {
     if (_user != null) {
       UserModel.getUserByEmail(_user.email).then((value) {
         provider.setUser(value!);
+        Cart.getCart(value.userId!).then((value) {
+          provider.setCartItems(value!.classItems.length + value.consultationItems.length);
+        });
       });
     } else {
       Future.delayed(Duration.zero, () {
@@ -54,12 +60,21 @@ class _MainScreenState extends State<MainScreen> {
       appBar: AppBar(
         title: Text(_pages[_selectedPageIndex]['title'].toString()).tr(),
         actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.shopping_cart,
-              color: Color(0XFFD6D6D6),
+          Badge(
+            position: BadgePosition.topEnd(top: 7, end: 5),
+            padding: const EdgeInsets.all(3),
+            badgeContent: Consumer<UserProvider>(
+              builder: (context, user, _) {
+                return Text(user.cartItems.toString(), style: poppinsTheme.caption!.copyWith(fontSize: 10));
+              },
             ),
-            onPressed: () => Get.toNamed('/cart'),
+            child: IconButton(
+              icon: const Icon(
+                Icons.shopping_cart,
+                color: Color(0XFFD6D6D6),
+              ),
+              onPressed: () => Get.toNamed('/cart'),
+            ),
           ),
         ],
       ),

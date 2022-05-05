@@ -275,7 +275,7 @@ class _EditConsultationScreenState extends State<EditConsultationScreen> {
                 controller: _linkController,
                 keyboardType: TextInputType.url,
                 decoration: InputDecoration(
-                  labelText: "Link:",
+                  labelText: tr("link_vm:"),
                   labelStyle: TextStyle(color: _fontColor),
                   isDense: true
                 ),

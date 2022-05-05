@@ -40,10 +40,10 @@ class SearchEditText extends StatelessWidget {
               hintStyle: TextStyle(
                 color: _textColor
               ),
-              suffixIcon: IconButton(
+              suffixIcon: (controller.text.isNotEmpty) ? IconButton(
                 icon: const FaIcon(FontAwesomeIcons.xmark), 
                 onPressed: onClear,
-              )
+              ) : null
             ),
             style: TextStyle(color: _textColor),
           ),

@@ -303,6 +303,7 @@ class _ConsultationDetailScreenState extends State<ConsultationDetailScreen> {
                                       if (_controller.text.isNotEmpty) {
                                         if (selectedDate != "") {
                                           await Consultation.joinConsultation(widget.consultation.id, _provider.user!.userId!, selectedDate, _controller.text);
+                                          _provider.addItem();
                                           Navigator.pop(context);
                                           Get.snackbar(
                                             tr('success'), tr('success_detail.send_request'),

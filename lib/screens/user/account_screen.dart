@@ -46,7 +46,7 @@ class AccountScreen extends StatelessWidget {
           onTap: () async {
             final result = await Get.toNamed('/expert/new');
 
-            if (result) {
+            if (result != null) {
               Get.snackbar(
                 tr('success'), tr('success_detail.create_expert'),
                 snackPosition: SnackPosition.BOTTOM,
@@ -135,9 +135,9 @@ class AccountScreen extends StatelessWidget {
               onCancel: () {
                 Navigator.pop(context);
               }, 
-              onPressed: () {
+              onPressed: () async {
                 final provider = Provider.of<GoogleSignInProvider>(context, listen: false);
-                provider.logout();
+                await provider.logout();
                 Get.offAllNamed('/');
               }
             )

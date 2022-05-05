@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flexone/common/style.dart';
 import 'package:flexone/data/models/merchandise_result.dart';
 import 'package:flexone/data/providers/user.dart';
 import 'package:flexone/widgets/listtile/merchandise_list_tile.dart';
@@ -64,27 +66,33 @@ class _MerchandiseHistoryScreenState extends State<MerchandiseHistoryScreen> {
           }
 
           if (snapshot.hasData) {
-            return Padding(
-              padding: const EdgeInsets.all(10),
-              child: ListView.separated(
-                controller: _scrollController,
-                itemBuilder: (context, index) {
-                  return (index < _histories.length)
-                  ? MerchandiseListTile(history: _histories[index])
-                  : const Center(
-                      child: SizedBox(
-                        width: 40,
-                        height: 40,
-                        child: CircularProgressIndicator(),
-                      ),
-                    );
-                },
-                itemCount: (_hasReachedMax || _histories.isEmpty) ? _histories.length : _histories.length + 1,
-                separatorBuilder: (BuildContext context, int index) {
-                  return const Divider();
-                },
-              ),
-            );
+            if (snapshot.data!.isNotEmpty) {
+              return Padding(
+                padding: const EdgeInsets.all(10),
+                child: ListView.separated(
+                  controller: _scrollController,
+                  itemBuilder: (context, index) {
+                    return (index < _histories.length)
+                    ? MerchandiseListTile(history: _histories[index])
+                    : const Center(
+                        child: SizedBox(
+                          width: 40,
+                          height: 40,
+                          child: CircularProgressIndicator(),
+                        ),
+                      );
+                  },
+                  itemCount: (_hasReachedMax || _histories.isEmpty) ? _histories.length : _histories.length + 1,
+                  separatorBuilder: (BuildContext context, int index) {
+                    return const Divider();
+                  },
+                ),
+              );
+            } else {
+              return Center(
+                child: Text("empty_text.history", style: poppinsTheme.bodyText1).tr(),
+              );
+            }
           } else if (snapshot.hasError) {
             return Center(child: Text(snapshot.error.toString()));
           } else {

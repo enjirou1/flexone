@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 
 class UserProvider extends ChangeNotifier {
   UserModel? _user;
+  int _cartItems = 0;
 
   UserModel? get user => _user;
+  int get cartItems => _cartItems;
 
   Future setUser(UserModel user) async {
     _user = user;
@@ -18,6 +20,22 @@ class UserProvider extends ChangeNotifier {
 
   void logout() async {
     _user = null;
+    _cartItems = 0;
+    notifyListeners();
+  }
+
+  void setCartItems(int value) {
+    _cartItems = value;
+    notifyListeners();
+  }
+
+  void addItem() {
+    _cartItems++;
+    notifyListeners();
+  }
+
+  void removeItem() {
+    _cartItems--;
     notifyListeners();
   }
 }
