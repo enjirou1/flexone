@@ -66,33 +66,27 @@ class _MerchandiseHistoryScreenState extends State<MerchandiseHistoryScreen> {
           }
 
           if (snapshot.hasData) {
-            if (snapshot.data!.isNotEmpty) {
-              return Padding(
-                padding: const EdgeInsets.all(10),
-                child: ListView.separated(
-                  controller: _scrollController,
-                  itemBuilder: (context, index) {
-                    return (index < _histories.length)
-                    ? MerchandiseListTile(history: _histories[index])
-                    : const Center(
-                        child: SizedBox(
-                          width: 40,
-                          height: 40,
-                          child: CircularProgressIndicator(),
-                        ),
-                      );
-                  },
-                  itemCount: (_hasReachedMax || _histories.isEmpty) ? _histories.length : _histories.length + 1,
-                  separatorBuilder: (BuildContext context, int index) {
-                    return const Divider();
-                  },
-                ),
-              );
-            } else {
-              return Center(
-                child: Text("empty_text.history", style: poppinsTheme.bodyText1).tr(),
-              );
-            }
+            return Padding(
+              padding: const EdgeInsets.all(10),
+              child: ListView.separated(
+                controller: _scrollController,
+                itemBuilder: (context, index) {
+                  return (index < _histories.length)
+                  ? MerchandiseListTile(history: _histories[index])
+                  : const Center(
+                      child: SizedBox(
+                        width: 40,
+                        height: 40,
+                        child: CircularProgressIndicator(),
+                      ),
+                    );
+                },
+                itemCount: (_hasReachedMax || _histories.isEmpty) ? _histories.length : _histories.length + 1,
+                separatorBuilder: (BuildContext context, int index) {
+                  return const Divider();
+                },
+              ),
+            );
           } else if (snapshot.hasError) {
             return Center(child: Text(snapshot.error.toString()));
           } else {

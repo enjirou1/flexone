@@ -99,71 +99,65 @@ class _MyRoomScreenState extends State<MyRoomScreen> {
                   }
             
                   if (snapshot.hasData) {
-                    if (snapshot.data!.isNotEmpty) {
-                      return Padding(
-                        padding: const EdgeInsets.only(top: 20),
-                        child: ListView.separated(
-                          controller: _scrollController,
-                          itemBuilder: (context, index) {
-                            return (index < _rooms.length)
-                              ? RoomCard(
-                                  room: _rooms[index], 
-                                  isOwner: _rooms[index].user.id == _provider.user!.userId!,
-                                  onRemoved: () {
-                                    showDialog(
-                                      context: context, 
-                                      builder: (context) => ConfirmationDialog(
-                                        title: 'confirmation.delete_room.title',
-                                        buttonText: 'delete', 
-                                        onCancel: () {
-                                          Navigator.pop(context);
-                                        }, 
-                                        onPressed: () async {
-                                          await Room.deleteRoom(_rooms[index].id);
-                                          _rooms.removeAt(index);
-                                          Navigator.pop(context);
-                                          setState(() {});
-                                        }
-                                      )
+                    return Padding(
+                      padding: const EdgeInsets.only(top: 20),
+                      child: ListView.separated(
+                        controller: _scrollController,
+                        itemBuilder: (context, index) {
+                          return (index < _rooms.length)
+                            ? RoomCard(
+                                room: _rooms[index], 
+                                isOwner: _rooms[index].user.id == _provider.user!.userId!,
+                                onRemoved: () {
+                                  showDialog(
+                                    context: context, 
+                                    builder: (context) => ConfirmationDialog(
+                                      title: 'confirmation.delete_room.title',
+                                      buttonText: 'delete', 
+                                      onCancel: () {
+                                        Navigator.pop(context);
+                                      }, 
+                                      onPressed: () async {
+                                        await Room.deleteRoom(_rooms[index].id);
+                                        _rooms.removeAt(index);
+                                        Navigator.pop(context);
+                                        setState(() {});
+                                      }
+                                    )
+                                  );
+                                },
+                                onPressed: () async {
+                                  final result = await Get.to(EditRoomScreen(room: _rooms[index]));
+                                  if (result != null) {
+                                    _rooms.clear();
+                                    _hasReachedMax = false;
+                                    setState(() {});
+                                    Get.snackbar(
+                                      tr('success'), tr('success_detail.update_room'),
+                                      snackPosition: SnackPosition.BOTTOM,
+                                      animationDuration: const Duration(milliseconds: 300),
+                                      backgroundColor: Colors.green,
+                                      colorText: Colors.white,
+                                      icon: const Icon(Icons.check, color: Colors.white),
+                                      duration: const Duration(seconds: 1)
                                     );
-                                  },
-                                  onPressed: () async {
-                                    final result = await Get.to(EditRoomScreen(room: _rooms[index]));
-                                    if (result != null) {
-                                      _rooms.clear();
-                                      _hasReachedMax = false;
-                                      setState(() {});
-                                      Get.snackbar(
-                                        tr('success'), tr('success_detail.update_room'),
-                                        snackPosition: SnackPosition.BOTTOM,
-                                        animationDuration: const Duration(milliseconds: 300),
-                                        backgroundColor: Colors.green,
-                                        colorText: Colors.white,
-                                        icon: const Icon(Icons.check, color: Colors.white),
-                                        duration: const Duration(seconds: 1)
-                                      );
-                                    }
-                                  },
-                                )
-                              : const Center(
-                                  child: SizedBox(
-                                    width: 40,
-                                    height: 40,
-                                    child: CircularProgressIndicator(),
-                                  ),
-                                );
-                          },
-                          itemCount: (_hasReachedMax || _rooms.isEmpty) ? _rooms.length : _rooms.length + 1,
-                          separatorBuilder: (context, index) {
-                            return const Divider();
-                          },
-                        ),
-                      );
-                    } else {
-                      return Center(
-                        child: Text("empty_text.my_rooms", style: poppinsTheme.bodyText1).tr(),
-                      );
-                    }
+                                  }
+                                },
+                              )
+                            : const Center(
+                                child: SizedBox(
+                                  width: 40,
+                                  height: 40,
+                                  child: CircularProgressIndicator(),
+                                ),
+                              );
+                        },
+                        itemCount: (_hasReachedMax || _rooms.isEmpty) ? _rooms.length : _rooms.length + 1,
+                        separatorBuilder: (context, index) {
+                          return const Divider();
+                        },
+                      ),
+                    );
                   } else if (snapshot.hasError) {
                     return Center(
                       child: Text(snapshot.error.toString()),

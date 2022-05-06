@@ -100,61 +100,55 @@ class _ClassOwnedScreenState extends State<ClassOwnedScreen> {
                   }
             
                   if (snapshot.hasData) {
-                    if (snapshot.data!.isNotEmpty) {
-                      return Padding(
-                        padding: const EdgeInsets.only(top: 20),
-                        child: ListView.separated(
-                          controller: _scrollController,
-                          itemBuilder: (context, index) {
-                            return (index < _classes.length)
-                              ? ClassCard(
-                                  classModel: _classes[index],
-                                  onRemoved: () async {
-                                    showDialog(
-                                      context: context, 
-                                      builder: (context) => ConfirmationDialog(
-                                        title: 'confirmation.delete_class.title',
-                                        buttonText: 'delete', 
-                                        onCancel: () {
-                                          Navigator.pop(context);
-                                        }, 
-                                        onPressed: () async {
-                                          await Class.deleteClass(_classes[index].id);
-                                          _classes.clear();
-                                          setState(() {});
-                                          Navigator.pop(context);
-                                        }
-                                      )
-                                    );
-                                  },
-                                  onUpdated: () async {
-                                    final result = await Get.to(EditClassScreen(classModel: _classes[index]));
-                                    if (result != null) {
-                                      _classes.clear();
-                                      _hasReachedMax = false;
-                                      setState(() {});
-                                    }
-                                  },
-                                )
-                              : const Center(
-                                  child: SizedBox(
-                                    width: 40,
-                                    height: 40,
-                                    child: CircularProgressIndicator(),
-                                  ),
-                                );
-                          },
-                          itemCount: (_hasReachedMax || _classes.isEmpty) ? _classes.length : _classes.length + 1,
-                          separatorBuilder: (context, index) {
-                            return const Divider();
-                          },
-                        ),
-                      );
-                    } else {
-                      return Center(
-                        child: Text("empty_text.classes_owned", style: poppinsTheme.bodyText1).tr(),
-                      );
-                    }
+                    return Padding(
+                      padding: const EdgeInsets.only(top: 20),
+                      child: ListView.separated(
+                        controller: _scrollController,
+                        itemBuilder: (context, index) {
+                          return (index < _classes.length)
+                            ? ClassCard(
+                                classModel: _classes[index],
+                                onRemoved: () async {
+                                  showDialog(
+                                    context: context, 
+                                    builder: (context) => ConfirmationDialog(
+                                      title: 'confirmation.delete_class.title',
+                                      buttonText: 'delete', 
+                                      onCancel: () {
+                                        Navigator.pop(context);
+                                      }, 
+                                      onPressed: () async {
+                                        await Class.deleteClass(_classes[index].id);
+                                        _classes.clear();
+                                        setState(() {});
+                                        Navigator.pop(context);
+                                      }
+                                    )
+                                  );
+                                },
+                                onUpdated: () async {
+                                  final result = await Get.to(EditClassScreen(classModel: _classes[index]));
+                                  if (result != null) {
+                                    _classes.clear();
+                                    _hasReachedMax = false;
+                                    setState(() {});
+                                  }
+                                },
+                              )
+                            : const Center(
+                                child: SizedBox(
+                                  width: 40,
+                                  height: 40,
+                                  child: CircularProgressIndicator(),
+                                ),
+                              );
+                        },
+                        itemCount: (_hasReachedMax || _classes.isEmpty) ? _classes.length : _classes.length + 1,
+                        separatorBuilder: (context, index) {
+                          return const Divider();
+                        },
+                      ),
+                    );
                   } else if (snapshot.hasError) {
                     return Center(
                       child: Text(snapshot.error.toString()),

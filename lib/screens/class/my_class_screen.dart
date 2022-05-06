@@ -73,121 +73,115 @@ class _MyClassScreenState extends State<MyClassScreen> {
             }
     
             if (snapshot.hasData) {
-              if (snapshot.data!.isNotEmpty) {
-                return ListView.separated(
-                  controller: _scrollController,
-                  itemBuilder: (context, index) {
-                    return (index < _classes.length)
-                      ? MyClassCard(
-                          classModel: _classes[index],
-                          onGiveRating: () {
-                            showDialog(
-                              context: context, 
-                              builder: (context) => AlertDialog(
-                                title: Center(child: Text('Rating', style: poppinsTheme.bodyText1!.copyWith(fontWeight: FontWeight.bold),)),
-                                actions: [
-                                  Center(
-                                    child: RatingBar.builder(
-                                      initialRating: 5,
-                                      minRating: 1,
-                                      direction: Axis.horizontal,
-                                      itemCount: 5,
-                                      itemPadding: const EdgeInsets.symmetric(horizontal: 4),
-                                      itemBuilder: (context, _) => const Icon(
+              return ListView.separated(
+                controller: _scrollController,
+                itemBuilder: (context, index) {
+                  return (index < _classes.length)
+                    ? MyClassCard(
+                        classModel: _classes[index],
+                        onGiveRating: () {
+                          showDialog(
+                            context: context, 
+                            builder: (context) => AlertDialog(
+                              title: Center(child: Text('Rating', style: poppinsTheme.bodyText1!.copyWith(fontWeight: FontWeight.bold),)),
+                              actions: [
+                                Center(
+                                  child: RatingBar.builder(
+                                    initialRating: 5,
+                                    minRating: 1,
+                                    direction: Axis.horizontal,
+                                    itemCount: 5,
+                                    itemPadding: const EdgeInsets.symmetric(horizontal: 4),
+                                    itemBuilder: (context, _) => const Icon(
+                                      Icons.star,
+                                      color: Colors.yellow,
+                                    ), 
+                                    onRatingUpdate: (rating) {
+                                      _rating = rating;
+                                      setState(() {});
+                                    }
+                                  ),
+                                ),
+                                const SizedBox(height: 10),
+                                Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: TextField(
+                                    controller: _controller,
+                                    style: const TextStyle(color: Colors.black),
+                                    decoration: InputDecoration(
+                                      labelText: tr("review"),
+                                      labelStyle: const TextStyle(color: Colors.black),
+                                      isDense: true
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 10),
+                                Center(
+                                  child: ElevatedButton(
+                                    onPressed: () async {
+                                      await Class.giveRating(
+                                        _classes[index].id,
+                                        _provider.user!.userId!,
+                                        _rating.toInt(), 
+                                        _controller.text
+                                      );
+                                      _classes.clear();
+                                      _hasReachedMax = false;
+                                      setState(() {});
+                                      Navigator.pop(context);
+                                    }, 
+                                    child: const Text('OK')
+                                  ),
+                                )
+                              ],
+                            )
+                          );
+                        },
+                        onViewReview: () {
+                          showDialog(
+                            context: context, 
+                            builder: (context) => AlertDialog(
+                              title: Center(child: Text('Rating', style: poppinsTheme.bodyText1!.copyWith(fontWeight: FontWeight.bold),)),
+                              actions: [
+                                Center(
+                                  child: RatingBarIndicator(
+                                    rating: _classes[index].detail!.rating.toDouble(),
+                                    unratedColor: Colors.grey,
+                                    itemBuilder: (context, index) => const Icon(
                                         Icons.star,
-                                        color: Colors.yellow,
-                                      ), 
-                                      onRatingUpdate: (rating) {
-                                        _rating = rating;
-                                        setState(() {});
-                                      }
+                                        color: Colors.amber,
                                     ),
+                                    itemCount: 5,
+                                    itemSize: 30,
+                                    direction: Axis.horizontal,
                                   ),
-                                  const SizedBox(height: 10),
-                                  Padding(
-                                    padding: const EdgeInsets.all(10),
-                                    child: TextField(
-                                      controller: _controller,
-                                      style: const TextStyle(color: Colors.black),
-                                      decoration: InputDecoration(
-                                        labelText: tr("review"),
-                                        labelStyle: const TextStyle(color: Colors.black),
-                                        isDense: true
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(height: 10),
-                                  Center(
-                                    child: ElevatedButton(
-                                      onPressed: () async {
-                                        await Class.giveRating(
-                                          _classes[index].id,
-                                          _provider.user!.userId!,
-                                          _rating.toInt(), 
-                                          _controller.text
-                                        );
-                                        _classes.clear();
-                                        _hasReachedMax = false;
-                                        setState(() {});
-                                        Navigator.pop(context);
-                                      }, 
-                                      child: const Text('OK')
-                                    ),
+                                ),
+                                const SizedBox(height: 20),
+                                Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                                    child: Text(_classes[index].detail!.review!, style: poppinsTheme.bodyText2!.copyWith(color: Colors.black)),
                                   )
-                                ],
-                              )
-                            );
-                          },
-                          onViewReview: () {
-                            showDialog(
-                              context: context, 
-                              builder: (context) => AlertDialog(
-                                title: Center(child: Text('Rating', style: poppinsTheme.bodyText1!.copyWith(fontWeight: FontWeight.bold),)),
-                                actions: [
-                                  Center(
-                                    child: RatingBarIndicator(
-                                      rating: _classes[index].detail!.rating.toDouble(),
-                                      unratedColor: Colors.grey,
-                                      itemBuilder: (context, index) => const Icon(
-                                          Icons.star,
-                                          color: Colors.amber,
-                                      ),
-                                      itemCount: 5,
-                                      itemSize: 30,
-                                      direction: Axis.horizontal,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 20),
-                                  Center(
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                                      child: Text(_classes[index].detail!.review!, style: poppinsTheme.bodyText2!.copyWith(color: Colors.black)),
-                                    )
-                                  ),
-                                  const SizedBox(height: 20),
-                                ],
-                              )
-                            );
-                          },
-                        )
-                      : const Center(
-                          child: SizedBox(
-                            width: 40,
-                            height: 40,
-                            child: CircularProgressIndicator(),
-                          ),
-                        );
-                  },
-                  itemCount: (_hasReachedMax || _classes.isEmpty) ? _classes.length : _classes.length + 1,
-                  separatorBuilder: (context, index) {
-                    return const Divider();
-                  },
-                );
-              } else {
-                return Center(
-                  child: Text("empty_text.my_classes", style: poppinsTheme.bodyText1).tr(),
-                );
-              }
+                                ),
+                                const SizedBox(height: 20),
+                              ],
+                            )
+                          );
+                        },
+                      )
+                    : const Center(
+                        child: SizedBox(
+                          width: 40,
+                          height: 40,
+                          child: CircularProgressIndicator(),
+                        ),
+                      );
+                },
+                itemCount: (_hasReachedMax || _classes.isEmpty) ? _classes.length : _classes.length + 1,
+                separatorBuilder: (context, index) {
+                  return const Divider();
+                },
+              );
             } else if (snapshot.hasError) {
               return Center(
                 child: Text(snapshot.error.toString()),
