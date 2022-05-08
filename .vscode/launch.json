@@ -4,7 +4,6 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-
         {
             "name": "MI 9T Pro",
             "request": "launch",
@@ -16,6 +15,12 @@
             "request": "launch",
             "type": "dart",
             "deviceId": "a12541bc89a8afc2f3a39c87d0b4f9cff1422e7e"
+        },
+        {
+            "name": "iPhone 8 simulator",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "2EF897CD-764E-4DA2-B1A4-E3CFC4FA9015"
         }
     ],
     "compounds": [
@@ -23,7 +28,8 @@
             "name": "All Devices",
             "configurations": [
                 "MI 9T Pro",
-                "iPhone 7"
+                "iPhone 7",
+                "iPhone 8 simulator"
             ]
         }
     ]

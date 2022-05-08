@@ -4,7 +4,7 @@ import 'package:flexone/common/style.dart';
 import 'package:flexone/data/models/expert_result.dart';
 import 'package:flexone/data/models/user_result.dart';
 import 'package:flexone/data/providers/user.dart';
-import 'package:flexone/screens/expert/certificate_screen.dart';
+import 'package:flexone/screens/user/certificate_screen.dart';
 import 'package:flexone/screens/user/chat_screen.dart';
 import 'package:flexone/widgets/counter_container.dart';
 import 'package:flexone/widgets/info_row.dart';
@@ -36,7 +36,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
       future: Future.wait([
         UserModel.getDetail(Get.parameters['id']!),
         Expert.getExpertByID("E${Get.parameters['id']}"),
-        Expert.getSkills(_provider.user!.expertId!)
+        Expert.getSkills("E${Get.parameters['id']}")
       ]),
       builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
         if (snapshot.hasData) {
@@ -256,63 +256,67 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                           label: "city",
                           icon: Icons.location_city_rounded
                         ),
-                        const Divider(),
-                        const SizedBox(height: 5),
-                        Text(
-                          'skills',
-                          style: poppinsTheme.headline6,
-                        ).tr(),
-                        const SizedBox(height: 10),
-                        SizedBox(
-                          width: double.infinity,
-                          child: Wrap(
-                            spacing: 10.0,
-                            children: (snapshot.data![2] as List<Skill>).map<Widget>((skill) => Chip(
-                              elevation: 3,
-                              padding: EdgeInsets.zero,
-                              label: Text(
-                                skill.name, 
-                                style: poppinsTheme.caption!.copyWith(fontSize: 9)
+                        if (snapshot.data![1] != null) ...[
+                          const Divider(),
+                          const SizedBox(height: 5),
+                          Text(
+                            'skills',
+                            style: poppinsTheme.headline6,
+                          ).tr(),
+                          const SizedBox(height: 10),
+                          ((snapshot.data![2] as List<Skill>).isNotEmpty) ? 
+                            SizedBox(
+                              width: double.infinity,
+                              child: Wrap(
+                                spacing: 10.0,
+                                children: (snapshot.data![2] as List<Skill>).map<Widget>((skill) => Chip(
+                                  elevation: 3,
+                                  padding: EdgeInsets.zero,
+                                  label: Text(
+                                    skill.name, 
+                                    style: poppinsTheme.caption!.copyWith(fontSize: 9)
+                                  ),
+                                )).toList(),
                               ),
-                            )).toList(),
-                          ),
-                        ),
-                        const Divider(),
-                        const SizedBox(height: 5),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'certificates',
-                              style: poppinsTheme.headline6,
-                            ).tr(),
-                            ElevatedButton(
-                              onPressed: () {
-                                Get.to(CertificateScreen(readOnly: true));
-                              }, 
-                              child: const Text('see_all').tr()
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 10),
-                        (snapshot.data![1] as Expert).certificates!.isNotEmpty ? 
-                          CarouselSlider.builder(
-                            itemCount: (snapshot.data![1] as Expert).certificates!.length, 
-                            itemBuilder: (context, index, realIdx) {
-                              final certificate = (snapshot.data![1] as Expert).certificates![index];
-                              return Center(
-                                child: GestureDetector(
-                                  child: Image.network(certificate.photo, fit: BoxFit.cover),
-                                  onTap: () => Get.to(PreviewImage(image: certificate.photo, detail: certificate.detail)),
-                                ),
-                              );
-                            }, 
-                            options: CarouselOptions(
-                              autoPlay: true,
-                              aspectRatio: 2.0,
-                              enlargeCenterPage: true,
                             )
-                          ) : Container(),
+                          : const Text("-"),
+                          const Divider(),
+                          const SizedBox(height: 5),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'certificates',
+                                style: poppinsTheme.headline6,
+                              ).tr(),
+                              ElevatedButton(
+                                onPressed: () {
+                                  Get.to(CertificateScreen(certificates: (snapshot.data![1] as Expert).certificates!));
+                                }, 
+                                child: const Text('see_all').tr()
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 10),
+                          (snapshot.data![1] as Expert).certificates!.isNotEmpty ? 
+                            CarouselSlider.builder(
+                              itemCount: (snapshot.data![1] as Expert).certificates!.length, 
+                              itemBuilder: (context, index, realIdx) {
+                                final certificate = (snapshot.data![1] as Expert).certificates![index];
+                                return Center(
+                                  child: GestureDetector(
+                                    child: Image.network(certificate.photo, fit: BoxFit.cover),
+                                    onTap: () => Get.to(PreviewImage(image: certificate.photo, detail: certificate.detail)),
+                                  ),
+                                );
+                              }, 
+                              options: CarouselOptions(
+                                autoPlay: true,
+                                aspectRatio: 2.0,
+                                enlargeCenterPage: true,
+                              )
+                            ) : const Text("-"),
+                        ],
                         const SizedBox(height: 20)
                       ],
                     )

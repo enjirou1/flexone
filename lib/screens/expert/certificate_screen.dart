@@ -8,9 +8,7 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class CertificateScreen extends StatelessWidget {
-  bool readOnly;
-
-  CertificateScreen({Key? key, required this.readOnly}) : super(key: key);
+  const CertificateScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,25 +19,23 @@ class CertificateScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('certificates').tr(),
         actions: [
-          if (!readOnly) ...[
-            IconButton(
-              onPressed: () async {
-                final result = await Get.toNamed('add_certificate');
-                if (result) {
-                  Get.snackbar(
-                    tr('success'), tr('success_detail.add_certificate'),
-                    snackPosition: SnackPosition.BOTTOM,
-                    animationDuration: const Duration(milliseconds: 300),
-                    backgroundColor: Colors.green,
-                    colorText: Colors.white,
-                    icon: const Icon(Icons.check, color: Colors.white),
-                    duration: const Duration(seconds: 1)
-                  );
-                }
-              }, 
-              icon: const Icon(Icons.add_a_photo_rounded, color: Colors.white)
-            )
-          ]
+          IconButton(
+            onPressed: () async {
+              final result = await Get.toNamed('add_certificate');
+              if (result) {
+                Get.snackbar(
+                  tr('success'), tr('success_detail.add_certificate'),
+                  snackPosition: SnackPosition.BOTTOM,
+                  animationDuration: const Duration(milliseconds: 300),
+                  backgroundColor: Colors.green,
+                  colorText: Colors.white,
+                  icon: const Icon(Icons.check, color: Colors.white),
+                  duration: const Duration(seconds: 1)
+                );
+              }
+            }, 
+            icon: const Icon(Icons.add_a_photo_rounded, color: Colors.white)
+          )
         ],
       ),
       body: SingleChildScrollView(
@@ -55,7 +51,7 @@ class CertificateScreen extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: () => Get.to(PreviewImage(image: certificate.photo, detail: certificate.detail)),
-                    child: Image.network(certificate.photo, width: 110, height: 110, fit: BoxFit.cover)
+                    child: Image.network(certificate.photo, width: (MediaQuery.of(context).size.width - 50) / 3, height: (MediaQuery.of(context).size.width - 50) / 3, fit: BoxFit.cover)
                   ),
                   GestureDetector(
                     onTap: () async {

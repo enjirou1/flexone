@@ -83,6 +83,7 @@ class MyApp extends StatelessWidget {
                 GetPage(name: '/expert/new', page: () => const NewAccountScreen()),
                 GetPage(name: '/expert/profile', page: () => const ExpertProfileScreen()),
                 GetPage(name: '/add_skill', page: () => const AddSkillScreen()),
+                GetPage(name: '/certificate', page: () => const CertificateScreen()),
                 GetPage(name: '/add_certificate', page: () => const AddCertificateScreen()),
                 GetPage(name: '/list_chat', page: () => const ListChatScreen()),
                 GetPage(name: '/shop', page: () => const ShopScreen()),
