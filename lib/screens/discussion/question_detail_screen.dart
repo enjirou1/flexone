@@ -159,6 +159,12 @@ class _QuestionDetailScreenState extends State<QuestionDetailScreen> {
                         return (index < _answers.length)
                           ? AnswerCard(
                             answer: _answers[index],
+                            onCheck: _provider.user?.userId == widget.question.user.id ? () async {
+                              await Question.acceptAnswer(_answers[index].answerId, widget.question.questionId, _answers[index].user.id);
+                              _answers.clear();
+                              _hasReachedMax = false;
+                              setState(() {});
+                            } : null,
                             onRatingPressed: () async {
                               bool checkRating = await Question.checkRating(_answers[index].answerId, _provider.user!.userId!);
                               if (checkRating && _provider.user!.userId! != _answers[index].user.id) {

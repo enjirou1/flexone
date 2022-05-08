@@ -16,3 +16,7 @@ String convertToDecimalPattern(String country, int value) {
 String convertToDateFormat(String format, String value) {
   return DateFormat(format).format(DateTime.parse(value));
 }
+
+String getCompactNumber(String locale, int value) {
+  return NumberFormat.compact(locale: locale).format(value);
+}

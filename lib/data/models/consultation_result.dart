@@ -219,6 +219,28 @@ class Consultation {
     final data = (jsonObject as Map<String, dynamic>)['data'] as List;
     return data.map<Consultation>((consultation) => Consultation.createConsultation(consultation)).toList();
   }
+
+  static Future<List<Review>> getConsultationReviews(String id, int start, int limit) async {
+    final url = '$_baseUrl/$id/reviews?start=$start&limit=$limit';
+    final response = await http.get(Uri.parse(url));
+    final jsonObject = json.decode(response.body);
+    final data = (jsonObject as Map<String, dynamic>)['data'] as List;
+    return data.map<Review>((review) => Review.createReview(review)).toList();
+  }
+}
+
+class Review {
+  late SimpleUser user;
+  late Detail detail;
+
+  Review({required this.user, required this.detail});
+
+  factory Review.createReview(Map<String, dynamic> object) {
+    return Review(
+      user: SimpleUser.createUser(object['user']), 
+      detail: Detail.createDetail(object['detail'])
+    );
+  }
 }
 
 class Detail {

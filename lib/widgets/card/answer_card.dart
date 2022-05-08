@@ -2,16 +2,19 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flexone/common/style.dart';
 import 'package:flexone/data/models/dicussion_result.dart';
 import 'package:flexone/screens/discussion/comment_screen.dart';
+import 'package:flexone/utils/format.dart';
 import 'package:flexone/widgets/preview_image.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class AnswerCard extends StatelessWidget {
   Answer answer;
+  Function()? onCheck;
   Function() onRatingPressed;
 
-  AnswerCard({ Key? key, required this.answer, required this.onRatingPressed }) : super(key: key);
+  AnswerCard({ Key? key, required this.answer, required this.onCheck, required this.onRatingPressed }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -81,6 +84,27 @@ class AnswerCard extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
+            if (answer.accepted) ...[
+              const Padding(
+                padding: EdgeInsets.all(12),
+                child: FaIcon(
+                  FontAwesomeIcons.check,
+                  color: Colors.green,
+                  size: 25,
+                ),
+              ),
+            ] else ...[
+              if (onCheck != null) ...[
+                IconButton(
+                  onPressed: onCheck,
+                  icon: const FaIcon(
+                    FontAwesomeIcons.check,
+                    size: 25,
+                  ),
+                )
+              ]
+            ],
+            const SizedBox(width: 25),
             IconButton(
               onPressed: onRatingPressed, 
               icon: const Icon(
@@ -91,9 +115,12 @@ class AnswerCard extends StatelessWidget {
             ),
             Text(answer.rating.toString(), style: poppinsTheme.caption),
             const SizedBox(width: 25),
-            TextButton(
-              onPressed: () => Get.to(CommentScreen(answer: answer)), 
-              child: Text('${tr('comments')} (${answer.totalComments})', style: poppinsTheme.caption)
+            SizedBox(
+              width: 120,
+              child: TextButton(
+                onPressed: () => Get.to(CommentScreen(answer: answer)), 
+                child: Text('${tr('comments')} (${getCompactNumber(context.locale == const Locale('id') ? 'id' : 'en_US', answer.totalComments)})', style: poppinsTheme.caption)
+              ),
             ),
           ],
         )

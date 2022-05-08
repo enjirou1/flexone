@@ -121,6 +121,14 @@ class Question {
     final data = (jsonObject as Map<String, dynamic>)['data'];
     return Comment.createComment(data);
   }
+
+  static Future acceptAnswer(String answerId, String questionId, String userId) async {
+    final url = '$_baseUrl/answer/$answerId/accept';
+    await http.post(Uri.parse(url), body: {
+      'question_id': questionId,
+      'user_id': userId
+    });
+  }
 }
 
 class Answer {
@@ -131,10 +139,11 @@ class Answer {
   late String photo;
   late double rating;
   late int totalComments;
+  late bool accepted;
   late String createdAt;
   late bool updatePoint;
 
-  Answer({required this.answerId, required this.user, required this.questionId, required this.text, required this.photo, required this.rating, required this.totalComments, required this.createdAt, required this.updatePoint});
+  Answer({required this.answerId, required this.user, required this.questionId, required this.text, required this.photo, required this.rating, required this.totalComments, required this.accepted, required this.createdAt, required this.updatePoint});
 
   factory Answer.createAnswer(Map<String, dynamic> object) {
     return Answer(
@@ -145,6 +154,7 @@ class Answer {
       photo: object['photo'],
       rating: (object['rating'] is int) ? (object['rating'] as int).toDouble() : object['rating'],
       totalComments: object['total_comments'],
+      accepted: object['accepted'],
       createdAt: object['created_at'],
       updatePoint: object['update_point'] ?? false
     );

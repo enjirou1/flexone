@@ -8,7 +8,9 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class CertificateScreen extends StatelessWidget {
-  const CertificateScreen({Key? key}) : super(key: key);
+  bool readOnly;
+
+  CertificateScreen({Key? key, required this.readOnly}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,23 +21,25 @@ class CertificateScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('certificates').tr(),
         actions: [
-          IconButton(
-            onPressed: () async {
-              final result = await Get.toNamed('add_certificate');
-              if (result) {
-                Get.snackbar(
-                  tr('success'), tr('success_detail.add_certificate'),
-                  snackPosition: SnackPosition.BOTTOM,
-                  animationDuration: const Duration(milliseconds: 300),
-                  backgroundColor: Colors.green,
-                  colorText: Colors.white,
-                  icon: const Icon(Icons.check, color: Colors.white),
-                  duration: const Duration(seconds: 1)
-                );
-              }
-            }, 
-            icon: const Icon(Icons.add_a_photo_rounded, color: Colors.white)
-          )
+          if (!readOnly) ...[
+            IconButton(
+              onPressed: () async {
+                final result = await Get.toNamed('add_certificate');
+                if (result) {
+                  Get.snackbar(
+                    tr('success'), tr('success_detail.add_certificate'),
+                    snackPosition: SnackPosition.BOTTOM,
+                    animationDuration: const Duration(milliseconds: 300),
+                    backgroundColor: Colors.green,
+                    colorText: Colors.white,
+                    icon: const Icon(Icons.check, color: Colors.white),
+                    duration: const Duration(seconds: 1)
+                  );
+                }
+              }, 
+              icon: const Icon(Icons.add_a_photo_rounded, color: Colors.white)
+            )
+          ]
         ],
       ),
       body: SingleChildScrollView(

@@ -162,6 +162,7 @@ class _RequestBodyState extends State<RequestBody> {
                                                   selectedDate = result;
                                                 });
                                               },
+                                              minTime: DateTime.now(),
                                               currentTime: DateTime.now(),
                                               locale: context.locale == const Locale('id') ? LocaleType.id : LocaleType.en
                                             );

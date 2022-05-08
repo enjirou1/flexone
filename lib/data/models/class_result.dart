@@ -17,7 +17,7 @@ class Class {
   late int price;
   late int discountPrice;
   late int estimatedTime;
-  late int rating;
+  late double rating;
   late int totalRatings;
   late int totalParticipants;
   late int totalModules;
@@ -44,7 +44,7 @@ class Class {
       price: object['price'] ?? 0, 
       discountPrice: object['discount_price'] ?? 0, 
       estimatedTime: object['estimated_time'] ?? 0, 
-      rating: object['rating'], 
+      rating: (object['rating'] is int) ? (object['rating'] as int).toDouble() : object['rating'],
       totalRatings: object['total_ratings'],
       totalParticipants: object['total_participants'], 
       totalModules: object['total_modules'], 
@@ -195,6 +195,28 @@ class Class {
     final jsonObject = json.decode(response.body);
     final data = (jsonObject as Map<String, dynamic>)['data'] as List;
     return data.map<Class>((item) => Class.createClass(item)).toList();
+  }
+
+  static Future<List<Review>> getClassReviews(String id, int start, int limit) async {
+    final url = '$_baseUrl/$id/reviews?start=$start&limit=$limit';
+    final response = await http.get(Uri.parse(url));
+    final jsonObject = json.decode(response.body);
+    final data = (jsonObject as Map<String, dynamic>)['data'] as List;
+    return data.map<Review>((review) => Review.createReview(review)).toList();
+  }
+}
+
+class Review {
+  late SimpleUser user;
+  late Detail detail;
+
+  Review({required this.user, required this.detail});
+
+  factory Review.createReview(Map<String, dynamic> object) {
+    return Review(
+      user: SimpleUser.createUser(object['user']), 
+      detail: Detail.createDetail(object['detail'])
+    );
   }
 }
 

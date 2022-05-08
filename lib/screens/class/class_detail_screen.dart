@@ -5,6 +5,7 @@ import 'package:flexone/common/style.dart';
 import 'package:flexone/data/models/class_result.dart';
 import 'package:flexone/data/providers/preferences.dart';
 import 'package:flexone/data/providers/user.dart';
+import 'package:flexone/screens/class/class_review_screen.dart';
 import 'package:flexone/screens/class/syllabus_detail_screen.dart';
 import 'package:flexone/utils/format.dart';
 import 'package:flutter/material.dart';
@@ -152,24 +153,33 @@ class _ClassDetailScreenState extends State<ClassDetailScreen> {
                               ],
                             ),
                             const SizedBox(height: 5),
-                            Row(
-                              children: [
-                                RatingBarIndicator(
-                                  rating: widget.classModel.rating.toDouble(),
-                                  unratedColor: Colors.grey,
-                                  itemBuilder: (context, index) => const Icon(
-                                      Icons.star,
-                                      color: Colors.amber,
+                            GestureDetector(
+                              behavior: HitTestBehavior.translucent,
+                              onTap: () => Get.to(ClassReviewScreen(classId: widget.classModel.id)),
+                              child: Row(
+                                children: [
+                                  RatingBarIndicator(
+                                    rating: widget.classModel.rating.toDouble(),
+                                    unratedColor: Colors.grey,
+                                    itemBuilder: (context, index) => const Icon(
+                                        Icons.star,
+                                        color: Colors.amber,
+                                    ),
+                                    itemCount: 5,
+                                    itemSize: 15,
+                                    direction: Axis.horizontal,
                                   ),
-                                  itemCount: 5,
-                                  itemSize: 15,
-                                  direction: Axis.horizontal,
-                                ),
-                                const SizedBox(width: 5),
-                                Text(widget.classModel.rating.toString(), style: notoSansDisplayTheme.caption!.copyWith(fontSize: 13, color: Colors.amber)),
-                                const SizedBox(width: 5),
-                                Text('(${widget.classModel.totalRatings})', style: notoSansDisplayTheme.caption!.copyWith(fontSize: 12))
-                              ],
+                                  const SizedBox(width: 5),
+                                  Text(widget.classModel.rating.toString(), style: notoSansDisplayTheme.caption!.copyWith(fontSize: 13, color: Colors.amber)),
+                                  const SizedBox(width: 5),
+                                  Text('(${widget.classModel.totalRatings})', style: notoSansDisplayTheme.caption!.copyWith(fontSize: 12)),
+                                  const SizedBox(width: 5),
+                                  const Padding(
+                                    padding: EdgeInsets.only(top: 2), 
+                                    child: Icon(Icons.chevron_right_rounded, size: 20)
+                                  )
+                                ],
+                              ),
                             ),
                             const SizedBox(height: 5),
                             if (widget.classModel.discountPrice > 0) ...[
@@ -239,7 +249,7 @@ class _ClassDetailScreenState extends State<ClassDetailScreen> {
                                         backgroundColor: Colors.green,
                                         colorText: Colors.white,
                                         icon: const Icon(Icons.check, color: Colors.white),
-                                        duration: const Duration(seconds: 1)
+                                        duration: const Duration(seconds: 2)
                                       );
                                     } catch (e) {
                                       Get.snackbar(tr('failed'), tr('already_added_in_cart'),

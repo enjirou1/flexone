@@ -9,6 +9,7 @@ import 'package:flexone/data/providers/user.dart';
 import 'package:flexone/data/services/upload_service.dart';
 import 'package:flexone/screens/class/class_owned_screen.dart';
 import 'package:flexone/screens/consultation/consultation_owned_screen.dart';
+import 'package:flexone/screens/expert/certificate_screen.dart';
 import 'package:flexone/utils/format.dart';
 import 'package:flexone/utils/input_validation.dart';
 import 'package:flexone/widgets/card/card_with_header.dart';
@@ -581,7 +582,7 @@ class _ExpertProfileScreenState extends State<ExpertProfileScreen> {
                               child: ElevatedButton.icon(
                                 icon: const Icon(Icons.edit),
                                 onPressed: () {
-                                  Get.toNamed('/certificate');
+                                  Get.to(CertificateScreen(readOnly: false));
                                 }, 
                                 label: const Text('edit').tr()
                               ),

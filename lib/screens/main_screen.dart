@@ -47,7 +47,7 @@ class _MainScreenState extends State<MainScreen> {
       UserModel.getUserByEmail(_user.email).then((value) {
         provider.setUser(value!);
         Cart.getCart(value.userId!).then((value) {
-          provider.setCartItems(value!.classItems.length + value.consultationItems.length);
+          if (value != null) provider.setCartItems(value.classItems.length + value.consultationItems.length);
         });
       });
     } else {

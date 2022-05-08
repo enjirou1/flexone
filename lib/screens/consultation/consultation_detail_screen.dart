@@ -3,6 +3,7 @@ import 'package:flexone/common/style.dart';
 import 'package:flexone/data/models/consultation_result.dart';
 import 'package:flexone/data/providers/preferences.dart';
 import 'package:flexone/data/providers/user.dart';
+import 'package:flexone/screens/consultation/consultation_review_screen.dart';
 import 'package:flexone/utils/format.dart';
 import 'package:flexone/utils/input_validation.dart';
 import 'package:flexone/widgets/preview_image.dart';
@@ -121,24 +122,30 @@ class _ConsultationDetailScreenState extends State<ConsultationDetailScreen> {
                 ],
               ),
               const SizedBox(height: 10),
-              Row(
-                children: [
-                  RatingBarIndicator(
-                    rating: widget.consultation.rating.toDouble(),
-                    unratedColor: Colors.grey,
-                    itemBuilder: (context, index) => const Icon(
-                        Icons.star,
-                        color: Colors.amber,
+              GestureDetector(
+                onTap: () => Get.to(ConsultationReviewScreen(consultationId: widget.consultation.id)),
+                behavior: HitTestBehavior.translucent,
+                child: Row(
+                  children: [
+                    RatingBarIndicator(
+                      rating: widget.consultation.rating.toDouble(),
+                      unratedColor: Colors.grey,
+                      itemBuilder: (context, index) => const Icon(
+                          Icons.star,
+                          color: Colors.amber,
+                      ),
+                      itemCount: 5,
+                      itemSize: 20,
+                      direction: Axis.horizontal,
                     ),
-                    itemCount: 5,
-                    itemSize: 20,
-                    direction: Axis.horizontal,
-                  ),
-                  const SizedBox(width: 5),
-                  Text(widget.consultation.rating.toString(), style: poppinsTheme.caption!.copyWith(fontSize: 15, color: Colors.amber)),
-                  const SizedBox(width: 5),
-                  Text('(${widget.consultation.totalRatings})', style: poppinsTheme.caption!.copyWith(fontSize: 13))
-                ],
+                    const SizedBox(width: 5),
+                    Text(widget.consultation.rating.toString(), style: poppinsTheme.caption!.copyWith(fontSize: 15, color: Colors.amber)),
+                    const SizedBox(width: 5),
+                    Text('(${widget.consultation.totalRatings})', style: poppinsTheme.caption!.copyWith(fontSize: 13)),
+                    const SizedBox(width: 10),
+                    const Icon(Icons.chevron_right_rounded)
+                  ],
+                ),
               ),
               const SizedBox(height: 10),
               if (widget.consultation.expert != null) ...[
@@ -283,6 +290,7 @@ class _ConsultationDetailScreenState extends State<ConsultationDetailScreen> {
                                               selectedDate = result;
                                             });
                                           },
+                                          minTime: DateTime.now(),
                                           currentTime: DateTime.now(),
                                           locale: context.locale == const Locale('id') ? LocaleType.id : LocaleType.en
                                         );
@@ -312,7 +320,7 @@ class _ConsultationDetailScreenState extends State<ConsultationDetailScreen> {
                                             backgroundColor: Colors.green,
                                             colorText: Colors.white,
                                             icon: const Icon(Icons.check, color: Colors.white),
-                                            duration: const Duration(seconds: 1)
+                                            duration: const Duration(seconds: 2)
                                           );
                                         } else {
                                           Get.snackbar(tr('failed'), tr('error.date.empty'),
