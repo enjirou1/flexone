@@ -56,6 +56,9 @@
         "delete_section": {
             "title": "Apakah anda yakin untuk menghapus bagian ini?"
         },
+        "finish_consultation": {
+            "title": "Apakah anda yakin untuk menyelesaikan konsultasi ini?"
+        },
         "logout": {
             "title": "Apakah anda yakin ingin logout?"
         },
@@ -131,6 +134,9 @@
         "detail": {
             "empty": "Detail tidak boleh kosong"
         },
+        "duration": {
+            "empty": "Durasi tidak boleh kosong"
+        },
         "education": {
             "empty": "Edukasi tidak boleh kosong"
         },
@@ -174,6 +180,9 @@
         },
         "reason": {
             "empty": "Alasan tidak boleh kosong"
+        },
+        "schedule": {
+            "booked": "Jadwal sudah dipesan"
         },
         "slot": {
             "empty": "Slot tidak boleh kosong",
@@ -318,5 +327,10 @@
     "previous": "Sebelumnya",
     "next": "Selanjutnya",
     "reviews": "Ulasan",
-    "see_all": "Lihat semua"
+    "see_all": "Lihat semua",
+    "duration": "Durasi",
+    "minutes": "menit",
+    "minutes_wp": "{} menit",
+    "done": "Selesai",
+    "help": "Bantuan"
 }

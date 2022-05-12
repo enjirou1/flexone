@@ -20,6 +20,15 @@ class RequestCard extends StatelessWidget {
     return Column(
       children: [
         Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Text("created_at", style: poppinsTheme.caption).tr(),
+            const SizedBox(width: 10),
+            Text(convertToDateFormat('dd/MM/y HH:mm', request.requestedAt), style: poppinsTheme.caption),
+          ],
+        ),
+        const SizedBox(height: 15),
+        Row(
           children: [
           GestureDetector(
             onTap: () => Get.toNamed('/user/detail?id=${request.user.id}'),
@@ -63,7 +72,18 @@ class RequestCard extends StatelessWidget {
                   const FaIcon(FontAwesomeIcons.calendarDay, size: 15),
                   const SizedBox(width: 5),
                   Text(
-                    convertToDateFormat('dd/MM/y hh:mm', request.appointmentDate),
+                    convertToDateFormat('dd/MM/y HH:mm', request.appointmentDate),
+                    style: poppinsTheme.caption!.copyWith(fontSize: 11),
+                  )
+                ],
+              ),
+              const SizedBox(height: 10),
+              Row(
+                children: [
+                  const FaIcon(FontAwesomeIcons.clock, size: 15),
+                  const SizedBox(width: 5),
+                  Text(
+                    tr("minutes_wp", args: [request.duration.toString()]),
                     style: poppinsTheme.caption!.copyWith(fontSize: 11),
                   )
                 ],

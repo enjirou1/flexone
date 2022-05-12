@@ -10,6 +10,7 @@ import 'package:flexone/widgets/preview_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
@@ -24,6 +25,7 @@ class ConsultationDetailScreen extends StatefulWidget {
 
 class _ConsultationDetailScreenState extends State<ConsultationDetailScreen> {
   final TextEditingController _controller = TextEditingController();
+  final TextEditingController _durationController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -246,7 +248,9 @@ class _ConsultationDetailScreenState extends State<ConsultationDetailScreen> {
                         context: context, 
                         builder: (BuildContext context) {
                           InputValidation inputValidation = InputValidation(isValid: true, message: '');
+                          InputValidation durationValidation = InputValidation(isValid: true, message: '');
                           String selectedDate = "";
+                          List<AppointmentDate> appointmentDates = [];
 
                           return StatefulBuilder(
                             builder: (context, setState) => AlertDialog(
@@ -270,7 +274,7 @@ class _ConsultationDetailScreenState extends State<ConsultationDetailScreen> {
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      selectedDate != "" ? convertToDateFormat('dd/MM/y hh:mm', selectedDate) : "-", 
+                                      selectedDate != "" ? convertToDateFormat('dd/MM/y HH:mm', selectedDate) : "-", 
                                       style: poppinsTheme.bodyText2!.copyWith(color: Colors.black)
                                     ),
                                     TextButton(
@@ -299,6 +303,39 @@ class _ConsultationDetailScreenState extends State<ConsultationDetailScreen> {
                                     ),
                                   ],
                                 ),
+                                TextField(
+                                  controller: _durationController,
+                                  keyboardType: TextInputType.number,
+                                  style: const TextStyle(color: Colors.black),
+                                  decoration: InputDecoration(
+                                    labelText: tr("duration"),
+                                    isDense: true,
+                                    prefixIcon: const Icon(Icons.access_alarm_rounded, color: Colors.black),
+                                    suffixText: tr("minutes"),
+                                    suffixStyle: const TextStyle(color: Colors.black),
+                                    enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: secondaryColor)),
+                                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: secondaryColor)),
+                                    labelStyle: TextStyle(color: secondaryColor),
+                                    errorText: durationValidation.isValid ? null : durationValidation.message
+                                  )
+                                ),
+                                if (appointmentDates.isNotEmpty) ...[
+                                      const SizedBox(height: 10),
+                                      Center(
+                                        child: Text('error.schedule.booked', style: poppinsTheme.subtitle2!.copyWith(color: Colors.black),).tr(),
+                                      ),
+                                      Container(
+                                        width: double.infinity,
+                                        padding: const EdgeInsets.only(top: 5),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: appointmentDates.map((date) => Text(
+                                            '${convertToDateFormat('dd/MM/y HH:mm', date.dtStart)} - ${convertToDateFormat('dd/MM/y HH:mm', date.dtEnd)}', 
+                                            style: poppinsTheme.caption!.copyWith(color: Colors.red[400])
+                                          )).toList(),
+                                        ),
+                                      ),
+                                    ],
                                 Container(
                                   width: double.infinity,
                                   padding: const EdgeInsets.only(top: 10.0),
@@ -306,22 +343,54 @@ class _ConsultationDetailScreenState extends State<ConsultationDetailScreen> {
                                     onPressed: () async {
                                       setState(() {
                                         inputValidation = InputValidation(isValid: _controller.text.isNotEmpty, message: tr('error.notes.empty'));
+                                        durationValidation = InputValidation(isValid: _durationController.text.isNotEmpty, message: tr('error.duration.empty'));
                                       });
 
-                                      if (_controller.text.isNotEmpty) {
+                                      Consultation.checkAppointmentDate(
+                                        widget.consultation.id, 
+                                        selectedDate, 
+                                        _durationController.text
+                                      ).then((value) {
+                                        appointmentDates = value;
+                                        setState(() {});
+                                        print(appointmentDates);
+                                      });
+
+                                      if (_controller.text.isNotEmpty && _durationController.text.isNotEmpty) {
                                         if (selectedDate != "") {
-                                          await Consultation.joinConsultation(widget.consultation.id, _provider.user!.userId!, selectedDate, _controller.text);
-                                          _provider.addItem();
-                                          Navigator.pop(context);
-                                          Get.snackbar(
-                                            tr('success'), tr('success_detail.send_request'),
-                                            snackPosition: SnackPosition.BOTTOM,
-                                            animationDuration: const Duration(milliseconds: 300),
-                                            backgroundColor: Colors.green,
-                                            colorText: Colors.white,
-                                            icon: const Icon(Icons.check, color: Colors.white),
-                                            duration: const Duration(seconds: 2)
+                                          final dates = await Consultation.checkAppointmentDate(
+                                            widget.consultation.id, 
+                                            selectedDate,
+                                            _durationController.text
                                           );
+
+                                          if (dates.isEmpty) {
+                                            await Consultation.joinConsultation(
+                                              widget.consultation.id, 
+                                              _provider.user!.userId!, 
+                                              selectedDate,
+                                              _durationController.text,
+                                              _controller.text
+                                            );
+                                            Navigator.pop(context);
+                                            Get.snackbar(
+                                              tr('success'), tr('success_detail.send_request'),
+                                              snackPosition: SnackPosition.BOTTOM,
+                                              animationDuration: const Duration(milliseconds: 300),
+                                              backgroundColor: Colors.green,
+                                              colorText: Colors.white,
+                                              icon: const Icon(Icons.check, color: Colors.white),
+                                              duration: const Duration(seconds: 2)
+                                            );
+                                          } else {
+                                            Get.snackbar(tr('failed'), tr('error.schedule.booked'),
+                                              snackPosition: SnackPosition.BOTTOM,
+                                              colorText: Colors.white,
+                                              backgroundColor: Colors.red,
+                                              animationDuration: const Duration(milliseconds: 300),
+                                              duration: const Duration(seconds: 2)
+                                            );
+                                          }
                                         } else {
                                           Get.snackbar(tr('failed'), tr('error.date.empty'),
                                             snackPosition: SnackPosition.BOTTOM,

@@ -72,7 +72,10 @@ class _ExpertProfileScreenState extends State<ExpertProfileScreen> {
                   title: const Text('consultations_owned').tr(),
                   tileColor: _tileColor,
                   dense: true,
-                  onTap: () => Get.to(ConsultationOwnedScreen(expert: _expert!)),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Get.to(ConsultationOwnedScreen(expert: _expert!));
+                  },
                 ),
               ),
               PopupMenuItem(
@@ -82,7 +85,10 @@ class _ExpertProfileScreenState extends State<ExpertProfileScreen> {
                   title: const Text('classes_owned').tr(),
                   tileColor: _tileColor,
                   dense: true,
-                  onTap: () => Get.to(const ClassOwnedScreen()),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Get.to(const ClassOwnedScreen());
+                  },
                 ),
               ),
               PopupMenuItem(
@@ -92,7 +98,10 @@ class _ExpertProfileScreenState extends State<ExpertProfileScreen> {
                   title: const Text('reviews').tr(),
                   tileColor: _tileColor,
                   dense: true,
-                  onTap: () => Get.toNamed('/reviews')
+                  onTap: () {
+                    Navigator.pop(context);
+                    Get.toNamed('/reviews');
+                  }
                 ),
               ),
             ],

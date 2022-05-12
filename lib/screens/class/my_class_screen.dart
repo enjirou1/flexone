@@ -80,6 +80,7 @@ class _MyClassScreenState extends State<MyClassScreen> {
                     ? MyClassCard(
                         classModel: _classes[index],
                         onGiveRating: () {
+                          BuildContext parentContext = context;
                           showDialog(
                             context: context, 
                             builder: (context) => AlertDialog(
@@ -129,6 +130,7 @@ class _MyClassScreenState extends State<MyClassScreen> {
                                       _hasReachedMax = false;
                                       setState(() {});
                                       Navigator.pop(context);
+                                      Navigator.pop(parentContext);
                                     }, 
                                     child: const Text('OK')
                                   ),
@@ -138,6 +140,7 @@ class _MyClassScreenState extends State<MyClassScreen> {
                           );
                         },
                         onViewReview: () {
+                          Navigator.pop(context);
                           showDialog(
                             context: context, 
                             builder: (context) => AlertDialog(

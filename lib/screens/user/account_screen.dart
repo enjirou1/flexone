@@ -3,9 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flexone/data/providers/google_sign_in.dart';
 import 'package:flexone/data/providers/preferences.dart';
 import 'package:flexone/data/providers/user.dart';
+import 'package:flexone/utils/launcher.dart';
 import 'package:flexone/widgets/card/profile_card.dart';
 import 'package:flexone/widgets/dialog/confirmation_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
@@ -117,6 +119,13 @@ class AccountScreen extends StatelessWidget {
         title: const Text('settings').tr(),
         onTap: () => Get.toNamed('/settings'),
       ),
+      // ListTile(
+      //   leading: const FaIcon(FontAwesomeIcons.whatsapp, color: Colors.green),
+      //   title: const Text('help').tr(),
+      //   onTap: () async {
+      //     await Launcher.launchWhatsapp();
+      //   },
+      // ),
       ListTile(
         leading: const Icon(
           Icons.logout_rounded,

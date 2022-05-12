@@ -4,6 +4,7 @@ import 'package:flexone/data/models/consultation_result.dart';
 import 'package:flexone/data/providers/user.dart';
 import 'package:flexone/utils/launcher.dart';
 import 'package:flexone/widgets/card/my_consultation_card.dart';
+import 'package:flexone/widgets/dialog/confirmation_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
@@ -79,6 +80,7 @@ class _MyConsultationScreenState extends State<MyConsultationScreen> {
                     ? MyConsultationCard(
                         consultation: _consultations[index],
                         onGiveRating: () {
+                          BuildContext parentContext = context;
                           showDialog(
                             context: context, 
                             builder: (context) => AlertDialog(
@@ -128,6 +130,7 @@ class _MyConsultationScreenState extends State<MyConsultationScreen> {
                                       _hasReachedMax = false;
                                       setState(() {});
                                       Navigator.pop(context);
+                                      Navigator.pop(parentContext);
                                     }, 
                                     child: const Text('OK')
                                   ),
@@ -137,6 +140,7 @@ class _MyConsultationScreenState extends State<MyConsultationScreen> {
                           );
                         },
                         onViewReview: () {
+                          Navigator.pop(context);
                           showDialog(
                             context: context, 
                             builder: (context) => AlertDialog(
@@ -168,6 +172,7 @@ class _MyConsultationScreenState extends State<MyConsultationScreen> {
                           );
                         },
                         onViewDetail: () {
+                          Navigator.pop(context);
                           showDialog(
                             context: context, 
                             builder: (context) => AlertDialog(
@@ -186,6 +191,27 @@ class _MyConsultationScreenState extends State<MyConsultationScreen> {
                         },
                         onConsult: () {
                           Launcher.launchExternalApplication(_consultations[index].link);
+                        },
+                        onDone: () {
+                          BuildContext parentContext = context;
+                          showDialog(
+                            context: context, 
+                            builder: (context) => ConfirmationDialog(
+                              title: 'confirmation.finish_consultation.title',
+                              buttonText: 'Ok', 
+                              onCancel: () {
+                                Navigator.pop(context);
+                              }, 
+                              onPressed: () async {
+                                await Consultation.complete(_consultations[index].detail!.id);
+                                _consultations.clear();
+                                _hasReachedMax = false;
+                                setState(() {});
+                                Navigator.pop(context);
+                                Navigator.pop(parentContext);
+                              }
+                            )
+                          );
                         },
                       )
                     : const Center(

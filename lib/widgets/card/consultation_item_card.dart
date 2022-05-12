@@ -108,7 +108,7 @@ class ConsultationItemCard extends StatelessWidget {
                     const FaIcon(FontAwesomeIcons.calendarDay, size: 15),
                     const SizedBox(width: 5),
                     Text(
-                      convertToDateFormat('dd/MM/y hh:mm', consultation.detail!.appointmentDate),
+                      convertToDateFormat('dd/MM/y HH:mm', consultation.detail!.appointmentDate),
                       style: poppinsTheme.caption!.copyWith(fontSize: 11),
                     )
                   ],

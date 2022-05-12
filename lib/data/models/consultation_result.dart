@@ -7,6 +7,7 @@ class ConsultationRequest {
   late SimpleUser user;
   late Consultation consultation;
   late String appointmentDate;
+  late int duration;
   late String explanation;
   late bool isDone;
   late int rating;
@@ -17,7 +18,9 @@ class ConsultationRequest {
   String? finishedAt;
   static const String _baseUrl = 'https://api.flexone.online/v1/expert';
 
-  ConsultationRequest({required this.id, this.transactionConsultationId, required this.user, required this.consultation, required this.appointmentDate, required this.explanation, required this.isDone, required this.rating, this.reason, this.review, required this.status, required this.requestedAt, this.finishedAt});
+  ConsultationRequest({required this.id, this.transactionConsultationId, required this.user, required this.consultation, 
+  required this.appointmentDate, required this.duration, required this.explanation, required this.isDone, required this.rating, 
+  this.reason, this.review, required this.status, required this.requestedAt, this.finishedAt});
 
   factory ConsultationRequest.createRequest(Map<String, dynamic> object) {
     return ConsultationRequest(
@@ -26,6 +29,7 @@ class ConsultationRequest {
       user: SimpleUser.createUser(object['user']), 
       consultation: Consultation.createConsultation(object['consultation']), 
       appointmentDate: object['appointment_date'], 
+      duration: object['duration'],
       explanation: object['explanation'], 
       isDone: object['is_done'], 
       rating: object['rating'],
@@ -179,11 +183,12 @@ class Consultation {
     return Consultation.createConsultation(data);
   }
 
-  static Future joinConsultation(String consultationId, String userId, String appointmentDate, String explanation) async {
+  static Future joinConsultation(String consultationId, String userId, String appointmentDate, String duration, String explanation) async {
     final url = '$_baseUrl/$consultationId/join';
     final response = await http.post(Uri.parse(url), body: {
       "user_id": userId,
       "appointment": appointmentDate,
+      "duration": duration,
       "explanation": explanation
     });
   }
@@ -196,10 +201,11 @@ class Consultation {
     });
   }
 
-  static Future reschedule(int requestId, String date) async {
+  static Future reschedule(int requestId, String date, String duration) async {
     final url = '$_baseUrl/reschedule/$requestId';
     await http.put(Uri.parse(url), body: {
-      "date": date
+      "date": date,
+      "duration": duration
     });
   }
 
@@ -227,6 +233,46 @@ class Consultation {
     final data = (jsonObject as Map<String, dynamic>)['data'] as List;
     return data.map<Review>((review) => Review.createReview(review)).toList();
   }
+
+  static Future<List<AppointmentDate>> checkAppointmentDate(String consultationId, String date, String duration) async {
+    final url = '$_baseUrl/$consultationId/check_datetime';
+    final response = await http.post(Uri.parse(url), body: {
+      "date": date,
+      "duration": duration
+    });
+    final jsonObject = json.decode(response.body);
+    final data = (jsonObject as Map<String, dynamic>)['data'] as List;
+    return data.map<AppointmentDate>((appointmentDate) => AppointmentDate.createAppointmentDate(appointmentDate)).toList();
+  }
+
+  static Future complete(int joinId) async {
+    final url = '$_baseUrl/$joinId/complete';
+    await http.post(Uri.parse(url));
+  }
+
+  static Future completeAll(int userId) async {
+    final url = '$_baseUrl/complete/$userId/all';
+    await http.post(Uri.parse(url));
+  }
+
+  static Future rejectAll(String expertId) async {
+    final url = '$_baseUrl/reject/$expertId/all';
+    await http.post(Uri.parse(url));
+  }
+}
+
+class AppointmentDate {
+  late String dtStart;
+  late String dtEnd;
+
+  AppointmentDate({required this.dtStart, required this.dtEnd});
+
+  factory AppointmentDate.createAppointmentDate(Map<String, dynamic> object) {
+    return AppointmentDate(
+      dtStart: object['dt_start'], 
+      dtEnd: object['dt_end']
+    );
+  }
 }
 
 class Review {
@@ -248,6 +294,7 @@ class Detail {
   String? invoice;
   int? transactionId;
   late String appointmentDate;
+  late int duration;
   late String explanation;
   late bool isDone;
   late int rating;
@@ -255,9 +302,9 @@ class Detail {
   late String status;
   String? reason;
   late String joinedAt;
-  bool? finished;
+  bool? isConsulting;
 
-  Detail({required this.id, this.invoice, this.transactionId, required this.appointmentDate, required this.explanation, required this.isDone, required this.rating, this.reason, this.review, required this.status, required this.joinedAt, this.finished});
+  Detail({required this.id, this.invoice, this.transactionId, required this.appointmentDate, required this.duration, required this.explanation, required this.isDone, required this.rating, this.reason, this.review, required this.status, required this.joinedAt, this.isConsulting});
 
   factory Detail.createDetail(Map<String, dynamic> object) {
     return Detail(
@@ -265,6 +312,7 @@ class Detail {
       invoice: object['invoice'],
       transactionId: object['transaction_id'],
       appointmentDate: object['appointment_date'], 
+      duration: object['duration'],
       explanation: object['explanation'], 
       isDone: object['is_done'], 
       rating: object['rating'],
@@ -272,7 +320,7 @@ class Detail {
       reason: object['reason'], 
       status: object['status'], 
       joinedAt: object['joined_at'],
-      finished: object['finished']
+      isConsulting: object['is_consulting']
     );
   }
 }

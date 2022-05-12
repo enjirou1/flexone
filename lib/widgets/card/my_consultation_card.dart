@@ -16,6 +16,7 @@ class MyConsultationCard extends StatelessWidget {
   Function()? onGiveRating;
   Function()? onViewReview;
   Function()? onConsult;
+  Function()? onDone;
   Map<String, dynamic> statusColor = {
     "pending": Colors.amber,
     "rejected": Colors.red,
@@ -23,7 +24,7 @@ class MyConsultationCard extends StatelessWidget {
     "paid": Colors.green
   };
 
-  MyConsultationCard({ Key? key, required this.consultation, this.status, this.onViewDetail, this.onGiveRating, this.onViewReview, this.onConsult }) : super(key: key);
+  MyConsultationCard({ Key? key, required this.consultation, this.status, this.onViewDetail, this.onGiveRating, this.onViewReview, this.onConsult, this.onDone }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +94,18 @@ class MyConsultationCard extends StatelessWidget {
                         const FaIcon(FontAwesomeIcons.calendarDay, size: 15),
                         const SizedBox(width: 5),
                         Text(
-                          convertToDateFormat('dd/MM/y hh:mm', consultation.detail!.appointmentDate),
+                          convertToDateFormat('dd/MM/y HH:mm', consultation.detail!.appointmentDate),
+                          style: poppinsTheme.caption!.copyWith(fontSize: 11),
+                        )
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    Row(
+                      children: [
+                        const FaIcon(FontAwesomeIcons.clock, size: 15),
+                        const SizedBox(width: 5),
+                        Text(
+                          tr("minutes_wp", args: [consultation.detail!.duration.toString()]),
                           style: poppinsTheme.caption!.copyWith(fontSize: 11),
                         )
                       ],
@@ -150,7 +162,7 @@ class MyConsultationCard extends StatelessWidget {
                             onTap: onViewReview,
                           ),
                       ),
-                      if (!consultation.detail!.finished!) ...[
+                      if (consultation.detail!.isConsulting!) ...[
                         PopupMenuItem(
                           padding: EdgeInsets.zero,
                           child: ListTile(
@@ -161,7 +173,19 @@ class MyConsultationCard extends StatelessWidget {
                             onTap: onConsult,
                           ),
                         ),
-                      ]
+                      ],
+                      if (!consultation.detail!.isDone) ...[
+                        PopupMenuItem(
+                          padding: EdgeInsets.zero,
+                          child: ListTile(
+                            leading: const Icon(Icons.check),
+                            title: const Text('done').tr(),
+                            tileColor: _tileColor,
+                            dense: true,
+                            onTap: onDone,
+                          ),
+                        ),
+                      ],
                     ],
                     if (consultation.detail!.status == "rejected") ...[
                       PopupMenuItem(

@@ -56,6 +56,9 @@
         "delete_section": {
             "title": "Are you sure to delete this section?"
         },
+        "finish_consultation": {
+            "title": "Are you sure to finish this consultation?"
+        },
         "logout": {
             "title": "Are you sure you want to logout?"
         },
@@ -131,6 +134,9 @@
         "detail": {
             "empty": "Detail cannot be empty"
         },
+        "duration": {
+            "empty": "Duration cannot be empty"
+        },
         "education": {
             "empty": "Education cannot be empty"
         },
@@ -174,6 +180,9 @@
         },
         "reason": {
             "empty": "Reason cannot be empty"
+        },
+        "schedule": {
+            "booked": "Schedule(s) already booked"
         },
         "slot": {
             "empty": "Slot cannot be empty",
@@ -318,5 +327,10 @@
     "previous": "Previous",
     "next": "Next",
     "reviews": "Reviews",
-    "see_all": "See all"
+    "see_all": "See all",
+    "duration": "Duration",
+    "minutes": "minutes",
+    "minutes_wp": "{} minutes",
+    "done": "Done",
+    "help": "Help"
 }
