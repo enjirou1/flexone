@@ -332,5 +332,9 @@
     "minutes": "menit",
     "minutes_wp": "{} menit",
     "done": "Selesai",
-    "help": "Bantuan"
+    "help": "Bantuan",
+    "your_account_has_been_banned": "Akun anda telah di ban!",
+    "contact_us_for_further_information": "Hubungi kami untuk informasi lebih lanjut.",
+    "back_to_login": "Kembali ke login",
+    "contact_us": "Hubungi kami"
 }

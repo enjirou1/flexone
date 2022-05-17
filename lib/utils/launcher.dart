@@ -24,25 +24,25 @@ class Launcher {
     }
   }
 
-  // static Future launchWhatsapp() async{
-  //   const String phone = "6282233033995";
-  //   const String whatsappURlAndroid = "https://api.whatsapp.com/send?phone=$phone";
-  //   final String whatappURLIOS = "https://wa.me/$phone/?text=${Uri.parse("")}";
+  static Future launchWhatsapp() async{
+    const String phone = "6282233033995";
+    const String whatsappURlAndroid = "https://api.whatsapp.com/send?phone=$phone";
+    final String whatappURLIOS = "https://wa.me/$phone/?text=${Uri.parse("")}";
 
-  //   if(Platform.isIOS){
-  //     if(await launchUrl(Uri.parse(whatappURLIOS))){
-  //       await launchUrl(
-  //         Uri.parse(whatappURLIOS),
-  //         mode: LaunchMode.externalApplication,
-  //       );
-  //     }
-  //   }else{
-  //     if(await canLaunchUrl(Uri.parse(whatsappURlAndroid))){
-  //       await launchUrl(
-  //         Uri.parse(whatsappURlAndroid),
-  //         mode: LaunchMode.externalApplication,
-  //       );
-  //     }
-  //   }
-  // }
+    if(Platform.isIOS){
+      if(await canLaunchUrl(Uri.parse(whatappURLIOS))){
+        await launchUrl(
+          Uri.parse(whatappURLIOS),
+          mode: LaunchMode.externalApplication,
+        );
+      }
+    }else{
+      if(await canLaunchUrl(Uri.parse(whatsappURlAndroid))){
+        await launchUrl(
+          Uri.parse(whatsappURlAndroid),
+          mode: LaunchMode.externalApplication,
+        );
+      }
+    }
+  }
 }

@@ -4,13 +4,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flexone/common/style.dart';
 import 'package:flexone/data/models/transaction_result.dart';
 import 'package:flexone/data/models/user_result.dart';
+import 'package:flexone/data/providers/google_sign_in.dart';
 import 'package:flexone/data/providers/user.dart';
 import 'package:flexone/screens/class/class_screen.dart';
 import 'package:flexone/screens/consultation/consultation_screen.dart';
 import 'package:flexone/screens/discussion/discussion_screen.dart';
 import 'package:flexone/screens/room/room_screen.dart';
 import 'package:flexone/screens/user/account_screen.dart';
+import 'package:flexone/utils/launcher.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
@@ -44,6 +47,40 @@ class _MainScreenState extends State<MainScreen> {
     print(_user);
 
     if (_user != null) {
+      UserModel.checkUser(_user.email!).then((value) async {
+        if (value == false) {
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (context) => AlertDialog(
+              title: const Text('your_account_has_been_banned').tr(),
+              content: const Text('contact_us_for_further_information').tr(),
+              actions: [
+                Center(
+                  child: TextButton.icon(
+                    onPressed: () async {
+                      await Launcher.launchWhatsapp();
+                    }, 
+                    icon: const FaIcon(FontAwesomeIcons.whatsapp, color: Colors.green), 
+                    label: const Text("contact_us").tr()
+                  ),
+                ),
+                Center(
+                  child: TextButton.icon(
+                    onPressed: () async {
+                      final provider = Provider.of<GoogleSignInProvider>(context, listen: false);
+                      await provider.logout();
+                      Get.offAllNamed('/');
+                    },
+                    icon: const Icon(Icons.login, color: Colors.red),
+                    label: const Text('logout', style: TextStyle(color: Colors.red),).tr(),
+                  ),
+                )
+              ],
+            )
+          );
+        }
+      });
       UserModel.getUserByEmail(_user.email).then((value) {
         provider.setUser(value!);
         Cart.getCart(value.userId!).then((value) {

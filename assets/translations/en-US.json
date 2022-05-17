@@ -332,5 +332,9 @@
     "minutes": "minutes",
     "minutes_wp": "{} minutes",
     "done": "Done",
-    "help": "Help"
+    "help": "Help",
+    "your_account_has_been_banned": "Your account has been banned!",
+    "contact_us_for_further_information": "Contact us for further information.",
+    "back_to_login": "Back to login",
+    "contact_us": "Contact us"
 }

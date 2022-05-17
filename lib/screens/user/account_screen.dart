@@ -119,13 +119,13 @@ class AccountScreen extends StatelessWidget {
         title: const Text('settings').tr(),
         onTap: () => Get.toNamed('/settings'),
       ),
-      // ListTile(
-      //   leading: const FaIcon(FontAwesomeIcons.whatsapp, color: Colors.green),
-      //   title: const Text('help').tr(),
-      //   onTap: () async {
-      //     await Launcher.launchWhatsapp();
-      //   },
-      // ),
+      ListTile(
+        leading: const FaIcon(FontAwesomeIcons.whatsapp, color: Colors.green),
+        title: const Text('help').tr(),
+        onTap: () async {
+          await Launcher.launchWhatsapp();
+        },
+      ),
       ListTile(
         leading: const Icon(
           Icons.logout_rounded,

@@ -235,6 +235,15 @@ class UserModel {
     }
   }
 
+  static Future<bool?> checkUser(String email) async {
+    const url = '$_baseUrl/check';
+    final response = await http.post(Uri.parse(url), body: {
+      "email": email
+    });
+
+    return json.decode(response.body)['data'];
+  }
+
   @override
   String toString() {
     return "$email";
