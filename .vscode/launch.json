@@ -20,7 +20,7 @@
             "name": "iPhone 8 simulator",
             "request": "launch",
             "type": "dart",
-            "deviceId": "2EF897CD-764E-4DA2-B1A4-E3CFC4FA9015"
+            "deviceId": "4C07F49B-F8C1-4F97-8DC6-612D1541BB9D"
         }
     ],
     "compounds": [
