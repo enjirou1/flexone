@@ -147,17 +147,9 @@ class _AddConsultationScreenState extends State<AddConsultationScreen> {
                               Navigator.pop(context);
                               _image = await UploadService.uploadImage(_file!, "consultation", _provider.user!.userId!);
                             } on FirebaseException catch (e) {
-                              Get.snackbar('Error', e.message!,
-                                snackPosition: SnackPosition.BOTTOM,
-                                animationDuration: const Duration(milliseconds: 300),
-                                duration: const Duration(seconds: 2)
-                              );
+                              print(e.message!);
                             } catch (e) {
-                              Get.snackbar('Error', e.toString(),
-                                snackPosition: SnackPosition.BOTTOM,
-                                animationDuration: const Duration(milliseconds: 300),
-                                duration: const Duration(seconds: 2)
-                              );
+                              print(e.toString());
                             }
                             setState(() {});
                           },
@@ -172,17 +164,9 @@ class _AddConsultationScreenState extends State<AddConsultationScreen> {
                               Navigator.pop(context);
                               _image = await UploadService.uploadImage(_file!, "consultation", _provider.user!.userId!);
                             } on FirebaseException catch (e) {
-                              Get.snackbar('Error', e.message!,
-                                snackPosition: SnackPosition.BOTTOM,
-                                animationDuration: const Duration(milliseconds: 300),
-                                duration: const Duration(seconds: 2)
-                              );
+                              print(e.message!);
                             } catch (e) {
-                              Get.snackbar('Error', e.toString(),
-                                snackPosition: SnackPosition.BOTTOM,
-                                animationDuration: const Duration(milliseconds: 300),
-                                duration: const Duration(seconds: 2)
-                              );
+                              print(e.toString());
                             }
                             setState(() {});
                           },
@@ -207,11 +191,10 @@ class _AddConsultationScreenState extends State<AddConsultationScreen> {
                       width: 200,
                       height: 200,
                       decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black),
                         borderRadius: BorderRadius.circular(5),
                         image: DecorationImage(
                           image: NetworkImage(_image!), 
-                          fit: BoxFit.cover
+                          fit: BoxFit.contain
                         )
                       ),
                     )
@@ -345,17 +328,9 @@ class _AddConsultationScreenState extends State<AddConsultationScreen> {
                                 Navigator.pop(context);
                                 _proofImage = await UploadService.uploadImage(_proofFile!, "certificate", "consultation-" + _provider.user!.userId!);
                               } on FirebaseException catch (e) {
-                                Get.snackbar('Error', e.message!,
-                                  snackPosition: SnackPosition.BOTTOM,
-                                  animationDuration: const Duration(milliseconds: 300),
-                                  duration: const Duration(seconds: 2)
-                                );
+                                print(e.message!);
                               } catch (e) {
-                                Get.snackbar('Error', e.toString(),
-                                  snackPosition: SnackPosition.BOTTOM,
-                                  animationDuration: const Duration(milliseconds: 300),
-                                  duration: const Duration(seconds: 2)
-                                );
+                                print(e.toString());
                               }
                               setState(() {});
                             },
@@ -370,17 +345,9 @@ class _AddConsultationScreenState extends State<AddConsultationScreen> {
                                 Navigator.pop(context);
                                 _proofImage = await UploadService.uploadImage(_proofFile!, "certificate", "consultation-" + _provider.user!.userId!);
                               } on FirebaseException catch (e) {
-                                Get.snackbar('Error', e.message!,
-                                  snackPosition: SnackPosition.BOTTOM,
-                                  animationDuration: const Duration(milliseconds: 300),
-                                  duration: const Duration(seconds: 2)
-                                );
+                                print(e.message!);
                               } catch (e) {
-                                Get.snackbar('Error', e.toString(),
-                                  snackPosition: SnackPosition.BOTTOM,
-                                  animationDuration: const Duration(milliseconds: 300),
-                                  duration: const Duration(seconds: 2)
-                                );
+                                print(e.toString());
                               }
                               setState(() {});
                             },
@@ -394,11 +361,10 @@ class _AddConsultationScreenState extends State<AddConsultationScreen> {
                         width: MediaQuery.of(context).size.width - 50,
                         height: (MediaQuery.of(context).size.width - 50) * 9 / 16,
                         decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black),
                           borderRadius: BorderRadius.circular(5),
                           image: DecorationImage(
                             image: NetworkImage(_proofImage!), 
-                            fit: BoxFit.cover
+                            fit: BoxFit.contain
                           )
                         ),
                       )

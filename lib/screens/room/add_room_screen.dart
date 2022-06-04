@@ -114,17 +114,9 @@ class _AddRoomScreenState extends State<AddRoomScreen> {
                               Navigator.pop(context);
                               _image = await UploadService.uploadImage(_file!, "room", _provider.user!.userId!);
                             } on FirebaseException catch (e) {
-                              Get.snackbar('Error', e.message!,
-                                snackPosition: SnackPosition.BOTTOM,
-                                animationDuration: const Duration(milliseconds: 300),
-                                duration: const Duration(seconds: 2)
-                              );
+                              print(e.message!);
                             } catch (e) {
-                              Get.snackbar('Error', e.toString(),
-                                snackPosition: SnackPosition.BOTTOM,
-                                animationDuration: const Duration(milliseconds: 300),
-                                duration: const Duration(seconds: 2)
-                              );
+                              print(e.toString());
                             }
                             setState(() {});
                           },
@@ -139,17 +131,9 @@ class _AddRoomScreenState extends State<AddRoomScreen> {
                               Navigator.pop(context);
                               _image = await UploadService.uploadImage(_file!, "room", _provider.user!.userId!);
                             } on FirebaseException catch (e) {
-                              Get.snackbar('Error', e.message!,
-                                snackPosition: SnackPosition.BOTTOM,
-                                animationDuration: const Duration(milliseconds: 300),
-                                duration: const Duration(seconds: 2)
-                              );
+                              print(e.message!);
                             } catch (e) {
-                              Get.snackbar('Error', e.toString(),
-                                snackPosition: SnackPosition.BOTTOM,
-                                animationDuration: const Duration(milliseconds: 300),
-                                duration: const Duration(seconds: 2)
-                              );
+                              print(e.toString());
                             }
                             setState(() {});
                           },
@@ -174,11 +158,10 @@ class _AddRoomScreenState extends State<AddRoomScreen> {
                       width: 150,
                       height: 150,
                       decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black),
                         borderRadius: BorderRadius.circular(5),
                         image: DecorationImage(
                           image: NetworkImage(_image!), 
-                          fit: BoxFit.cover
+                          fit: BoxFit.contain
                         )
                       ),
                     )

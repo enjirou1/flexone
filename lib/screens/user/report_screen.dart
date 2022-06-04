@@ -103,17 +103,9 @@ class _ReportScreenState extends State<ReportScreen> {
                               _image = await UploadService.uploadImage(
                                   _file!, "report", Get.parameters['id']!);
                             } on FirebaseException catch (e) {
-                              Get.snackbar('Error', e.message!,
-                                  snackPosition: SnackPosition.BOTTOM,
-                                  animationDuration:
-                                      const Duration(milliseconds: 300),
-                                  duration: const Duration(seconds: 2));
+                              print(e.message!);
                             } catch (e) {
-                              Get.snackbar('Error', e.toString(),
-                                  snackPosition: SnackPosition.BOTTOM,
-                                  animationDuration:
-                                      const Duration(milliseconds: 300),
-                                  duration: const Duration(seconds: 2));
+                              print(e.toString());
                             }
                             setState(() {});
                           },
@@ -129,17 +121,9 @@ class _ReportScreenState extends State<ReportScreen> {
                               _image = await UploadService.uploadImage(
                                   _file!, "report", Get.parameters['id']!);
                             } on FirebaseException catch (e) {
-                              Get.snackbar('Error', e.message!,
-                                  snackPosition: SnackPosition.BOTTOM,
-                                  animationDuration:
-                                      const Duration(milliseconds: 300),
-                                  duration: const Duration(seconds: 2));
+                              print(e.message!);
                             } catch (e) {
-                              Get.snackbar('Error', e.toString(),
-                                  snackPosition: SnackPosition.BOTTOM,
-                                  animationDuration:
-                                      const Duration(milliseconds: 300),
-                                  duration: const Duration(seconds: 2));
+                              print(e.toString());
                             }
                             setState(() {});
                           },
@@ -164,10 +148,9 @@ class _ReportScreenState extends State<ReportScreen> {
                       width: double.infinity,
                       height: MediaQuery.of(context).size.width - 40,
                       decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black),
                           borderRadius: BorderRadius.circular(5),
                           image: DecorationImage(
-                              image: NetworkImage(_image!), fit: BoxFit.cover)),
+                              image: NetworkImage(_image!), fit: BoxFit.contain)),
                     )
                   : Container(
                       width: double.infinity,

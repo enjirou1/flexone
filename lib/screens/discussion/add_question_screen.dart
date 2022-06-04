@@ -342,17 +342,9 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
                                     _provider.user!.userId!
                                   );
                                 } on FirebaseException catch (e) {
-                                  Get.snackbar('Error', e.message!,
-                                    snackPosition: SnackPosition.BOTTOM,
-                                    animationDuration: const Duration(milliseconds: 300),
-                                    duration: const Duration(seconds: 2)
-                                  );
+                                  print(e.message!);
                                 } catch (e) {
-                                  Get.snackbar('Error', e.toString(),
-                                    snackPosition: SnackPosition.BOTTOM,
-                                    animationDuration: const Duration(milliseconds: 300),
-                                    duration: const Duration(seconds: 2)
-                                  );
+                                  print(e.toString());
                                 }
                                 setState(() {});
                               },
@@ -371,17 +363,9 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
                                     _provider.user!.userId!
                                   );
                                 } on FirebaseException catch (e) {
-                                  Get.snackbar('Error', e.message!,
-                                    snackPosition: SnackPosition.BOTTOM,
-                                    animationDuration: const Duration(milliseconds: 300),
-                                    duration: const Duration(seconds: 2)
-                                  );
+                                  print(e.message!);
                                 } catch (e) {
-                                  Get.snackbar('Error', e.toString(),
-                                    snackPosition: SnackPosition.BOTTOM,
-                                    animationDuration: const Duration(milliseconds: 300),
-                                    duration: const Duration(seconds: 2)
-                                  );
+                                  print(e.toString());
                                 }
                                 setState(() {});
                               },

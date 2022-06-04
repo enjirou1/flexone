@@ -115,17 +115,9 @@ class _NewAccountScreenState extends State<NewAccountScreen> {
                               Navigator.pop(context);
                               _image = await UploadService.uploadImage(_file!, "identity", _provider.user!.userId!);
                             } on FirebaseException catch (e) {
-                              Get.snackbar('Error', e.message!,
-                                snackPosition: SnackPosition.BOTTOM,
-                                animationDuration: const Duration(milliseconds: 300),
-                                duration: const Duration(seconds: 2)
-                              );
+                              print(e.message!);
                             } catch (e) {
-                              Get.snackbar('Error', e.toString(),
-                                snackPosition: SnackPosition.BOTTOM,
-                                animationDuration: const Duration(milliseconds: 300),
-                                duration: const Duration(seconds: 2)
-                              );
+                              print(e.toString());
                             }
                             setState(() {});
                           },
@@ -140,17 +132,9 @@ class _NewAccountScreenState extends State<NewAccountScreen> {
                               Navigator.pop(context);
                               _image = await UploadService.uploadImage(_file!, "identity", _provider.user!.userId!);
                             } on FirebaseException catch (e) {
-                              Get.snackbar('Error', e.message!,
-                                snackPosition: SnackPosition.BOTTOM,
-                                animationDuration: const Duration(milliseconds: 300),
-                                duration: const Duration(seconds: 2)
-                              );
+                              print(e.message!);
                             } catch (e) {
-                              Get.snackbar('Error', e.toString(),
-                                snackPosition: SnackPosition.BOTTOM,
-                                animationDuration: const Duration(milliseconds: 300),
-                                duration: const Duration(seconds: 2)
-                              );
+                              print(e.toString());
                             }
                             setState(() {});
                           },
@@ -176,11 +160,10 @@ class _NewAccountScreenState extends State<NewAccountScreen> {
                     width: double.infinity,
                     height: MediaQuery.of(context).size.width * 9 / 16,
                     decoration: BoxDecoration(
-                      border: Border.all(color: _borderColor),
                       borderRadius: BorderRadius.circular(5),
                       image: DecorationImage(
                         image: NetworkImage(_image!),
-                        fit: BoxFit.cover
+                        fit: BoxFit.contain
                       )
                     ),
                   )

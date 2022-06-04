@@ -94,17 +94,9 @@ class _AddCertificateScreenState extends State<AddCertificateScreen> {
                                 _provider.user!.expertId!
                               );
                             } on FirebaseException catch (e) {
-                              Get.snackbar('Error', e.message!,
-                                snackPosition: SnackPosition.BOTTOM,
-                                animationDuration: const Duration(milliseconds: 300),
-                                duration: const Duration(seconds: 2)
-                              );
+                              print(e.message!);
                             } catch (e) {
-                              Get.snackbar('Error', e.toString(),
-                                snackPosition: SnackPosition.BOTTOM,
-                                animationDuration: const Duration(milliseconds: 300),
-                                duration: const Duration(seconds: 2)
-                              );
+                              print(e.toString());
                             }
                             setState(() {});
                           },
@@ -123,17 +115,9 @@ class _AddCertificateScreenState extends State<AddCertificateScreen> {
                                 _provider.user!.expertId!
                               );
                             } on FirebaseException catch (e) {
-                              Get.snackbar('Error', e.message!,
-                                snackPosition: SnackPosition.BOTTOM,
-                                animationDuration: const Duration(milliseconds: 300),
-                                duration: const Duration(seconds: 2)
-                              );
+                              print(e.message!);
                             } catch (e) {
-                              Get.snackbar('Error', e.toString(),
-                                snackPosition: SnackPosition.BOTTOM,
-                                animationDuration: const Duration(milliseconds: 300),
-                                duration: const Duration(seconds: 2)
-                              );
+                              print(e.toString());
                             }
                             setState(() {});
                           },
@@ -147,11 +131,10 @@ class _AddCertificateScreenState extends State<AddCertificateScreen> {
                     width: double.infinity,
                     height: MediaQuery.of(context).size.width - 40,
                     decoration: BoxDecoration(
-                      border: Border.all(color: _borderColor),
                       borderRadius: BorderRadius.circular(5),
                       image: DecorationImage(
                         image: NetworkImage(_image!), 
-                        fit: BoxFit.cover
+                        fit: BoxFit.contain
                       )
                     ),
                   )

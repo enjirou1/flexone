@@ -32,6 +32,7 @@ class _EditRoomScreenState extends State<EditRoomScreen> {
 
   @override
   void initState() {
+    _image = widget.room.photo;
     _nameController.text = widget.room.name;
     _descriptionController.text = widget.room.description;
     _slotController.text = widget.room.maxSlot.toString();
@@ -116,17 +117,9 @@ class _EditRoomScreenState extends State<EditRoomScreen> {
                               Navigator.pop(context);
                               _image = await UploadService.uploadImage(_file!, "room", _provider.user!.userId!);
                             } on FirebaseException catch (e) {
-                              Get.snackbar('Error', e.message!,
-                                snackPosition: SnackPosition.BOTTOM,
-                                animationDuration: const Duration(milliseconds: 300),
-                                duration: const Duration(seconds: 2)
-                              );
+                              print(e.message!);
                             } catch (e) {
-                              Get.snackbar('Error', e.toString(),
-                                snackPosition: SnackPosition.BOTTOM,
-                                animationDuration: const Duration(milliseconds: 300),
-                                duration: const Duration(seconds: 2)
-                              );
+                              print(e.toString());
                             }
                             setState(() {});
                           },
@@ -141,17 +134,9 @@ class _EditRoomScreenState extends State<EditRoomScreen> {
                               Navigator.pop(context);
                               _image = await UploadService.uploadImage(_file!, "room", _provider.user!.userId!);
                             } on FirebaseException catch (e) {
-                              Get.snackbar('Error', e.message!,
-                                snackPosition: SnackPosition.BOTTOM,
-                                animationDuration: const Duration(milliseconds: 300),
-                                duration: const Duration(seconds: 2)
-                              );
+                              print(e.message!);
                             } catch (e) {
-                              Get.snackbar('Error', e.toString(),
-                                snackPosition: SnackPosition.BOTTOM,
-                                animationDuration: const Duration(milliseconds: 300),
-                                duration: const Duration(seconds: 2)
-                              );
+                              print(e.toString());
                             }
                             setState(() {});
                           },
@@ -176,11 +161,10 @@ class _EditRoomScreenState extends State<EditRoomScreen> {
                       width: 150,
                       height: 150,
                       decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black),
                         borderRadius: BorderRadius.circular(5),
                         image: DecorationImage(
                           image: NetworkImage(_image!), 
-                          fit: BoxFit.cover
+                          fit: BoxFit.contain
                         )
                       ),
                     )

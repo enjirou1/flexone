@@ -176,17 +176,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     Navigator.pop(context);
                                     _image = await UploadService.uploadImage(_file!, "user", _user!.uid);
                                   } on FirebaseException catch (e) {
-                                    Get.snackbar('Error', e.message!,
-                                      snackPosition: SnackPosition.BOTTOM,
-                                      animationDuration: const Duration(milliseconds: 300),
-                                      duration: const Duration(seconds: 2)
-                                    );
+                                    print(e.message!);
                                   } catch (e) {
-                                    Get.snackbar('Error', e.toString(),
-                                      snackPosition: SnackPosition.BOTTOM,
-                                      animationDuration: const Duration(milliseconds: 300),
-                                      duration: const Duration(seconds: 2)
-                                    );
+                                    print(e.toString());
                                   }
                                   setState(() {});
                                 },
@@ -201,17 +193,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     Navigator.pop(context);
                                     _image = await UploadService.uploadImage(_file!, "user", _user!.uid);
                                   } on FirebaseException catch (e) {
-                                    Get.snackbar('Error', e.message!,
-                                      snackPosition: SnackPosition.BOTTOM,
-                                      animationDuration: const Duration(milliseconds: 300),
-                                      duration: const Duration(seconds: 2)
-                                    );
+                                    print(e.message!);
                                   } catch (e) {
-                                    Get.snackbar('Error', e.toString(),
-                                      snackPosition: SnackPosition.BOTTOM,
-                                      animationDuration: const Duration(milliseconds: 300),
-                                      duration: const Duration(seconds: 2)
-                                    );
+                                    print(e.toString());
                                   }
                                   setState(() {});
                                 },

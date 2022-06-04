@@ -6,8 +6,8 @@ class CertificateProvider extends ChangeNotifier {
 
   List<Certificate> get certificates => _certificates;
 
-  void setCertificates(List<Certificate> data) {
-    _certificates.clear();
+  Future setCertificates(List<Certificate> data) async {
+    _certificates = [];
     _certificates = data;
     notifyListeners();
   }

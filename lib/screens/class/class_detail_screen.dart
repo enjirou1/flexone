@@ -8,6 +8,7 @@ import 'package:flexone/data/providers/user.dart';
 import 'package:flexone/screens/class/class_review_screen.dart';
 import 'package:flexone/screens/class/syllabus_detail_screen.dart';
 import 'package:flexone/utils/format.dart';
+import 'package:flexone/widgets/preview_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart' hide Text;
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -68,18 +69,21 @@ class _ClassDetailScreenState extends State<ClassDetailScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       (widget.classModel.photo != null && widget.classModel.photo != "")
-                      ? Container(
-                          width: 100,
-                          height: 100,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.rectangle,
-                            borderRadius: const BorderRadius.all(Radius.circular(5)),
-                            image: DecorationImage(
-                              image: NetworkImage(widget.classModel.photo!), 
-                              fit: BoxFit.cover
-                            )
+                      ? GestureDetector(
+                        onTap: () => Get.to(PreviewImage(image: widget.classModel.photo!)),
+                        child: Container(
+                            width: 100,
+                            height: 100,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.rectangle,
+                              borderRadius: const BorderRadius.all(Radius.circular(5)),
+                              image: DecorationImage(
+                                image: NetworkImage(widget.classModel.photo!), 
+                                fit: BoxFit.cover
+                              )
+                            ),
                           ),
-                        )
+                      )
                       : Container(
                           width: 100,
                           height: 100,
