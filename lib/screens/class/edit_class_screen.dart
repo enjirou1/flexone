@@ -327,7 +327,7 @@ class _EditClassScreenState extends State<EditClassScreen> {
                     TextField(
                       controller: _nameController,
                       decoration: InputDecoration(
-                        labelText: tr("name:"),
+                        labelText: tr("name"),
                         labelStyle: TextStyle(color: _fontColor),
                         errorText: _nameValidation.isValid ? null : _nameValidation.message,
                         isDense: true
@@ -345,7 +345,7 @@ class _EditClassScreenState extends State<EditClassScreen> {
                             decoration: InputDecoration(
                               prefixText: "Rp",
                               prefixStyle: TextStyle(color: _fontColor),
-                              labelText: tr("price:"),
+                              labelText: tr("price"),
                               labelStyle: TextStyle(color: _fontColor),
                               isDense: true
                             ),
@@ -361,7 +361,7 @@ class _EditClassScreenState extends State<EditClassScreen> {
                             decoration: InputDecoration(
                               prefixText: "Rp",
                               prefixStyle: TextStyle(color: _fontColor),
-                              labelText: tr("discount_price:"),
+                              labelText: tr("discount_price"),
                               labelStyle: TextStyle(color: _fontColor),
                               isDense: true
                             ),
@@ -397,7 +397,7 @@ class _EditClassScreenState extends State<EditClassScreen> {
                               decoration: InputDecoration(
                                 suffixText: tr("hours"),
                                 suffixStyle: TextStyle(color: _fontColor),
-                                labelText: tr("estimated_time:"),
+                                labelText: tr("estimated_time"),
                                 labelStyle: TextStyle(color: _fontColor),
                                 isDense: true
                               ),

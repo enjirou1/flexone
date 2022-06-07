@@ -231,7 +231,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 controller: _nameController,
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.person),
-                  labelText: tr("fullname:"),
+                  labelText: tr("fullname"),
                   labelStyle: TextStyle(color: _fontColor),
                   errorText: _nameValidation.isValid ? null : _nameValidation.message
                 ),
@@ -246,7 +246,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 keyboardType: TextInputType.multiline,
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.note_rounded),
-                  labelText: tr("about_me:"),
+                  labelText: tr("about_me"),
                   labelStyle: TextStyle(color: _fontColor)
                 ),
               ),
@@ -258,7 +258,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 keyboardType: TextInputType.phone,
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.phone),
-                  labelText: tr("phone_number:"),
+                  labelText: tr("phone_number"),
                   labelStyle: TextStyle(color: _fontColor)
                 ),
               ),
@@ -272,7 +272,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 showSelectedItems: true,
                 items: _provincesStr,
                 selectedItem: _selectedProvince,
-                label: tr("province:"),
+                label: tr("province"),
                 dropdownSearchDecoration: InputDecoration(
                   contentPadding: const EdgeInsets.symmetric(vertical: 5, horizontal: 2),
                   prefixIcon: const Icon(Icons.location_city_rounded),
@@ -306,7 +306,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 showSelectedItems: true,
                 items: _citiesStr,
                 selectedItem: _selectedCity,
-                label: tr("city:"),
+                label: tr("city"),
                 dropdownSearchDecoration: InputDecoration(
                   contentPadding: const EdgeInsets.symmetric(vertical: 5, horizontal: 2),
                   prefixIcon: const Icon(Icons.location_city_rounded),
@@ -325,7 +325,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 controller: _addressController,
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.home),
-                  labelText: tr("address:"),
+                  labelText: tr("address"),
                   labelStyle: TextStyle(color: _fontColor)
                 ),
               ),

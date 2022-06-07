@@ -157,7 +157,7 @@ class _AddCertificateScreenState extends State<AddCertificateScreen> {
                 controller: _controller,
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.text_snippet_rounded),
-                  labelText: tr("detail:"),
+                  labelText: tr("detail"),
                   labelStyle: TextStyle(color: _fontColor)
                 ),
               ),

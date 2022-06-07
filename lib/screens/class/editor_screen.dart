@@ -96,7 +96,7 @@ class _EditorScreenState extends State<EditorScreen> {
               child: TextField(
                 controller: _textController,
                 decoration: InputDecoration(
-                  labelText: tr("name:"),
+                  labelText: tr("name"),
                   errorText: _validation.isValid ? null : _validation.message,
                   isDense: true
                 ),

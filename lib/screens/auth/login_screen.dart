@@ -53,7 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                           icon: const Icon(Icons.email),
-                          labelText: "Email: ",
+                          labelText: "Email",
                           errorText: _emailValidation.isValid ? null : _emailValidation.message
                         ),
                       ),
@@ -65,7 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         obscureText: true,
                         decoration: InputDecoration(
                           icon: const Icon(Icons.vpn_key),
-                          labelText: "Password: ",
+                          labelText: "Password",
                           errorText: _passwordValidation.isValid ? null : _passwordValidation.message
                         ),
                       ),
@@ -87,7 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       style: const TextStyle(
                                           color: Colors.black),
                                       decoration: InputDecoration(
-                                        labelText: "Email: ",
+                                        labelText: "Email",
                                         enabledBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: secondaryColor

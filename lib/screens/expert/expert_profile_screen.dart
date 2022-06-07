@@ -136,11 +136,9 @@ class _ExpertProfileScreenState extends State<ExpertProfileScreen> {
                 });
               }
 
-              if (((snapshot.data![0] as Expert).certificates as List<Certificate>).isNotEmpty) {
-                Future.delayed(Duration.zero, () {
-                  _certificateProvider.setCertificates((snapshot.data![0] as Expert).certificates as List<Certificate>);
-                }); 
-              }
+              Future.delayed(Duration.zero, () {
+                _certificateProvider.setCertificates((snapshot.data![0] as Expert).certificates as List<Certificate>);
+              }); 
 
               return SingleChildScrollView(
                 child: Padding(
@@ -167,7 +165,7 @@ class _ExpertProfileScreenState extends State<ExpertProfileScreen> {
                                   return StatefulBuilder(
                                     builder: (context, setState) => SingleInputDialog(
                                       title: tr("enter_nominal"),
-                                      label: tr("nominal:"),
+                                      label: tr("nominal"),
                                       buttonText: tr('withdraw'),
                                       controller: _nominalController,
                                       inputValidation: _nominalValidation,
@@ -195,7 +193,6 @@ class _ExpertProfileScreenState extends State<ExpertProfileScreen> {
                                               );
                                             }
                                           }
-
 
                                           if (_nominalValidation.isValid) {
                                             showDialog(
@@ -256,7 +253,7 @@ class _ExpertProfileScreenState extends State<ExpertProfileScreen> {
                         content: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text('personal_identity_card:').tr(),
+                            const Text('personal_identity_card').tr(),
                             const SizedBox(height: 5),
                             GestureDetector(
                               onTap: () => showDialog(
@@ -353,7 +350,7 @@ class _ExpertProfileScreenState extends State<ExpertProfileScreen> {
                               }).toList(),
                               decoration: InputDecoration(
                                 prefixIcon: const Icon(Icons.account_balance_rounded),
-                                labelText: tr('bank:'),
+                                labelText: tr('bank'),
                                 labelStyle: TextStyle(color: _fontColor),
                               ),
                               isExpanded: true,
@@ -370,7 +367,7 @@ class _ExpertProfileScreenState extends State<ExpertProfileScreen> {
                               controller: _accountNameController,
                               decoration: InputDecoration(
                                 prefixIcon: const Icon(Icons.person),
-                                labelText: tr("account_holder_name:"),
+                                labelText: tr("account_holder_name"),
                                 labelStyle: TextStyle(color: _fontColor),
                                 errorText: _accountNameValidation.isValid
                                   ? null
@@ -385,7 +382,7 @@ class _ExpertProfileScreenState extends State<ExpertProfileScreen> {
                               keyboardType: TextInputType.number,
                               decoration: InputDecoration(
                                 prefixIcon: const Icon(Icons.person),
-                                labelText: tr("account_number:"),
+                                labelText: tr("account_number"),
                                 labelStyle: TextStyle(color: _fontColor),
                                 errorText: _accountNumberValidation.isValid
                                   ? null
@@ -399,7 +396,7 @@ class _ExpertProfileScreenState extends State<ExpertProfileScreen> {
                               controller: _educationController,
                               decoration: InputDecoration(
                                 prefixIcon: const Icon(Icons.school_rounded),
-                                labelText: tr("education:"),
+                                labelText: tr("education"),
                                 labelStyle: TextStyle(color: _fontColor),
                                 errorText: _educationValidation.isValid
                                   ? null
@@ -413,7 +410,7 @@ class _ExpertProfileScreenState extends State<ExpertProfileScreen> {
                               controller: _jobController,
                               decoration: InputDecoration(
                                 prefixIcon: const Icon(Icons.work_rounded),
-                                labelText: tr("job:"),
+                                labelText: tr("job"),
                                 labelStyle: TextStyle(color: _fontColor),
                                 errorText: _jobValidation.isValid
                                   ? null

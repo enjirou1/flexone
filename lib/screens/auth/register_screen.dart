@@ -48,7 +48,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         controller: _nameController,
                         decoration: InputDecoration(
                           icon: const Icon(Icons.person),
-                          labelText: tr("fullname:"),
+                          labelText: tr("fullname"),
                           errorText: _nameValidation.isValid ? null : _nameValidation.message
                         ),
                       ),
@@ -60,7 +60,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                           icon: const Icon(Icons.email),
-                          labelText: "Email: ",
+                          labelText: "Email",
                           errorText: _emailValidation.isValid ? null : _emailValidation.message
                         ),
                       ),
@@ -72,7 +72,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         obscureText: true,
                         decoration: InputDecoration(
                           icon: const Icon(Icons.vpn_key),
-                          labelText: "Password: ",
+                          labelText: "Password",
                           errorText: _passwordValidation.isValid ? null : _passwordValidation.message
                         ),
                       ),

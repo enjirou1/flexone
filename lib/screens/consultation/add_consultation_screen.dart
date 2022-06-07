@@ -218,7 +218,7 @@ class _AddConsultationScreenState extends State<AddConsultationScreen> {
               TextField(
                 controller: _nameController,
                 decoration: InputDecoration(
-                  labelText: tr("name:"),
+                  labelText: tr("name"),
                   labelStyle: TextStyle(color: _fontColor),
                   errorText: _nameValidation.isValid ? null : _nameValidation.message,
                   isDense: true
@@ -230,7 +230,7 @@ class _AddConsultationScreenState extends State<AddConsultationScreen> {
               TextField(
                 controller: _topicController,
                 decoration: InputDecoration(
-                  labelText: tr("topic:"),
+                  labelText: tr("topic"),
                   labelStyle: TextStyle(color: _fontColor),
                   errorText: _topicValidation.isValid ? null : _topicValidation.message,
                   isDense: true
@@ -243,7 +243,7 @@ class _AddConsultationScreenState extends State<AddConsultationScreen> {
                 controller: _linkController,
                 keyboardType: TextInputType.url,
                 decoration: InputDecoration(
-                  labelText: tr("link_vm:"),
+                  labelText: tr("link_vm"),
                   labelStyle: TextStyle(color: _fontColor),
                   isDense: true
                 ),
@@ -258,7 +258,7 @@ class _AddConsultationScreenState extends State<AddConsultationScreen> {
                 maxLines: null,
                 cursorColor: Colors.indigo,
                 decoration: InputDecoration(
-                  labelText: tr("description:"),
+                  labelText: tr("description"),
                   labelStyle: TextStyle(color: _fontColor),
                   isDense: true
                 ),
@@ -275,7 +275,7 @@ class _AddConsultationScreenState extends State<AddConsultationScreen> {
                       decoration: InputDecoration(
                         prefixText: "Rp",
                         prefixStyle: TextStyle(color: _fontColor),
-                        labelText: tr("price:"),
+                        labelText: tr("price"),
                         labelStyle: TextStyle(color: _fontColor),
                         errorText: _priceValidation.isValid ? null : _priceValidation.message,
                         isDense: true
@@ -292,7 +292,7 @@ class _AddConsultationScreenState extends State<AddConsultationScreen> {
                       decoration: InputDecoration(
                         prefixText: "Rp",
                         prefixStyle: TextStyle(color: _fontColor),
-                        labelText: tr("discount_price:"),
+                        labelText: tr("discount_price"),
                         labelStyle: TextStyle(color: _fontColor),
                         isDense: true
                       ),
@@ -389,7 +389,7 @@ class _AddConsultationScreenState extends State<AddConsultationScreen> {
               TextField(
                 controller: _proofDetailController,
                 decoration: InputDecoration(
-                  labelText: tr("detail:"),
+                  labelText: tr("detail"),
                   labelStyle: TextStyle(color: _fontColor),
                   errorText: _proofDetailValidation.isValid ? null : _proofDetailValidation.message,
                   isDense: true

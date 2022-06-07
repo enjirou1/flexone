@@ -24,7 +24,6 @@ class _AddRoomScreenState extends State<AddRoomScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _slotController = TextEditingController();
   InputValidation _nameValidation = InputValidation(isValid: true, message: '');
-  InputValidation _passwordValidation = InputValidation(isValid: true, message: '');
   InputValidation _slotValidation = InputValidation(isValid: true, message: '');
   String? _image = "";
   XFile? _file;
@@ -55,13 +54,6 @@ class _AddRoomScreenState extends State<AddRoomScreen> {
                 _nameValidation = InputValidation(isValid: false, message: tr('error.name.empty'));
               } else {
                 _nameValidation = InputValidation(isValid: true, message: '');
-              }
-
-              if (_passwordController.text.isEmpty) {
-                isValid = false;
-                _passwordValidation = InputValidation(isValid: false, message: tr('error.password.empty'));
-              } else {
-                _passwordValidation = InputValidation(isValid: true, message: '');
               }
 
               if (_slotController.text.isEmpty) {
@@ -185,7 +177,7 @@ class _AddRoomScreenState extends State<AddRoomScreen> {
               TextField(
                 controller: _nameController,
                 decoration: InputDecoration(
-                  labelText: tr("name:"),
+                  labelText: tr("name"),
                   labelStyle: TextStyle(color: _fontColor),
                   errorText: _nameValidation.isValid ? null : _nameValidation.message
                 ),
@@ -200,7 +192,7 @@ class _AddRoomScreenState extends State<AddRoomScreen> {
                 maxLines: null,
                 cursorColor: Colors.indigo,
                 decoration: InputDecoration(
-                  labelText: tr("description:"),
+                  labelText: tr("description"),
                   labelStyle: TextStyle(color: _fontColor),
                 ),
               ),
@@ -211,9 +203,8 @@ class _AddRoomScreenState extends State<AddRoomScreen> {
                 controller: _passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
-                  labelText: tr("password:"),
-                  labelStyle: TextStyle(color: _fontColor),
-                  errorText: _passwordValidation.isValid ? null : _passwordValidation.message
+                  labelText: tr("password"),
+                  labelStyle: TextStyle(color: _fontColor)
                 ),
               ),
               const SizedBox(
@@ -223,7 +214,7 @@ class _AddRoomScreenState extends State<AddRoomScreen> {
                 controller: _slotController,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
-                  labelText: tr("slot:"),
+                  labelText: tr("slot"),
                   labelStyle: TextStyle(color: _fontColor),
                   errorText: _slotValidation.isValid ? null : _slotValidation.message
                 ),

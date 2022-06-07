@@ -254,7 +254,7 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
                               errorBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(25),
                               ),
-                              labelText: tr("point:"),
+                              labelText: tr("point"),
                               labelStyle: TextStyle(color: _borderColor),
                               errorText: _pointValidation.isValid ? null : _pointValidation.message
                             ),

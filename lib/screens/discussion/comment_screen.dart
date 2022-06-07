@@ -120,6 +120,15 @@ class _CommentScreenState extends State<CommentScreen> {
               },
             )
           ),
+          if (_provider.user == null) 
+          Container(
+            width: double.infinity,
+            color: Colors.indigo.withOpacity(0.5),
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: Center(child: const Text('error.comment.login').tr()),
+            ),
+          ),
           ChatEditText(
             controller: _controller, 
             enabled: _provider.user != null,

@@ -188,7 +188,7 @@ class _EditRoomScreenState extends State<EditRoomScreen> {
               TextField(
                 controller: _nameController,
                 decoration: InputDecoration(
-                  labelText: tr("name:"),
+                  labelText: tr("name"),
                   labelStyle: TextStyle(color: _fontColor),
                   errorText: _nameValidation.isValid ? null : _nameValidation.message
                 ),
@@ -203,7 +203,7 @@ class _EditRoomScreenState extends State<EditRoomScreen> {
                 maxLines: null,
                 cursorColor: Colors.indigo,
                 decoration: InputDecoration(
-                  labelText: tr("description:"),
+                  labelText: tr("description"),
                   labelStyle: TextStyle(color: _fontColor),
                 ),
               ),
@@ -214,7 +214,7 @@ class _EditRoomScreenState extends State<EditRoomScreen> {
                 controller: _passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
-                  labelText: tr("password:"),
+                  labelText: tr("password"),
                   labelStyle: TextStyle(color: _fontColor),
                 ),
               ),
@@ -225,7 +225,7 @@ class _EditRoomScreenState extends State<EditRoomScreen> {
                 controller: _slotController,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
-                  labelText: tr("slot:"),
+                  labelText: tr("slot"),
                   labelStyle: TextStyle(color: _fontColor),
                   errorText: _slotValidation.isValid ? null : _slotValidation.message
                 ),

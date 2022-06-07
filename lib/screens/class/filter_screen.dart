@@ -169,7 +169,7 @@ class _FilterScreenState extends State<FilterScreen> {
                               });
                             },
                           ),
-                          title: (item == "0") ? const Text('all').tr() : const Text('rating_rb').tr(args: [item.toString()]),
+                          title: item == "0" ? const Text('all').tr() : item == "5" ? const Text('5') : const Text('rating_rb').tr(args: [item.toString()]),
                           dense: true,
                         );
                       }).toList()

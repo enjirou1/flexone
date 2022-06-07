@@ -79,7 +79,7 @@ class _ReportScreenState extends State<ReportScreen> {
               maxLines: null,
               decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.text_snippet_rounded),
-                  labelText: tr("reason:"),
+                  labelText: tr("reason"),
                   labelStyle: TextStyle(color: _fontColor),
                   errorText: _reasonValidation.isValid
                       ? null

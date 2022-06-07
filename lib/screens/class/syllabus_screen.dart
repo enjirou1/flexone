@@ -199,6 +199,7 @@ class _SyllabusScreenState extends State<SyllabusScreen> {
                       await Class.addSection(widget.classId, _controller.text);
                       Navigator.pop(context);
                       classModel = null;
+                      _controller.text = "";
                       this.setState(() {});
                     }
                   }

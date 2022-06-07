@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 
 class ModuleScreen extends StatelessWidget {
   QuillController? _controller;
+  final ScrollController _scrollController = ScrollController();
 
   ModuleScreen({ Key? key }) : super(key: key);
 
@@ -47,16 +48,16 @@ class ModuleScreen extends StatelessWidget {
           child: Stack(
             children: [
               QuillEditor(
-                  showCursor: false, 
-                  controller: _controller!, 
-                  focusNode: FocusNode(), 
-                  scrollController: ScrollController(), 
-                  scrollable: true, 
-                  padding: const EdgeInsets.all(10), 
-                  autoFocus: true, 
-                  readOnly: true, 
-                  expands: false,
-                ),
+                showCursor: false, 
+                controller: _controller!, 
+                focusNode: FocusNode(), 
+                scrollController: _scrollController, 
+                scrollable: true, 
+                padding: const EdgeInsets.only(top: 10, right: 10, bottom: 75, left: 10), 
+                autoFocus: true, 
+                readOnly: true, 
+                expands: false,
+              ),
               Positioned(
                 bottom: 0,
                 width: MediaQuery.of(context).size.width,
@@ -66,19 +67,21 @@ class ModuleScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       SizedBox(
-                        width: 100,
+                        width: MediaQuery.of(context).size.width * 0.35,
                         child: ElevatedButton(
                           onPressed: (_provider.currentIndex - 1 >= 0) ? () {
                             _provider.previous();
+                            _scrollController.jumpTo(0);
                           } : null, 
-                          child: const Text('previous').tr()
+                          child: const Text('previous').tr(),
                         ),
                       ),
                       SizedBox(
-                        width: 100,
+                        width: MediaQuery.of(context).size.width * 0.35,
                         child: ElevatedButton(
                           onPressed: (_provider.currentIndex + 1 < _provider.modules.length) ? () {
                             _provider.next();
+                            _scrollController.jumpTo(0);
                           } : null, 
                           child: const Text('next').tr()
                         ),
