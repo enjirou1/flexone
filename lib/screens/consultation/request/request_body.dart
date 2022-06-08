@@ -251,6 +251,7 @@ class _RequestBodyState extends State<RequestBody> {
                                                   duration: const Duration(seconds: 1)
                                                 );
                                                 _requests.clear();
+                                                _durationController.text = "";
                                                 _hasReachedMax = false;
                                                 this.setState(() {});
                                               } else {

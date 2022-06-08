@@ -21,8 +21,6 @@ class _ShopScreenState extends State<ShopScreen> {
   final TextEditingController _controller = TextEditingController();
   final ScrollController _scrollController = ScrollController();
   List<Merchandise> _merchandises = [];
-  String _keywords = "";
-  int _lowestPrice = 0, _highestPrice = 0;
   bool _hasReachedMax = false;
 
   @override
@@ -34,7 +32,7 @@ class _ShopScreenState extends State<ShopScreen> {
         title: const Text('shop').tr(),
       ),
       body: FutureBuilder<List<Merchandise>>(
-        future: Merchandise.getMerchandises(_merchandises.length, 10, _keywords, _lowestPrice, _highestPrice),
+        future: Merchandise.getMerchandises(_merchandises.length, 10, "", 0, 0),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             List<Merchandise> data = snapshot.data!;

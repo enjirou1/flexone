@@ -97,7 +97,7 @@ class _NewAccountScreenState extends State<NewAccountScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('personal_identity_card:').tr(),
+              const Text('personal_identity_card').tr(),
               const SizedBox(height: 5),
               GestureDetector(
                 onTap: () => showDialog(
@@ -200,7 +200,7 @@ class _NewAccountScreenState extends State<NewAccountScreen> {
                 }).toList(),
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.account_balance_rounded),
-                  labelText: tr('bank:'),
+                  labelText: tr('bank'),
                   labelStyle: TextStyle(color: _fontColor),
                 ),
                 isExpanded: true,
@@ -217,7 +217,7 @@ class _NewAccountScreenState extends State<NewAccountScreen> {
                 controller: _accountNameController,
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.person),
-                  labelText: tr("account_holder_name:"),
+                  labelText: tr("account_holder_name"),
                   labelStyle: TextStyle(color: _fontColor),
                   errorText: _accountNameValidation.isValid ? null : _accountNameValidation.message
                 ),
@@ -230,7 +230,7 @@ class _NewAccountScreenState extends State<NewAccountScreen> {
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.person),
-                  labelText: tr("account_number:"),
+                  labelText: tr("account_number"),
                   labelStyle: TextStyle(color: _fontColor),
                   errorText: _accountNumberValidation.isValid ? null : _accountNumberValidation.message
                 ),
@@ -242,7 +242,7 @@ class _NewAccountScreenState extends State<NewAccountScreen> {
                 controller: _educationController,
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.school_rounded),
-                  labelText: tr("education:"),
+                  labelText: tr("education"),
                   labelStyle: TextStyle(color: _fontColor),
                   errorText: _educationValidation.isValid ? null : _educationValidation.message
                 ),
@@ -254,7 +254,7 @@ class _NewAccountScreenState extends State<NewAccountScreen> {
                 controller: _jobController,
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.work_rounded),
-                  labelText: tr("job:"),
+                  labelText: tr("job"),
                   labelStyle: TextStyle(color: _fontColor),
                   errorText: _jobValidation.isValid ? null : _jobValidation.message
                 ),

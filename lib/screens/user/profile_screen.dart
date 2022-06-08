@@ -314,7 +314,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 popupBackgroundColor: _preferencesProvider.isDarkTheme ? const Color(0xFF212121) : Colors.white,
                 onChanged: (value) {
-                  _selectedCity = value!;
+                  _selectedCity = value ?? "";
                   setState(() {});
                 },
               ),
