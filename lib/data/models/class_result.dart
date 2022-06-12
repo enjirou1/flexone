@@ -12,6 +12,7 @@ class Class {
   Subject? subject;
   Grade? grade;
   late String name;
+  Proof? proof;
   String? photo;
   String? description;
   late int price;
@@ -22,12 +23,13 @@ class Class {
   late int totalParticipants;
   late int totalModules;
   bool? joined;
+  late int status;
   late String createdAt;
   List<Section>? sections;
   Detail? detail;
   static const String _baseUrl = 'https://api.flexone.online/v1/class';
 
-  Class({required this.id, this.itemId, this.expert, this.user, this.expertId, this.subject, this.grade, required this.name, this.photo, this.description, required this.price, required this.discountPrice, required this.estimatedTime, required this.rating, required this.totalRatings, required this.totalParticipants, required this.totalModules, required this.joined, required this.createdAt, this.detail, this.sections});
+  Class({required this.id, this.itemId, this.expert, this.user, this.expertId, this.subject, this.grade, required this.name, this.proof, this.photo, this.description, required this.price, required this.discountPrice, required this.estimatedTime, required this.rating, required this.totalRatings, required this.totalParticipants, required this.totalModules, required this.joined, required this.status, required this.createdAt, this.detail, this.sections});
 
   factory Class.createClass(Map<String, dynamic> object) {
     return Class(
@@ -39,6 +41,7 @@ class Class {
       subject: object['subject'] != null ? Subject.createSubject(object['subject']) : null,
       grade: object['grade'] != null ? Grade.createGrade(object['grade']) : null,
       name: object['name'], 
+      proof: object['proof'] != null ? Proof.createProof(object['proof']) : null,
       photo: object['photo'],
       description: object['description'],
       price: object['price'] ?? 0, 
@@ -49,6 +52,7 @@ class Class {
       totalParticipants: object['total_participants'], 
       totalModules: object['total_modules'], 
       joined: object['joined'] ?? false, 
+      status: object['status'],
       createdAt: object['created_at'],
       detail: object['detail'] != null ? Detail.createDetail(object['detail']) : null,
       sections: object['syllabus'] != null ? List<Map<String, dynamic>>.from(object['syllabus'] as List)
@@ -57,7 +61,7 @@ class Class {
   }
 
   static Future<List<Class>> getClasses(int start, int limit, String keywords, int? rating, int? lowest, int? highest, int? grade, int? subject, String? userId) async {
-    String url = '$_baseUrl/all?start=$start&limit=$limit&keywords=$keywords';
+    String url = '$_baseUrl/all?start=$start&limit=$limit&status=1&keywords=$keywords';
     if (rating != null) url += '&rating=$rating';
     if (lowest != null) url += '&lowest=$lowest';
     if (highest != null) url += '&highest=$highest';
@@ -83,13 +87,15 @@ class Class {
     await http.delete(Uri.parse(url));
   }
 
-  static Future createNewClass(String expertId, int? subject, int? grade, String name, String photo, String description, String price, String discountPrice, String estimatedTime) async {
+  static Future createNewClass(String expertId, int? subject, int? grade, String name, String proofImage, String proofDetail, String photo, String description, String price, String discountPrice, String estimatedTime) async {
     const String url = '$_baseUrl/new';
     await http.post(Uri.parse(url), body: {
       "expert_id": expertId,
       "subject_id": subject.toString(),
       "grade_id": grade.toString(),
       "name": name,
+      "proof_image": proofImage,
+      "proof_detail": proofDetail,
       "photo": photo,
       "description": description,
       "price": price,
@@ -310,5 +316,16 @@ class SimpleExpert {
       photo: object['photo'] ?? "",
       education: object['education'] ?? ""
     );
+  }
+}
+
+class Proof {
+  late String image;
+  late String detail;
+
+  Proof({required this.image, required this.detail});
+
+  factory Proof.createProof(Map<String, dynamic> object) {
+    return Proof(image: object['image'], detail: object['detail']);
   }
 }

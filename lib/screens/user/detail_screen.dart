@@ -10,6 +10,7 @@ import 'package:flexone/widgets/counter_container.dart';
 import 'package:flexone/widgets/info_row.dart';
 import 'package:flexone/widgets/preview_image.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
@@ -255,6 +256,12 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                           value: snapshot.data![0].city ?? "-",
                           label: "city",
                           icon: Icons.location_city_rounded
+                        ),
+                        const SizedBox(height: 10),
+                        InfoRow(
+                          value: snapshot.data![1] == null ? "-" : snapshot.data![1].socialLink,
+                          label: "social_link",
+                          icon: Icons.link
                         ),
                         if (snapshot.data![1] != null) ...[
                           const Divider(),

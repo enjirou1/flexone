@@ -6,13 +6,15 @@ class Expert {
   String? expertId;
   String? userId;
   String? identityPhoto;
+  String? selfiePhoto;
   String? bank;
   String? accountHolderName;
   String? accountnumber;
   String? education;
   String? job;
   int? balance;
-  int? isBanned;
+  String? socialLink;
+  String? status;
   String? createdAt;
   List<Certificate>? certificates;
   static const String _baseUrl = 'https://api.flexone.online/v1/expert';
@@ -21,13 +23,15 @@ class Expert {
       {this.expertId,
       this.userId,
       this.identityPhoto,
+      this.selfiePhoto,
       this.bank,
       this.accountHolderName,
       this.accountnumber,
       this.education,
       this.job,
       this.balance,
-      this.isBanned,
+      this.socialLink,
+      this.status,
       this.createdAt,
       this.certificates});
 
@@ -36,13 +40,15 @@ class Expert {
         expertId: object['expert_id'],
         userId: object['user_id'],
         identityPhoto: object['identity_photo'],
+        selfiePhoto: object['selfie_photo'],
         bank: object['bank'],
         accountHolderName: object['account_holder_name'],
         accountnumber: object['account_number'],
         education: object['education'],
         job: object['job'],
         balance: object['balance'],
-        isBanned: object['is_banned'],
+        socialLink: object['social_link'],
+        status: object['status'],
         createdAt: object['created_at'],
         certificates: List<Map<String, dynamic>>.from(object['certificates'] as List)
           .map((certificate) => Certificate.createCertificate(certificate)).toList());
@@ -65,20 +71,24 @@ class Expert {
   static Future createNew(
       String userId,
       String identity,
+      String selfiePhoto,
       String bank,
       String accountName,
       String accountNumber,
       String education,
-      String job) async {
+      String job,
+      String socialLink) async {
     const url = '$_baseUrl/new';
     final response = await http.post(Uri.parse(url), body: {
       "user_id": userId,
       "identity_photo": identity,
+      "selfie_photo": selfiePhoto,
       "bank": bank,
       "account_holder_name": accountName,
       "account_number": accountNumber,
       "education": education,
-      "job": job
+      "job": job,
+      "social_link": socialLink
     });
 
     if (response.statusCode != 201) {
@@ -93,7 +103,8 @@ class Expert {
       String accountName,
       String accountNumber,
       String education,
-      String job) async {
+      String job,
+      String socialLink) async {
     final url = '$_baseUrl/$expertId';
     final response = await http.put(Uri.parse(url), body: {
       "identity_photo": identity,
@@ -101,7 +112,8 @@ class Expert {
       "account_holder_name": accountName,
       "account_number": accountNumber,
       "education": education,
-      "job": job
+      "job": job,
+      "social_link": socialLink
     });
 
     if (response.statusCode != 200) {

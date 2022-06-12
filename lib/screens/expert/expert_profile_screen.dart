@@ -34,12 +34,14 @@ class _ExpertProfileScreenState extends State<ExpertProfileScreen> {
   final TextEditingController _educationController = TextEditingController();
   final TextEditingController _jobController = TextEditingController();
   final TextEditingController _nominalController = TextEditingController();
+  final TextEditingController _socialLinkController = TextEditingController();
 
   InputValidation _accountNameValidation = InputValidation(isValid: true, message: '');
   InputValidation _accountNumberValidation = InputValidation(isValid: true, message: '');
   InputValidation _educationValidation = InputValidation(isValid: true, message: '');
   InputValidation _jobValidation = InputValidation(isValid: true, message: '');
   InputValidation _identityCardValidation = InputValidation(isValid: true, message: '');
+  InputValidation _socialLinkValidation = InputValidation(isValid: true, message: '');
 
   Expert? _expert;
   String _bank = "BRI";
@@ -125,6 +127,7 @@ class _ExpertProfileScreenState extends State<ExpertProfileScreen> {
                   _accountNumberController.text = _expert!.accountnumber!;
                   _educationController.text = _expert!.education!;
                   _jobController.text = _expert!.job!;
+                  _socialLinkController.text = _expert!.socialLink!;
                   setState(() {});
                 });
               }
@@ -420,6 +423,20 @@ class _ExpertProfileScreenState extends State<ExpertProfileScreen> {
                             const SizedBox(
                               height: 15,
                             ),
+                            TextField(
+                              controller: _socialLinkController,
+                              decoration: InputDecoration(
+                                prefixIcon: const Icon(Icons.link),
+                                labelText: tr("social_link"),
+                                labelStyle: TextStyle(color: _fontColor),
+                                errorText: _socialLinkValidation.isValid
+                                  ? null
+                                  : _socialLinkValidation.message
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
                             Align(
                               alignment: Alignment.centerRight,
                               child: ElevatedButton.icon(
@@ -441,6 +458,10 @@ class _ExpertProfileScreenState extends State<ExpertProfileScreen> {
                                     isValid: _jobController.text.isNotEmpty,
                                     message: tr('error.job.empty')
                                   );
+                                  _socialLinkValidation = InputValidation(
+                                    isValid: _socialLinkController.text.isNotEmpty,
+                                    message: tr('error.social.empty')
+                                  );
                                   _identityCardValidation = InputValidation(
                                     isValid: _image == "" ? false : true,
                                     message: tr('error.personal_identity_card.empty')
@@ -450,7 +471,8 @@ class _ExpertProfileScreenState extends State<ExpertProfileScreen> {
                                       _accountNumberValidation.isValid &&
                                       _educationValidation.isValid &&
                                       _jobValidation.isValid &&
-                                      _identityCardValidation.isValid) {
+                                      _identityCardValidation.isValid &&
+                                      _socialLinkValidation.isValid) {
                                     try {
                                       await Expert.update(
                                         _provider.user!.expertId!,
@@ -459,7 +481,8 @@ class _ExpertProfileScreenState extends State<ExpertProfileScreen> {
                                         _accountNameController.text,
                                         _accountNumberController.text,
                                         _educationController.text,
-                                        _jobController.text
+                                        _jobController.text,
+                                        _socialLinkController.text
                                       );
 
                                       Get.snackbar(tr('success'), tr('success_detail.update_profile'),

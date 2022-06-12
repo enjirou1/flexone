@@ -17,16 +17,17 @@ class InfoRow extends StatelessWidget {
       children: [
         Icon(icon),
         const SizedBox(width: 10),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              value == "" ? "-" : value,
-              style:
-                  poppinsTheme.bodyText2!.copyWith(fontWeight: FontWeight.bold),
-            ),
-            Text(label, style: poppinsTheme.caption).tr(),
-          ],
+        Flexible(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SelectableText(
+                value == "" ? "-" : value,
+                style: poppinsTheme.subtitle2!.copyWith(fontWeight: FontWeight.bold),
+              ),
+              Text(label, style: poppinsTheme.caption).tr(),
+            ],
+          ),
         ),
       ],
     );

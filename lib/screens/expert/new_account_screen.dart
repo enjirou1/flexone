@@ -25,14 +25,19 @@ class _NewAccountScreenState extends State<NewAccountScreen> {
   final TextEditingController _accountNumberController = TextEditingController();
   final TextEditingController _educationController = TextEditingController();
   final TextEditingController _jobController = TextEditingController();
+  final TextEditingController _socialLinkController = TextEditingController();
   InputValidation _accountNameValidation = InputValidation(isValid: true, message: '');
   InputValidation _accountNumberValidation = InputValidation(isValid: true, message: '');
   InputValidation _educationValidation = InputValidation(isValid: true, message: '');
   InputValidation _jobValidation = InputValidation(isValid: true, message: '');
+  InputValidation _socialLinkValidation = InputValidation(isValid: true, message: '');
   InputValidation _identityCardValidation = InputValidation(isValid: true, message: '');
+  InputValidation _selfieValidation = InputValidation(isValid: true, message: '');
   String _bank = "BCA";
   String? _image = "";
   XFile? _file;
+  String? _imageSelfie = "";
+  XFile? _fileSelfie;
 
   @override
   Widget build(BuildContext context) {
@@ -57,18 +62,22 @@ class _NewAccountScreenState extends State<NewAccountScreen> {
               _accountNumberValidation = InputValidation(isValid: _accountNumberController.text.isNotEmpty, message: tr('error.account_number.empty'));
               _educationValidation = InputValidation(isValid: _educationController.text.isNotEmpty, message: tr('error.education.empty'));
               _jobValidation = InputValidation(isValid: _jobController.text.isNotEmpty, message: tr('error.job.empty'));
+              _socialLinkValidation = InputValidation(isValid: _socialLinkController.text.isNotEmpty, message: tr('error.social.empty'));
               _identityCardValidation = InputValidation(isValid: _image == "" ? false : true, message: tr('error.personal_identity_card.empty'));
+              _selfieValidation = InputValidation(isValid: _imageSelfie == "" ? false : true, message: tr('error.selfie.empty'));
 
-              if (_accountNameValidation.isValid && _accountNumberValidation.isValid && _educationValidation.isValid && _jobValidation.isValid && _identityCardValidation.isValid) {
+              if (_accountNameValidation.isValid && _accountNumberValidation.isValid && _educationValidation.isValid && _jobValidation.isValid && _socialLinkValidation.isValid && _identityCardValidation.isValid && _selfieValidation.isValid) {
                 try {
                   await Expert.createNew(
                     _provider.user!.userId!,
                     _image!,
+                    _imageSelfie!,
                     _bank,
                     _accountNameController.text,
                     _accountNumberController.text,
                     _educationController.text,
-                    _jobController.text
+                    _jobController.text,
+                    _socialLinkController.text
                   );
 
                   await UserModel.getUserByEmail(_provider.user!.email).then((value) {
@@ -191,6 +200,99 @@ class _NewAccountScreenState extends State<NewAccountScreen> {
                   ),
                 ),
               const SizedBox(height: 15),
+              const Text('photo_selfie').tr(),
+              const SizedBox(height: 5),
+              GestureDetector(
+                onTap: () => showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      actions: [
+                        ListTile(
+                          title: const Text("open_camera").tr(),
+                          tileColor: Colors.white,
+                          textColor: Colors.black,
+                          onTap: () async {
+                            try {
+                              _fileSelfie = await UploadService.getImage(0);
+                              Navigator.pop(context);
+                              _imageSelfie = await UploadService.uploadImage(_fileSelfie!, "identity", "selfie-" + _provider.user!.userId!);
+                            } on FirebaseException catch (e) {
+                              print(e.message!);
+                            } catch (e) {
+                              print(e.toString());
+                            }
+                            setState(() {});
+                          },
+                        ),
+                        ListTile(
+                          title: const Text("select_photo").tr(),
+                          tileColor: Colors.white,
+                          textColor: Colors.black,
+                          onTap: () async {
+                            try {
+                              _fileSelfie = await UploadService.getImage(1);
+                              Navigator.pop(context);
+                              _imageSelfie = await UploadService.uploadImage(_fileSelfie!, "identity", "selfie-" + _provider.user!.userId!);
+                            } on FirebaseException catch (e) {
+                              print(e.message!);
+                            } catch (e) {
+                              print(e.toString());
+                            }
+                            setState(() {});
+                          },
+                        ),
+                        ListTile(
+                          title: const Text("delete_photo").tr(),
+                          tileColor: Colors.white,
+                          textColor: Colors.black,
+                          onTap: () {
+                            _fileSelfie = null;
+                            _imageSelfie = "";
+                            setState(() {});
+
+                            Navigator.pop(context);
+                          },
+                        )
+                      ],
+                    );
+                  }
+                ),
+                child: (_imageSelfie != "")
+                ? Container(
+                    width: double.infinity,
+                    height: MediaQuery.of(context).size.width * 9 / 16,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      image: DecorationImage(
+                        image: NetworkImage(_imageSelfie!),
+                        fit: BoxFit.contain
+                      )
+                    ),
+                  )
+                : Container(
+                    width: double.infinity,
+                    height: MediaQuery.of(context).size.width * 9 / 16,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: _borderColor),
+                      borderRadius: BorderRadius.circular(5),
+                      color: Colors.white,
+                      image: const DecorationImage(
+                        image: AssetImage('assets/images/image-icon.png'),
+                        fit: BoxFit.fill
+                      )
+                    ),
+                  ),
+              ),
+              if (!_selfieValidation.isValid)
+                Padding(
+                  padding: const EdgeInsets.only(left: 12, top: 5),
+                  child: Text(
+                    _selfieValidation.message,
+                    style: poppinsTheme.caption!.copyWith(color: Colors.red[700]),
+                  ),
+                ),
+              const SizedBox(height: 15),
               DropdownButtonFormField<String>(
                 items: ['BCA', 'BNI', 'BRI', 'MANDIRI', 'PERMATA'].map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
@@ -257,6 +359,18 @@ class _NewAccountScreenState extends State<NewAccountScreen> {
                   labelText: tr("job"),
                   labelStyle: TextStyle(color: _fontColor),
                   errorText: _jobValidation.isValid ? null : _jobValidation.message
+                ),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              TextField(
+                controller: _socialLinkController,
+                decoration: InputDecoration(
+                  prefixIcon: const Icon(Icons.link),
+                  labelText: tr("social_link"),
+                  labelStyle: TextStyle(color: _fontColor),
+                  errorText: _socialLinkValidation.isValid ? null : _socialLinkValidation.message
                 ),
               ),
               const SizedBox(

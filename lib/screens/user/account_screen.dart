@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flexone/data/models/expert_result.dart';
 import 'package:flexone/data/providers/google_sign_in.dart';
 import 'package:flexone/data/providers/preferences.dart';
 import 'package:flexone/data/providers/user.dart';
@@ -46,17 +47,30 @@ class AccountScreen extends StatelessWidget {
           leading: const Icon(Icons.account_box_rounded, color: Color(0XFFBDBDBD)),
           title: const Text('create_expert_account').tr(),
           onTap: () async {
-            final result = await Get.toNamed('/expert/new');
+            final expert = await Expert.getExpertByID('E${_provider.user?.userId}');
+            if (expert == null) {
+              final result = await Get.toNamed('/expert/new');
 
-            if (result != null) {
+              if (result != null) {
+                Get.snackbar(
+                  tr('success'), tr('success_detail.create_expert'),
+                  snackPosition: SnackPosition.BOTTOM,
+                  animationDuration: const Duration(milliseconds: 300),
+                  backgroundColor: Colors.green,
+                  colorText: Colors.white,
+                  icon: const Icon(Icons.check, color: Colors.white),
+                  duration: const Duration(seconds: 1)
+                );
+              }
+            } else {
               Get.snackbar(
-                tr('success'), tr('success_detail.create_expert'),
+                tr('pending'), 'Permintaan akun expert anda sedang diverifikasi oleh admin',
                 snackPosition: SnackPosition.BOTTOM,
                 animationDuration: const Duration(milliseconds: 300),
-                backgroundColor: Colors.green,
+                backgroundColor: Colors.amber,
                 colorText: Colors.white,
-                icon: const Icon(Icons.check, color: Colors.white),
-                duration: const Duration(seconds: 1)
+                icon: const Icon(Icons.pending, color: Colors.white),
+                duration: const Duration(seconds: 3)
               );
             }
           },

@@ -11,6 +11,7 @@ import 'package:flexone/data/services/upload_service.dart';
 import 'package:flexone/screens/class/description_screen.dart';
 import 'package:flexone/screens/class/syllabus_screen.dart';
 import 'package:flexone/utils/input_validation.dart';
+import 'package:flexone/widgets/preview_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -28,6 +29,7 @@ class EditClassScreen extends StatefulWidget {
 
 class _EditClassScreenState extends State<EditClassScreen> {
   final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _proofDetailController = TextEditingController();
   final TextEditingController _priceController = TextEditingController();
   final TextEditingController _discountPriceController = TextEditingController();
   final TextEditingController _estimatedTimeController = TextEditingController();
@@ -40,6 +42,7 @@ class _EditClassScreenState extends State<EditClassScreen> {
   String _description = "";
   String? _image = "";
   XFile? _file;
+  String? _proofImage = "";
 
   @override
   void initState() {
@@ -48,11 +51,13 @@ class _EditClassScreenState extends State<EditClassScreen> {
     _priceController.text = widget.classModel.price.toString();
     _discountPriceController.text = widget.classModel.discountPrice.toString();
     _estimatedTimeController.text = widget.classModel.estimatedTime.toString();
+    _proofDetailController.text = widget.classModel.proof!.detail;
     _image = widget.classModel.photo;
     _description = widget.classModel.description!;
     _selectedSubject = widget.classModel.subject!.id;
     _selectedGrade = widget.classModel.grade!.id;
     _description = jsonDecode(widget.classModel.description!);
+    _proofImage = widget.classModel.proof!.image;
   }
 
   @override
@@ -405,6 +410,60 @@ class _EditClassScreenState extends State<EditClassScreen> {
                           ),
                         ),
                       ],
+                    ),
+                    const SizedBox(
+                      height: 25,
+                    ),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text("certificate", style: poppinsTheme.headline6).tr()
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: GestureDetector(
+                        onTap: () => Get.to(PreviewImage(image: widget.classModel.proof!.image)),
+                        child: (_proofImage != "")
+                          ? Container(
+                              width: MediaQuery.of(context).size.width - 50,
+                              height: (MediaQuery.of(context).size.width - 50) * 9 / 16,
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.black),
+                                borderRadius: BorderRadius.circular(5),
+                                image: DecorationImage(
+                                  image: NetworkImage(_proofImage!), 
+                                  fit: BoxFit.cover
+                                )
+                              ),
+                            )
+                          : Container(
+                              width: MediaQuery.of(context).size.width - 50,
+                              height: (MediaQuery.of(context).size.width - 50) * 9 / 16,
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.black),
+                                borderRadius: BorderRadius.circular(5),
+                                color: Colors.white,
+                                image: const DecorationImage(
+                                  image: AssetImage('assets/images/photo-icon.png'),
+                                  fit: BoxFit.contain
+                                )
+                              ),
+                            ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    TextField(
+                      controller: _proofDetailController,
+                      enabled: false,
+                      decoration: InputDecoration(
+                        labelText: tr("detail"),
+                        labelStyle: TextStyle(color: _fontColor),
+                        isDense: true
+                      ),
                     ),
                   ],
                 );

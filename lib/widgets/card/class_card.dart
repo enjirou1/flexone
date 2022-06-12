@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 
 class ClassCard extends StatelessWidget {
   Class classModel;
-  String? status;
+  int? status;
   Function()? onRemoved;
   Function()? onUpdated;
 
@@ -67,6 +67,20 @@ class ClassCard extends StatelessWidget {
                   child: Text(classModel.expert!.name, style: poppinsTheme.caption!.copyWith(fontSize: 11)),
                 ),
                 const SizedBox(height: 5),
+                if (status != null && status != 1) ...[
+                  Padding(
+                    padding: const EdgeInsets.only(left: 2.0),
+                    child: Text(
+                      status == 0 ? "pending" : "declined", 
+                      style: poppinsTheme.caption!.copyWith(
+                        fontSize: 11, 
+                        fontWeight: FontWeight.bold,
+                        color: status == 0 ? Colors.amber : Colors.red
+                      )
+                    ),
+                  ),
+                  const SizedBox(height: 5),
+                ],
                 Row(
                   children: [
                     const Icon(Icons.people, size: 15),

@@ -26,8 +26,10 @@ class _AddClassScreenState extends State<AddClassScreen> {
   final TextEditingController _priceController = TextEditingController();
   final TextEditingController _discountPriceController = TextEditingController();
   final TextEditingController _estimatedTimeController = TextEditingController();
+  final TextEditingController _proofDetailController = TextEditingController();
 
   InputValidation _nameValidation = InputValidation(isValid: true, message: '');
+  InputValidation _proofDetailValidation = InputValidation(isValid: true, message: '');
 
   List<Subject> _subjects = [];
   List<Grade> _grades = [];
@@ -35,6 +37,8 @@ class _AddClassScreenState extends State<AddClassScreen> {
   String _description = "";
   String? _image = "";
   XFile? _file;
+  String? _proofImage = "";
+  XFile? _proofFile;
 
   @override
   Widget build(BuildContext context) {
@@ -76,12 +80,32 @@ class _AddClassScreenState extends State<AddClassScreen> {
                 );
               }
 
+              if (_proofDetailController.text.isEmpty) {
+                isValid = false;
+                _proofDetailValidation = InputValidation(isValid: false, message: tr('error.detail.empty'));
+              } else {
+                _proofDetailValidation = InputValidation(isValid: true, message: '');
+              }
+
+              if (_proofImage == "") {
+                isValid = false;
+                Get.snackbar(tr('failed'), tr('error.certificate.empty'),
+                  snackPosition: SnackPosition.BOTTOM,
+                  colorText: Colors.white,
+                  backgroundColor: Colors.red,
+                  animationDuration: const Duration(milliseconds: 300),
+                  duration: const Duration(seconds: 2)
+                );
+              }
+
               if (isValid) {
                 await Class.createNewClass(
                   _provider.user!.expertId!, 
                   _selectedSubject, 
                   _selectedGrade, 
                   _nameController.text, 
+                  _proofImage!,
+                  _proofDetailController.text,
                   _image!, 
                   _description, 
                   _priceController.text, 
@@ -386,6 +410,101 @@ class _AddClassScreenState extends State<AddClassScreen> {
                           ),
                         ),
                       ],
+                    ),
+                    const SizedBox(
+                      height: 25,
+                    ),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text("certificate", style: poppinsTheme.headline6).tr()
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: GestureDetector(
+                        onTap: () => showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              actions: [
+                                ListTile(
+                                  title: const Text("open_camera").tr(),
+                                  tileColor: Colors.white,
+                                  textColor: Colors.black,
+                                  onTap: () async {
+                                    try {
+                                      _proofFile = await UploadService.getImage(0);
+                                      Navigator.pop(context);
+                                      _proofImage = await UploadService.uploadImage(_proofFile!, "certificate", "class-" + _provider.user!.userId!);
+                                    } on FirebaseException catch (e) {
+                                      print(e.message!);
+                                    } catch (e) {
+                                      print(e.toString());
+                                    }
+                                    setState(() {});
+                                  },
+                                ),
+                                ListTile(
+                                  title: const Text("select_photo").tr(),
+                                  tileColor: Colors.white,
+                                  textColor: Colors.black,
+                                  onTap: () async {
+                                    try {
+                                      _proofFile = await UploadService.getImage(1);
+                                      Navigator.pop(context);
+                                      _proofImage = await UploadService.uploadImage(_proofFile!, "certificate", "class-" + _provider.user!.userId!);
+                                    } on FirebaseException catch (e) {
+                                      print(e.message!);
+                                    } catch (e) {
+                                      print(e.toString());
+                                    }
+                                    setState(() {});
+                                  },
+                                )
+                              ],
+                            );
+                          }
+                        ),
+                        child: (_proofImage != "")
+                          ? Container(
+                              width: MediaQuery.of(context).size.width - 50,
+                              height: (MediaQuery.of(context).size.width - 50) * 9 / 16,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                image: DecorationImage(
+                                  image: NetworkImage(_proofImage!), 
+                                  fit: BoxFit.contain
+                                )
+                              ),
+                            )
+                          : Container(
+                              width: MediaQuery.of(context).size.width - 50,
+                              height: (MediaQuery.of(context).size.width - 50) * 9 / 16,
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.black),
+                                borderRadius: BorderRadius.circular(5),
+                                color: Colors.white,
+                                image: const DecorationImage(
+                                  image: AssetImage('assets/images/photo-icon.png'),
+                                  fit: BoxFit.contain
+                                )
+                              ),
+                            ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    TextField(
+                      controller: _proofDetailController,
+                      decoration: InputDecoration(
+                        labelText: tr("detail"),
+                        labelStyle: TextStyle(color: _fontColor),
+                        errorText: _proofDetailValidation.isValid ? null : _proofDetailValidation.message,
+                        isDense: true
+                      ),
                     ),
                   ],
                 );

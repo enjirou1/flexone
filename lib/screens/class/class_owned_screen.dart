@@ -108,6 +108,7 @@ class _ClassOwnedScreenState extends State<ClassOwnedScreen> {
                           return (index < _classes.length)
                             ? ClassCard(
                                 classModel: _classes[index],
+                                status: _classes[index].status,
                                 onRemoved: () async {
                                   showDialog(
                                     context: context, 

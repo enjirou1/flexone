@@ -185,9 +185,15 @@
         "schedule": {
             "booked": "Schedule(s) already booked"
         },
+        "selfie": {
+            "empty": "Photo selfie is required"
+        },
         "slot": {
             "empty": "Slot cannot be empty",
             "minimum": "Minimum slot is 3"
+        },
+        "social": {
+            "empty": "Social media link cannot be empty"
         },
         "text": {
             "empty": "Content cannot be empty"
@@ -231,6 +237,7 @@
     "password": "Password",
     "personal_identity_card": "Personal identity card",
     "phone_number": "Phone number",
+    "photo_selfie": "Photo selfie",
     "points": "{} points",
     "point": "Point",
     "preview": "Preview",
@@ -261,6 +268,7 @@
     "skills": "Skills",
     "slot": "Slot",
     "slot:": "Slot:",
+    "social_link": "Social media link",
     "stock": "Stock",
     "subject": "Subject",
     "submit": "Submit",

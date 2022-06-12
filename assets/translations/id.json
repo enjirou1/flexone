@@ -185,9 +185,15 @@
         "schedule": {
             "booked": "Jadwal sudah dipesan"
         },
+        "selfie": {
+            "empty": "Foto selfie diperlukan"
+        },
         "slot": {
             "empty": "Slot tidak boleh kosong",
             "minimum": "Slot minimal adalah 3"
+        },
+        "social": {
+            "empty": "Link sosial media tidak boleh kosong"
         },
         "text": {
             "empty": "Isi tidak boleh kosong"
@@ -231,6 +237,7 @@
     "password": "Password",
     "personal_identity_card": "Kartu identitas pribadi",
     "phone_number": "Nomor telepon",
+    "photo_selfie": "Foto selfie",
     "points": "{} poin",
     "point": "Point",
     "preview": "Preview",
@@ -261,6 +268,7 @@
     "skills": "Kemampuan",
     "slot": "Slot",
     "slot:": "Slot:",
+    "social_link": "Link sosial media",
     "stock": "Stok",
     "subject": "Subjek",
     "submit": "Submit",
